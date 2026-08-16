@@ -1,0 +1,105 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "eyebrow": { "type": "eyebrow", "settings": { "text": "The house" } },
+        "heading": { "type": "heading", "settings": { "text": "Florève" } },
+        "text": {
+          "type": "text",
+          "settings": { "text": "A jewellery house built on a single observation about flowers." }
+        }
+      },
+      "block_order": ["eyebrow", "heading", "text"],
+      "settings": {
+        "focal_x": 50,
+        "focal_y": 50,
+        "overlay_opacity": 40,
+        "height": "md",
+        "content_position": "center",
+        "color_scheme": "alt",
+        "use_h1": true,
+        "show_cue": false
+      }
+    },
+    "story": {
+      "type": "rich-text",
+      "blocks": {
+        "mark": { "type": "mark", "settings": {} },
+        "heading": { "type": "heading", "settings": { "text": "How we began", "size": "h2" } },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Replace this with the true account of how Florève started — who began it, where, and what they were trying to make that did not exist yet.</p>"
+          }
+        }
+      },
+      "block_order": ["mark", "heading", "text"],
+      "settings": {
+        "color_scheme": "parchment",
+        "width": "reading",
+        "alignment": "center",
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "craft": {
+      "type": "editorial-story",
+      "blocks": {
+        "eyebrow": { "type": "eyebrow", "settings": { "text": "Craft" } },
+        "heading": { "type": "heading", "settings": { "text": "Two hands, two countries" } },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Describe the working relationship between the design studio and the atelier in your own words.</p>"
+          }
+        },
+        "details": {
+          "type": "details",
+          "settings": {
+            "label_one": "Drawn in",
+            "value_one": "Italy",
+            "label_two": "Made in",
+            "value_two": "India"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "heading", "text", "details"],
+      "settings": {
+        "color_scheme": "white",
+        "image_ratio": "portrait",
+        "media_position": "end",
+        "wide_media": true,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "statement": {
+      "type": "statement",
+      "settings": {
+        "color_scheme": "sage",
+        "show_mark": true,
+        "quote": "We are not trying to preserve a flower. We are trying to keep the moment you noticed one.",
+        "padding_top": 120,
+        "padding_bottom": 120
+      }
+    },
+    "invitation": {
+      "type": "invitation",
+      "settings": {
+        "color_scheme": "alt",
+        "height": "sm",
+        "overlay_opacity": 45,
+        "focal_x": 50,
+        "focal_y": 50,
+        "show_mark": false,
+        "eyebrow": "",
+        "heading": "See the work",
+        "text": "",
+        "primary_label": "Explore the collection",
+        "secondary_label": ""
+      }
+    }
+  },
+  "order": ["hero", "story", "craft", "statement", "invitation"]
+}

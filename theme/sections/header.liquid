@@ -1,0 +1,338 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign overlay = false
+  if section.settings.transparent_on_home and request.page_type == 'index'
+    assign overlay = true
+  endif
+-%}
+
+<div
+  class="header-wrapper scheme scheme--{{ section.settings.color_scheme }}{% if section.settings.sticky and overlay == false %} header-wrapper--sticky{% endif %}{% if overlay %} header-wrapper--overlay{% endif %}"
+  data-header
+>
+  <header class="header">
+    <div class="page-width">
+      <div class="header__inner">
+        {%- comment -%} Left cluster — navigation on desktop, menu button on mobile {%- endcomment -%}
+        <div class="header__cluster">
+          <button
+            type="button"
+            class="icon-button header__menu-toggle"
+            data-panel-open="mobile-nav"
+            aria-label="{{ 'general.accessibility.open_menu' | t }}"
+            aria-controls="mobile-nav"
+          >
+            {% render 'icon', name: 'menu' %}
+          </button>
+
+          <nav class="nav" aria-label="{{ 'sections.header.menu' | t }}">
+            {%- for link in menu.links -%}
+              <div class="nav__item">
+                <a
+                  href="{{ link.url }}"
+                  class="nav__link"
+                  {% if link.current %}aria-current="page"{% endif %}
+                  {% if link.links.size > 0 %}aria-haspopup="true"{% endif %}
+                >
+                  {{ link.title }}
+                  {%- if link.links.size > 0 -%}
+                    <span class="nav__caret">{% render 'icon', name: 'chevron-down' %}</span>
+                  {%- endif -%}
+                </a>
+
+                {%- if link.links.size > 0 -%}
+                  {%- liquid
+                    assign is_mega = false
+                    for child in link.links
+                      if child.links.size > 0
+                        assign is_mega = true
+                        break
+                      endif
+                    endfor
+
+                    assign feature_block = null
+                    for block in section.blocks
+                      if block.type == 'menu_feature' and block.settings.parent_title == link.title
+                        assign feature_block = block
+                        break
+                      endif
+                    endfor
+
+                    if feature_block
+                      assign is_mega = true
+                    endif
+                  -%}
+
+                  <div class="nav__panel{% if is_mega %} nav__panel--mega{% endif %}">
+                    {%- if is_mega -%}
+                      <div class="nav__panel-grid">
+                        {%- for child in link.links -%}
+                          <div>
+                            <a href="{{ child.url }}" class="nav__panel-heading">{{ child.title }}</a>
+                            {%- if child.links.size > 0 -%}
+                              <ul class="nav__sublist" role="list">
+                                {%- for grandchild in child.links -%}
+                                  <li>
+                                    <a href="{{ grandchild.url }}" class="nav__sublink">{{ grandchild.title }}</a>
+                                  </li>
+                                {%- endfor -%}
+                              </ul>
+                            {%- endif -%}
+                          </div>
+                        {%- endfor -%}
+
+                        {%- if feature_block -%}
+                          <a
+                            href="{{ feature_block.settings.link | default: link.url }}"
+                            class="nav__feature"
+                            {{ feature_block.shopify_attributes }}
+                          >
+                            {%- if feature_block.settings.image -%}
+                              <div class="media media--landscape media--zoom">
+                                <img
+                                  src="{{ feature_block.settings.image | image_url: width: 600 }}"
+                                  srcset="{{ feature_block.settings.image | image_url: width: 400 }} 400w, {{ feature_block.settings.image | image_url: width: 700 }} 700w"
+                                  sizes="20vw"
+                                  alt="{{ feature_block.settings.image.alt | escape }}"
+                                  width="{{ feature_block.settings.image.width }}"
+                                  height="{{ feature_block.settings.image.height }}"
+                                  loading="lazy"
+                                >
+                              </div>
+                            {%- endif -%}
+                            {%- if feature_block.settings.title != blank -%}
+                              <span class="nav__feature-title">{{ feature_block.settings.title }}</span>
+                            {%- endif -%}
+                            {%- if feature_block.settings.text != blank -%}
+                              <span class="nav__feature-text">{{ feature_block.settings.text }}</span>
+                            {%- endif -%}
+                          </a>
+                        {%- endif -%}
+                      </div>
+                    {%- else -%}
+                      <ul class="nav__sublist" role="list">
+                        {%- for child in link.links -%}
+                          <li><a href="{{ child.url }}" class="nav__sublink">{{ child.title }}</a></li>
+                        {%- endfor -%}
+                      </ul>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </nav>
+        </div>
+
+        {%- comment -%}
+          The lockup. Over a hero image the charcoal wordmark would disappear,
+          so the light artwork is swapped in until the header turns solid.
+        {%- endcomment -%}
+        <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }}">
+          {% render 'logo', variant: 'dark', width: 320, class: 'header__logo-dark' %}
+          {%- if overlay -%}
+            {% render 'logo', variant: 'light', width: 320, class: 'header__logo-light' %}
+          {%- endif -%}
+        </a>
+
+        {%- comment -%} Right cluster — search, account, bag {%- endcomment -%}
+        <div class="header__cluster header__cluster--end">
+          <button
+            type="button"
+            class="icon-button"
+            data-panel-open="search-panel"
+            aria-label="{{ 'general.search.search' | t }}"
+            aria-controls="search-panel"
+          >
+            {% render 'icon', name: 'search' %}
+          </button>
+
+          {%- if shop.customer_accounts_enabled -%}
+            <a
+              href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+              class="icon-button"
+              aria-label="{{ 'sections.header.account' | t }}"
+            >
+              {% render 'icon', name: 'account' %}
+            </a>
+          {%- endif -%}
+
+          {%- if settings.cart_type == 'drawer' -%}
+            <button
+              type="button"
+              class="icon-button cart-link"
+              data-panel-open="cart-drawer"
+              aria-controls="cart-drawer"
+            >
+              {% render 'icon', name: 'bag' %}
+              <span class="cart-link__count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>
+                {{- cart.item_count -}}
+              </span>
+              <span class="visually-hidden" data-cart-count-label>
+                {{ 'sections.header.cart_count.other' | t: count: cart.item_count }}
+              </span>
+            </button>
+          {%- else -%}
+            <a href="{{ routes.cart_url }}" class="icon-button cart-link">
+              {% render 'icon', name: 'bag' %}
+              <span class="cart-link__count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>
+                {{- cart.item_count -}}
+              </span>
+              <span class="visually-hidden" data-cart-count-label>
+                {{ 'sections.header.cart_count.other' | t: count: cart.item_count }}
+              </span>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+{%- comment -%} Mobile navigation {%- endcomment -%}
+<div class="drawer drawer--left" id="mobile-nav" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.menu' | t }}">
+  <div class="drawer__header">
+    <span class="drawer__title">{{ 'sections.header.menu' | t }}</span>
+    <button type="button" class="icon-button" data-panel-close data-panel-initial-focus aria-label="{{ 'general.accessibility.close_menu' | t }}">
+      {% render 'icon', name: 'close' %}
+    </button>
+  </div>
+
+  <div class="drawer__body">
+    <ul class="mobile-nav__list" role="list">
+      {%- for link in menu.links -%}
+        <li class="mobile-nav__item">
+          {%- if link.links.size > 0 -%}
+            <details class="accordion__item" style="border: 0;">
+              <summary class="mobile-nav__summary">
+                {{ link.title }}
+                <span class="accordion__icon" aria-hidden="true"></span>
+              </summary>
+              <div>
+                <ul class="mobile-nav__sublist" role="list">
+                  <li><a href="{{ link.url }}" class="mobile-nav__group-title">{{ link.title }} — {{ 'collections.general.view_all' | t }}</a></li>
+                  {%- for child in link.links -%}
+                    <li>
+                      {%- if child.links.size > 0 -%}
+                        <a href="{{ child.url }}" class="mobile-nav__group-title">{{ child.title }}</a>
+                        <ul class="mobile-nav__sublist" role="list" style="padding-bottom: 0;">
+                          {%- for grandchild in child.links -%}
+                            <li><a href="{{ grandchild.url }}" class="mobile-nav__sublink">{{ grandchild.title }}</a></li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- else -%}
+                        <a href="{{ child.url }}" class="mobile-nav__sublink">{{ child.title }}</a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </details>
+          {%- else -%}
+            <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <div class="mobile-nav__footer">
+      {%- if shop.customer_accounts_enabled -%}
+        <a
+          href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+          class="link link--muted"
+        >
+          {%- if customer -%}{{ 'customer.account.title' | t }}{%- else -%}{{ 'customer.log_in' | t }}{%- endif -%}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.mobile_note != blank -%}
+        <p class="caption">{{ section.settings.mobile_note }}</p>
+      {%- endif -%}
+
+      {% render 'social-icons' %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "div",
+  "class": "header-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" }
+      ],
+      "default": "parchment"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Keep the header visible while scrolling",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_on_home",
+      "label": "Lay the header over the homepage hero",
+      "default": true,
+      "info": "The header turns solid as soon as the visitor scrolls. Use a hero image with a darker upper area."
+    },
+    {
+      "type": "text",
+      "id": "mobile_note",
+      "label": "Note in the mobile menu",
+      "default": "Maison de Joaillerie"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_feature",
+      "name": "Menu image",
+      "settings": [
+        {
+          "type": "text",
+          "id": "parent_title",
+          "label": "Menu item title",
+          "info": "Type the top-level menu item exactly as it appears, for example Collections."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Short line"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,125 @@
+<section
+  class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="newsletter newsletter--center reveal">
+      {%- if section.settings.show_mark -%}
+        {% render 'calyx', size: '2.25rem' %}
+      {%- endif -%}
+
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <p class="lede">{{ section.settings.text }}</p>
+      {%- endif -%}
+
+      {%- assign newsletter_form_id = 'newsletter-' | append: section.id -%}
+      {%- form 'customer', class: 'newsletter__form', id: newsletter_form_id -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+
+        {%- if form.posted_successfully? -%}
+          <p class="form-status form-status--success" style="width: 100%;">
+            {{ 'general.newsletter.success' | t }}
+          </p>
+        {%- else -%}
+          <div class="field">
+            <input
+              type="email"
+              id="newsletter-email-{{ section.id }}"
+              name="contact[email]"
+              class="field__input"
+              value="{{ form.email }}"
+              placeholder=" "
+              autocomplete="email"
+              required
+            >
+            <label class="field__label" for="newsletter-email-{{ section.id }}">
+              {{ 'general.newsletter.email_placeholder' | t }}
+            </label>
+          </div>
+          <button type="submit" class="btn btn--primary">
+            <span class="btn__label">{{ section.settings.button_label }}</span>
+          </button>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <p class="field__error" style="width: 100%;">
+            {{ form.errors.translated_fields.email }} {{ form.errors.messages.email }}
+          </p>
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if section.settings.consent_note != blank -%}
+        <p class="newsletter__consent">{{ section.settings.consent_note }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Correspondence",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" },
+        { "value": "dark", "label": "Atelier black" },
+        { "value": "sage", "label": "Botanical sage" },
+        { "value": "blush", "label": "Pressed blush" }
+      ],
+      "default": "alt"
+    },
+    { "type": "checkbox", "id": "show_mark", "label": "Show the calyx mark", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Correspondence" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Notes from the atelier" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "New pieces, written about rarely and sent to a small list."
+    },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Subscribe" },
+    {
+      "type": "text",
+      "id": "consent_note",
+      "label": "Note under the form",
+      "default": "Unsubscribe whenever you wish."
+    },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 96
+    }
+  ],
+  "presets": [{ "name": "Correspondence" }]
+}
+{% endschema %}

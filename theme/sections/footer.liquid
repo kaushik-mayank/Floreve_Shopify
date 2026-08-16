@@ -1,0 +1,193 @@
+<footer class="footer scheme scheme--{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="footer__top" style="--footer-cols: {{ section.blocks.size | at_most: 3 | at_least: 1 }};">
+      <div class="footer__brand">
+        <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+          {%- if section.settings.color_scheme == 'dark' or section.settings.color_scheme == 'sage' -%}
+            {% render 'logo', variant: 'light', width: 400 %}
+          {%- else -%}
+            {% render 'logo', variant: 'dark', width: 400 %}
+          {%- endif -%}
+        </a>
+
+        {%- if section.settings.brand_text != blank -%}
+          <div class="rte" style="font-size: var(--fs-body-sm);">{{ section.settings.brand_text }}</div>
+        {%- endif -%}
+
+        {% render 'social-icons' %}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="footer__heading">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.menu != blank -%}
+                <ul class="footer__list" role="list">
+                  {%- for link in block.settings.menu.links -%}
+                    <li><a href="{{ link.url }}" class="footer__link">{{ link.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+
+          {%- when 'text' -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="footer__heading">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              <div class="rte" style="font-size: var(--fs-body-sm);">{{ block.settings.text }}</div>
+            </div>
+
+          {%- when 'newsletter' -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="footer__heading">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+
+              {%- if block.settings.text != blank -%}
+                <p class="text-body" style="font-size: var(--fs-body-sm); margin-bottom: 1rem;">
+                  {{ block.settings.text }}
+                </p>
+              {%- endif -%}
+
+              {%- form 'customer', class: 'newsletter__form', id: 'footer-newsletter' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                {%- if form.posted_successfully? -%}
+                  <p class="form-status form-status--success">{{ 'general.newsletter.success' | t }}</p>
+                {%- else -%}
+                  <div class="field">
+                    <input
+                      type="email"
+                      id="footer-newsletter-email"
+                      name="contact[email]"
+                      class="field__input"
+                      value="{{ form.email }}"
+                      placeholder=" "
+                      autocomplete="email"
+                      required
+                    >
+                    <label class="field__label" for="footer-newsletter-email">
+                      {{ 'general.newsletter.email_placeholder' | t }}
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn--outline btn--small">
+                    <span class="btn__label">{{ 'general.newsletter.submit' | t }}</span>
+                  </button>
+                {%- endif -%}
+
+                {%- if form.errors -%}
+                  <p class="field__error">{{ form.errors.translated_fields.email }} {{ form.errors.messages.email }}</p>
+                {%- endif -%}
+              {%- endform -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__legal">
+        <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+        {%- for policy in shop.policies -%}
+          {%- if policy != blank -%}
+            <a href="{{ policy.url }}">{{ policy.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <div class="payment-icons">
+          <span class="visually-hidden">{{ 'sections.footer.payment_methods' | t }}</span>
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "div",
+  "class": "footer-section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "alt", "label": "Warm parchment" },
+        { "value": "dark", "label": "Atelier black" },
+        { "value": "sage", "label": "Botanical sage" }
+      ],
+      "default": "alt"
+    },
+    {
+      "type": "richtext",
+      "id": "brand_text",
+      "label": "About the maison",
+      "default": "<p>Florève is a jewellery house built around a single idea: that a flower, held long enough, becomes an object worth keeping.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show accepted payment methods",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "The house" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Client care" },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Write to us and a member of the atelier will answer personally.</p>"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Correspondence",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Correspondence" },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Notes on new pieces, written rarely and sent to a small list."
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {},
+    "blocks": [
+      { "type": "menu", "settings": { "heading": "The house" } },
+      { "type": "menu", "settings": { "heading": "Client care" } },
+      { "type": "newsletter" }
+    ]
+  },
+  "enabled_on": {
+    "groups": ["footer"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="{{ settings.color_background }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    {%- liquid
+      assign favicon = settings.favicon | default: settings.logo_mark
+      if favicon == blank
+        assign favicon = 'floreve-mark.png' | asset_url
+        assign favicon_is_asset = true
+      endif
+    -%}
+    {%- if favicon_is_asset -%}
+      <link rel="icon" type="image/png" href="{{ favicon }}">
+    {%- else -%}
+      <link rel="icon" type="image/png" href="{{ favicon | image_url: width: 96 }}">
+      <link rel="apple-touch-icon" href="{{ favicon | image_url: width: 180 }}">
+    {%- endif -%}
+
+    <title>
+      {{- page_title -}}
+      {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {% render 'meta-tags' %}
+
+    {{ content_for_header }}
+
+    {%- liquid
+      assign heading_font = settings.font_heading
+      assign body_font = settings.font_body
+      assign body_font_bold = body_font | font_modify: 'weight', 'bolder'
+      assign body_font_italic = body_font | font_modify: 'style', 'italic'
+      assign heading_font_italic = heading_font | font_modify: 'style', 'italic'
+    -%}
+
+    {{ heading_font | font_face: font_display: 'swap' }}
+    {{ heading_font_italic | font_face: font_display: 'swap' }}
+    {{ body_font | font_face: font_display: 'swap' }}
+    {{ body_font_bold | font_face: font_display: 'swap' }}
+    {{ body_font_italic | font_face: font_display: 'swap' }}
+
+    <style>
+      :root {
+        --color-bg: {{ settings.color_background }};
+        --color-surface: {{ settings.color_surface }};
+        --color-surface-alt: {{ settings.color_surface_alt }};
+        --color-dark: {{ settings.color_dark }};
+        --color-ink: {{ settings.color_ink }};
+        --color-body: {{ settings.color_body }};
+        --color-muted: {{ settings.color_muted }};
+        --color-gold: {{ settings.color_gold }};
+        --color-gold-pale: {{ settings.color_gold_pale }};
+        --color-sage: {{ settings.color_sage }};
+        --color-blush: {{ settings.color_blush }};
+        --color-error: {{ settings.color_error }};
+        --color-success: {{ settings.color_success }};
+
+        --color-gold-rgb: {{ settings.color_gold.rgb }};
+        --color-ink-rgb: {{ settings.color_ink.rgb }};
+        --color-bg-rgb: {{ settings.color_background.rgb }};
+
+        --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+        --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
+        --font-heading-weight: {{ heading_font.weight }};
+        --font-body-weight: {{ body_font.weight }};
+
+        --heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+        --body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+        --heading-tracking: {{ settings.heading_tracking | divided_by: 1000.0 }}em;
+        --label-tracking: {{ settings.label_tracking | divided_by: 1000.0 }}em;
+
+        --page-max: {{ settings.page_width }}px;
+        --grid-gap: {{ settings.grid_gap }}px;
+        --radius: {{ settings.radius }}px;
+        --section-spacing: {{ settings.section_spacing | divided_by: 100.0 }};
+
+        --logo-width: {{ settings.logo_width }}px;
+        --logo-width-mobile: {{ settings.logo_width_mobile }}px;
+      }
+    </style>
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'components.css' | asset_url | stylesheet_tag }}
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      window.Floreve = {
+        moneyFormat: {{ shop.money_format | json }},
+        routes: {
+          root: {{ routes.root_url | json }},
+          cart: {{ routes.cart_url | json }},
+          cart_add: {{ routes.cart_add_url | json }},
+          cart_change: {{ routes.cart_change_url | json }},
+          cart_update: {{ routes.cart_update_url | json }},
+          predictive_search: {{ routes.predictive_search_url | json }}
+        },
+        settings: {
+          enableReveal: {{ settings.enable_reveal | json }},
+          cartType: {{ settings.cart_type | json }}
+        },
+        strings: {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          adding: {{ 'products.product.adding' | t | json }},
+          added: {{ 'products.product.added' | t | json }},
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }},
+          linkCopied: {{ 'general.share.copied' | t | json }},
+          inventoryInStock: {{ 'products.product.inventory_in_stock' | t | json }},
+          inventoryLow: {{ 'products.product.inventory_low_count.other' | t: count: '[count]' | json }},
+          inventoryOut: {{ 'products.product.inventory_out_of_stock' | t | json }},
+          inventoryBackorder: {{ 'products.product.inventory_backorder' | t | json }},
+          cartCountOne: {{ 'sections.header.cart_count.one' | t: count: 1 | json }},
+          cartCountOther: {{ 'sections.header.cart_count.other' | t: count: '[count]' | json }}
+        }
+      };
+    </script>
+
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  </head>
+
+  <body class="template-{{ template.name | handle }}{% if template.suffix %} template-{{ template.name | handle }}-{{ template.suffix | handle }}{% endif %}">
+    <a class="skip-to-content" href="#main-content">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    <div class="loading-bar" data-loading-bar aria-hidden="true"></div>
+
+    {% sections 'header-group' %}
+
+    <main id="main-content" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    {%- comment -%}
+      Drawers and the search panel are static sections: they are still editable
+      in the theme editor, but they are not something a merchant should be able
+      to reorder or remove.
+    {%- endcomment -%}
+    {% section 'search-panel' %}
+    {% section 'cart-drawer' %}
+
+    <div
+      class="lightbox"
+      data-lightbox
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ 'products.product.media_gallery' | t }}"
+    >
+      <div class="lightbox__bar">
+        <button
+          type="button"
+          class="icon-button"
+          data-panel-close
+          data-panel-initial-focus
+          aria-label="{{ 'products.product.close_media' | t }}"
+        >
+          {% render 'icon', name: 'close' %}
+        </button>
+      </div>
+      <div class="lightbox__body" data-lightbox-body></div>
+    </div>
+
+    <div class="toast" data-toast role="status" aria-live="polite">
+      {% render 'icon', name: 'check' %}
+      <span data-toast-message></span>
+    </div>
+
+    <div class="overlay" data-overlay></div>
+
+    {%- if request.page_type == 'index' -%}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": {{ shop.name | json }},
+          "url": {{ shop.url | append: routes.root_url | json }},
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {{ shop.url | append: routes.search_url | append: '?q={search_term_string}' | json }},
+            "query-input": "required name=search_term_string"
+          }
+        }
+      </script>
+    {%- endif -%}
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": {{ shop.name | json }},
+        "url": {{ shop.url | append: routes.root_url | json }},
+        {%- if settings.logo -%}
+          "logo": {{ settings.logo | image_url: width: 600 | prepend: 'https:' | json }},
+        {%- endif -%}
+        "description": {{ shop.description | default: shop.name | json }}
+      }
+    </script>
+  </body>
+</html>

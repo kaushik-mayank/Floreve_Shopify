@@ -1,0 +1,78 @@
+<section class="section">
+  <div class="page-width">
+    <div class="customer">
+      <div class="section-header section-header--center">
+        <span class="eyebrow">{{ shop.name }}</span>
+        <h1 class="section-header__title">{{ 'customer.register.title' | t }}</h1>
+      </div>
+
+      {%- form 'create_customer', class: 'customer__form', novalidate: 'novalidate' -%}
+        {%- if form.errors -%}
+          <div class="form-status form-status--error">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+
+        <div class="field">
+          <input
+            type="text"
+            id="register-first"
+            name="customer[first_name]"
+            class="field__input"
+            value="{{ form.first_name }}"
+            placeholder=" "
+            autocomplete="given-name"
+          >
+          <label class="field__label" for="register-first">{{ 'customer.register.first_name' | t }}</label>
+        </div>
+
+        <div class="field">
+          <input
+            type="text"
+            id="register-last"
+            name="customer[last_name]"
+            class="field__input"
+            value="{{ form.last_name }}"
+            placeholder=" "
+            autocomplete="family-name"
+          >
+          <label class="field__label" for="register-last">{{ 'customer.register.last_name' | t }}</label>
+        </div>
+
+        <div class="field">
+          <input
+            type="email"
+            id="register-email"
+            name="customer[email]"
+            class="field__input"
+            value="{{ form.email }}"
+            placeholder=" "
+            autocomplete="email"
+            autocapitalize="off"
+            required
+          >
+          <label class="field__label" for="register-email">{{ 'customer.register.email' | t }}</label>
+        </div>
+
+        <div class="field">
+          <input
+            type="password"
+            id="register-password"
+            name="customer[password]"
+            class="field__input"
+            placeholder=" "
+            autocomplete="new-password"
+            required
+          >
+          <label class="field__label" for="register-password">{{ 'customer.register.password' | t }}</label>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full">
+          <span class="btn__label">{{ 'customer.register.submit' | t }}</span>
+        </button>
+
+        <p class="caption" style="text-align: center;">
+          <a href="{{ routes.account_login_url }}" class="link link--muted link--plain">{{ 'customer.log_in' | t }}</a>
+        </p>
+      {%- endform -%}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,97 @@
+<section class="section">
+  <div class="page-width">
+    <div class="customer">
+      <div class="section-header section-header--center">
+        <span class="eyebrow">{{ shop.name }}</span>
+        <h1 class="section-header__title">{{ 'customer.login.title' | t }}</h1>
+      </div>
+
+      {%- form 'customer_login', class: 'customer__form', novalidate: 'novalidate' -%}
+        {%- if form.errors -%}
+          <div class="form-status form-status--error">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+
+        <div class="field">
+          <input
+            type="email"
+            id="customer-email"
+            name="customer[email]"
+            class="field__input"
+            placeholder=" "
+            autocomplete="email"
+            autocapitalize="off"
+            required
+          >
+          <label class="field__label" for="customer-email">{{ 'customer.login.email' | t }}</label>
+        </div>
+
+        {%- if form.password_needed -%}
+          <div class="field">
+            <input
+              type="password"
+              id="customer-password"
+              name="customer[password]"
+              class="field__input"
+              placeholder=" "
+              autocomplete="current-password"
+              required
+            >
+            <label class="field__label" for="customer-password">{{ 'customer.login.password' | t }}</label>
+          </div>
+        {%- endif -%}
+
+        <button type="submit" class="btn btn--primary btn--full">
+          <span class="btn__label">{{ 'customer.login.sign_in' | t }}</span>
+        </button>
+
+        <p class="caption" style="text-align: center;">
+          {{ 'customer.create_account' | t }} &mdash;
+          <a href="{{ routes.account_register_url }}" class="link link--muted link--plain">
+            {{ 'customer.register.title' | t }}
+          </a>
+        </p>
+      {%- endform -%}
+
+      {%- comment -%}
+        Password recovery lives on this page in Shopify. A details element keeps
+        it one keystroke away without needing JavaScript.
+      {%- endcomment -%}
+      <div class="accordion">
+        <details class="accordion__item" {% if form.errors %}open{% endif %}>
+          <summary class="accordion__summary">
+            {{ 'customer.login.forgot_password' | t }}
+            <span class="accordion__icon" aria-hidden="true"></span>
+          </summary>
+
+          <div class="accordion__panel">
+            {%- form 'recover_customer_password', class: 'customer__form' -%}
+              {%- if form.posted_successfully? -%}
+                <p class="form-status form-status--success">{{ 'customer.recover_password.success' | t }}</p>
+              {%- else -%}
+                <p class="text-body" style="margin-bottom: 1rem;">{{ 'customer.recover_password.subtext' | t }}</p>
+
+                <div class="field">
+                  <input
+                    type="email"
+                    id="recover-email"
+                    name="email"
+                    class="field__input"
+                    placeholder=" "
+                    autocomplete="email"
+                    autocapitalize="off"
+                    required
+                  >
+                  <label class="field__label" for="recover-email">{{ 'customer.login.email' | t }}</label>
+                </div>
+
+                <button type="submit" class="btn btn--outline btn--full">
+                  <span class="btn__label">{{ 'customer.recover_password.submit' | t }}</span>
+                </button>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>

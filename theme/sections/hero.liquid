@@ -1,0 +1,288 @@
+{%- liquid
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile | default: image
+  assign has_media = false
+  if image != blank or section.settings.video != blank
+    assign has_media = true
+  endif
+
+  assign scheme = section.settings.color_scheme
+  if has_media
+    assign scheme = 'dark'
+  endif
+-%}
+
+<section
+  class="hero hero--{{ section.settings.height }} scheme scheme--{{ scheme }}{% if section.settings.content_position == 'center' %} hero--center{% endif %}"
+  style="--focal: {{ section.settings.focal_x }}% {{ section.settings.focal_y }}%; --scrim: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+>
+  {%- if has_media -%}
+    <div class="hero__media">
+      {%- if section.settings.video != blank -%}
+        {{
+          section.settings.video
+          | video_tag: image_size: '1600x', autoplay: true, loop: true, muted: true, controls: false, playsinline: true
+        }}
+      {%- else -%}
+        <img
+          src="{{ image | image_url: width: 1800 }}"
+          srcset="
+            {{ image_mobile | image_url: width: 600 }} 600w,
+            {{ image_mobile | image_url: width: 900 }} 900w,
+            {{ image | image_url: width: 1400 }} 1400w,
+            {{ image | image_url: width: 1800 }} 1800w,
+            {{ image | image_url: width: 2400 }} 2400w
+          "
+          sizes="100vw"
+          alt="{{ image.alt | escape }}"
+          width="{{ image.width }}"
+          height="{{ image.height }}"
+          loading="eager"
+          fetchpriority="high"
+        >
+      {%- endif -%}
+    </div>
+    <div class="hero__scrim" aria-hidden="true"></div>
+  {%- endif -%}
+
+  <div class="hero__inner page-width">
+    <div class="hero__content hero__content--{{ section.settings.content_position }} reveal">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'eyebrow' -%}
+            <span class="eyebrow" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+
+          {%- when 'mark' -%}
+            <span {{ block.shopify_attributes }}>
+              {% render 'calyx', size: '2.75rem' %}
+            </span>
+
+          {%- when 'heading' -%}
+            {%- if section.settings.use_h1 -%}
+              <h1 class="display hero__title" {{ block.shopify_attributes }}>{{ block.settings.text }}</h1>
+            {%- else -%}
+              <p class="display hero__title" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+            {%- endif -%}
+
+          {%- when 'text' -%}
+            <p class="lede hero__text" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+
+          {%- when 'buttons' -%}
+            <div class="hero__actions" {{ block.shopify_attributes }}>
+              {%- if block.settings.primary_label != blank -%}
+                <a href="{{ block.settings.primary_url | default: routes.all_products_collection_url }}" class="btn btn--primary">
+                  <span class="btn__label">{{ block.settings.primary_label }}</span>
+                </a>
+              {%- endif -%}
+              {%- if block.settings.secondary_label != blank -%}
+                <a href="{{ block.settings.secondary_url }}" class="btn btn--outline">
+                  <span class="btn__label">{{ block.settings.secondary_label }}</span>
+                </a>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- if section.settings.show_cue -%}
+    <div class="hero__cue" aria-hidden="true">
+      <span>{{ section.settings.cue_text }}</span>
+      <span class="hero__cue-line"></span>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "div",
+  "class": "hero-section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image for small screens",
+      "info": "A portrait crop keeps the piece readable on a phone. Falls back to the main image."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "Plays silently and on loop. Takes the place of the image when set."
+    },
+    {
+      "type": "range",
+      "id": "focal_x",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Focal point — horizontal",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "focal_y",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Focal point — vertical",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Shade behind the text",
+      "default": 42,
+      "info": "Only as much as the words need to stay legible."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "sm", "label": "Compact" },
+        { "value": "md", "label": "Medium" },
+        { "value": "lg", "label": "Tall" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Text position",
+      "options": [
+        { "value": "start", "label": "Lower left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "end", "label": "Lower right" }
+      ],
+      "default": "start"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme when there is no image",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "alt", "label": "Warm parchment" },
+        { "value": "dark", "label": "Atelier black" },
+        { "value": "sage", "label": "Botanical sage" }
+      ],
+      "default": "alt"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_h1",
+      "label": "Use the heading as the page's main heading",
+      "default": true,
+      "info": "Keep this on for the first hero on a page and off for any others."
+    },
+    {
+      "type": "header",
+      "content": "Scroll cue"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cue",
+      "label": "Show the scroll cue",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cue_text",
+      "label": "Cue text",
+      "default": "Scroll"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mark",
+      "name": "Calyx mark",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "eyebrow",
+      "name": "Eyebrow",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Maison de Joaillerie"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Heading",
+          "default": "Flowers, kept"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Jewellery drawn from botanical form, made by hand between Italy and India."
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "primary_label", "label": "First button", "default": "Discover the collection" },
+        { "type": "url", "id": "primary_url", "label": "First link" },
+        { "type": "text", "id": "secondary_label", "label": "Second button", "default": "The house" },
+        { "type": "url", "id": "secondary_url", "label": "Second link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "eyebrow" },
+        { "type": "heading" },
+        { "type": "text" },
+        { "type": "buttons" }
+      ]
+    }
+  ]
+}
+{% endschema %}

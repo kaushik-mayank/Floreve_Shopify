@@ -1,0 +1,162 @@
+<section
+  class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="manifesto">
+      <div class="reveal">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow eyebrow--ruled" style="margin-bottom: 1.25rem;">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.statement != blank -%}
+          <h2 class="manifesto__statement">{{ section.settings.statement }}</h2>
+        {%- endif -%}
+      </div>
+
+      <div class="manifesto__body reveal" style="--reveal-delay: 120ms;">
+        {%- if section.settings.text != blank -%}
+          <div class="rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.link_label != blank and section.settings.link_url != blank -%}
+          <a href="{{ section.settings.link_url }}" class="link-arrow">
+            {{ section.settings.link_label }}
+            {% render 'icon', name: 'arrow-right' %}
+          </a>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="manifesto__pillars">
+            {%- for block in section.blocks -%}
+              <div {{ block.shopify_attributes }}>
+                <span class="pillar__index">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                <span class="pillar__title">{{ block.settings.title }}</span>
+                <p class="pillar__text">{{ block.settings.text }}</p>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand statement",
+  "tag": "div",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" },
+        { "value": "dark", "label": "Atelier black" },
+        { "value": "sage", "label": "Botanical sage" }
+      ],
+      "default": "parchment"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The house"
+    },
+    {
+      "type": "textarea",
+      "id": "statement",
+      "label": "Statement",
+      "default": "A flower lasts a season. Held in metal, it lasts a life."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Florève begins where botany and metalwork meet. Each form is studied from a living flower, then rebuilt by hand — petal by petal — in materials chosen to hold that shape long after the season has passed.</p><p>The result is not a copy of nature. It is nature, given a second structure.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read our story"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 112
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 112
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Studied" },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Every form begins with a real flower, observed before it is drawn."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand statement",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Studied",
+            "text": "Every form begins with a real flower, observed before it is drawn."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Made",
+            "text": "Built by hand in small numbers, in an atelier rather than a factory."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Worn",
+            "text": "Weighted and finished to sit comfortably against the body, every day."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,112 @@
+{%- if settings.cart_type == 'drawer' -%}
+  <div
+    class="drawer"
+    id="cart-drawer"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ 'sections.cart.title' | t }}"
+  >
+    <div data-cart-section="{{ section.id }}">
+      <div class="drawer__header">
+        <span class="drawer__title">
+          {{ 'sections.cart.title' | t }}
+          {%- if cart.item_count > 0 %} ({{ cart.item_count }}){% endif -%}
+        </span>
+        <button
+          type="button"
+          class="icon-button"
+          data-panel-close
+          data-panel-initial-focus
+          aria-label="{{ 'general.accessibility.close' | t }}"
+        >
+          {% render 'icon', name: 'close' %}
+        </button>
+      </div>
+
+      {%- if cart.item_count == 0 -%}
+        <div class="drawer__body">
+          <div class="cart__empty">
+            {% render 'calyx', size: '3rem', opacity: '0.5' %}
+            <p class="h4">{{ 'sections.cart.empty' | t }}</p>
+            <p class="text-body">{{ 'sections.cart.empty_subtext' | t }}</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">
+              {{ 'sections.cart.continue' | t }}
+            </a>
+          </div>
+        </div>
+      {%- else -%}
+        <div class="drawer__body">
+          {% render 'cart-items', compact: true %}
+
+          {%- if settings.cart_notes -%}
+            <details class="accordion__item" style="border-bottom: 0; margin-top: 1rem;">
+              <summary class="accordion__summary">
+                {{ settings.cart_note_label }}
+                <span class="accordion__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="accordion__panel">
+                <label class="visually-hidden" for="cart-drawer-note">{{ 'sections.cart.note' | t }}</label>
+                <textarea
+                  id="cart-drawer-note"
+                  class="field__input"
+                  name="note"
+                  data-cart-note
+                  rows="3"
+                >{{ cart.note }}</textarea>
+              </div>
+            </details>
+          {%- endif -%}
+        </div>
+
+        <div class="drawer__footer">
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            <div class="cart__totals">
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <div class="cart__total-row">
+                  <span>{{ discount.title }}</span>
+                  <span>&minus;{{ discount.total_allocated_amount | money }}</span>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <div class="cart__total-row cart__total-row--grand" style="border-top: 0; padding-top: 0; margin-bottom: 0.5rem;">
+            <span>{{ 'sections.cart.subtotal' | t }}</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+
+          <p class="caption" style="margin-bottom: 1rem;">
+            {%- if cart.taxes_included -%}
+              {{ 'sections.cart.taxes_included_shipping_at_checkout' | t }}
+            {%- else -%}
+              {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+            {%- endif -%}
+          </p>
+
+          <form action="{{ routes.cart_url }}" method="post">
+            <button type="submit" name="checkout" class="btn btn--primary btn--full">
+              <span class="btn__label">{{ 'sections.cart.checkout' | t }}</span>
+            </button>
+          </form>
+
+          <a href="{{ routes.cart_url }}" class="link link--muted" style="display: block; text-align: center; margin-top: 1rem;">
+            {{ 'sections.cart.view_cart' | t }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bag drawer",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "The slide-out bag appears when Cart behaviour is set to “Slide-out bag” in Theme settings › Cart."
+    }
+  ]
+}
+{% endschema %}

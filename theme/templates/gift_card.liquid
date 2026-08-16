@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value | money, shop: shop.name }}</title>
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96 }}">
+    {%- else -%}
+      <link rel="icon" type="image/png" href="{{ 'floreve-mark.png' | asset_url }}">
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    {%- liquid
+      assign heading_font = settings.font_heading
+      assign body_font = settings.font_body
+    -%}
+    {{ heading_font | font_face: font_display: 'swap' }}
+    {{ body_font | font_face: font_display: 'swap' }}
+
+    <style>
+      :root {
+        --color-bg: {{ settings.color_background }};
+        --color-surface: {{ settings.color_surface }};
+        --color-surface-alt: {{ settings.color_surface_alt }};
+        --color-dark: {{ settings.color_dark }};
+        --color-ink: {{ settings.color_ink }};
+        --color-body: {{ settings.color_body }};
+        --color-muted: {{ settings.color_muted }};
+        --color-gold: {{ settings.color_gold }};
+        --color-gold-pale: {{ settings.color_gold_pale }};
+        --color-sage: {{ settings.color_sage }};
+        --color-blush: {{ settings.color_blush }};
+        --color-error: {{ settings.color_error }};
+        --color-success: {{ settings.color_success }};
+        --color-gold-rgb: {{ settings.color_gold.rgb }};
+        --color-ink-rgb: {{ settings.color_ink.rgb }};
+        --color-bg-rgb: {{ settings.color_background.rgb }};
+        --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+        --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
+        --font-heading-weight: {{ heading_font.weight }};
+        --font-body-weight: {{ body_font.weight }};
+        --label-tracking: {{ settings.label_tracking | divided_by: 1000.0 }}em;
+        --radius: {{ settings.radius }}px;
+      }
+
+      .gift-card {
+        max-width: 32rem;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+      }
+
+      .gift-card__value {
+        font-family: var(--font-heading);
+        font-size: clamp(3rem, 10vw, 4.5rem);
+        line-height: 1;
+        color: var(--color-ink);
+      }
+
+      .gift-card__code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 1.125rem;
+        letter-spacing: 0.22em;
+        padding: 1rem 1.5rem;
+        border: 1px solid var(--rule-strong);
+        background: var(--color-surface);
+        word-break: break-all;
+      }
+
+      .gift-card__qr { padding: 1rem; background: #fff; border: 1px solid var(--rule); }
+
+      @media print {
+        .gift-card__actions { display: none; }
+      }
+    </style>
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'components.css' | asset_url | stylesheet_tag }}
+  </head>
+
+  <body class="template-gift-card">
+    <main class="section" role="main">
+      <div class="page-width">
+        <div class="gift-card">
+          <a href="{{ shop.url }}" aria-label="{{ shop.name }}" style="line-height: 0;">
+            {% render 'logo', variant: 'dark', width: 400, class: 'brand-lockup' %}
+          </a>
+
+          <span class="eyebrow">{{ 'gift_cards.issued.subtext' | t }}</span>
+          <span class="gift-card__value">{{ gift_card.initial_value | money }}</span>
+
+          {%- if gift_card.initial_value != gift_card.balance -%}
+            <p class="text-body">{{ 'gift_cards.issued.remaining_html' | t: balance: gift_card.balance | money }}</p>
+          {%- endif -%}
+
+          {%- if gift_card.expired -%}
+            <p class="form-status form-status--error">{{ 'gift_cards.issued.expired' | t }}</p>
+          {%- elsif gift_card.expires_on -%}
+            <p class="caption">
+              {{ 'gift_cards.issued.expiration_date' | t: expires_on: gift_card.expires_on | date: format: 'date' }}
+            </p>
+          {%- endif -%}
+
+          <div class="gift-card__qr">
+            {{ gift_card.qr_identifier | img_tag }}
+          </div>
+
+          <p class="gift-card__code">{{ gift_card.code | format_code }}</p>
+
+          <div class="gift-card__actions" style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;">
+            <a href="{{ shop.url }}" class="btn btn--primary">
+              <span class="btn__label">{{ 'gift_cards.issued.shop_link' | t }}</span>
+            </a>
+            <button type="button" class="btn btn--outline" onclick="window.print()">
+              <span class="btn__label">{{ 'gift_cards.issued.print' | t }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

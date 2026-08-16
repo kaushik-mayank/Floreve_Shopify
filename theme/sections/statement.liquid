@@ -1,0 +1,111 @@
+<section
+  class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="statement reveal">
+      {%- if section.settings.show_mark -%}
+        {% render 'calyx', size: '2.5rem', opacity: '0.85' %}
+      {%- endif -%}
+
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.quote != blank -%}
+        <blockquote class="statement__quote">{{ section.settings.quote }}</blockquote>
+      {%- endif -%}
+
+      {%- if section.settings.attribution != blank -%}
+        <cite class="statement__attribution">{{ section.settings.attribution }}</cite>
+      {%- endif -%}
+
+      {%- if section.settings.link_label != blank and section.settings.link_url != blank -%}
+        <a href="{{ section.settings.link_url }}" class="btn btn--outline" style="margin-top: 0.75rem;">
+          <span class="btn__label">{{ section.settings.link_label }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Statement",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" },
+        { "value": "dark", "label": "Atelier black" },
+        { "value": "sage", "label": "Botanical sage" },
+        { "value": "blush", "label": "Pressed blush" }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mark",
+      "label": "Show the calyx mark",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Statement",
+      "default": "Ornament is not decoration. It is the part of us we choose to make visible."
+    },
+    {
+      "type": "text",
+      "id": "attribution",
+      "label": "Attribution",
+      "info": "Only credit a real person. Leave empty otherwise."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 140
+    }
+  ],
+  "presets": [{ "name": "Statement" }]
+}
+{% endschema %}

@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "color_scheme": "parchment",
+        "eyebrow": "Your selection",
+        "show_assurances": true,
+        "padding_top": 56,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-search",
+      "settings": {
+        "color_scheme": "parchment",
+        "results_per_page": 24,
+        "columns": 4,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "padding_top": 56,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["main"]
+}

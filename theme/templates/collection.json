@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "banner": {
+      "type": "collection-banner",
+      "settings": {
+        "color_scheme": "parchment",
+        "show_image": true,
+        "show_description": true,
+        "eyebrow": "The collection",
+        "alignment": "center"
+      }
+    },
+    "grid": {
+      "type": "main-collection",
+      "settings": {
+        "color_scheme": "parchment",
+        "products_per_page": 24,
+        "columns": 4,
+        "columns_mobile": "2",
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "padding_top": 24,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["banner", "grid"]
+}

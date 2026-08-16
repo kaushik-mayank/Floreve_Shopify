@@ -1,0 +1,87 @@
+{%- liquid
+  assign image = collection.image
+  if section.settings.show_image == false
+    assign image = blank
+  endif
+-%}
+
+<section class="scheme scheme--{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    {%- if image != blank -%}
+      <div class="collection-hero collection-hero--image reveal">
+        <div class="collection-hero__media">
+          <img
+            src="{{ image | image_url: width: 1800 }}"
+            srcset="{{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1400 }} 1400w, {{ image | image_url: width: 2000 }} 2000w"
+            sizes="100vw"
+            alt="{{ image.alt | escape }}"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            loading="eager"
+            fetchpriority="high"
+          >
+        </div>
+        <div class="collection-hero__scrim" aria-hidden="true"></div>
+
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        <h1 class="h1 collection-hero__title">{{ collection.title }}</h1>
+        {%- if collection.description != blank and section.settings.show_description -%}
+          <div class="collection-hero__text rte">{{ collection.description }}</div>
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <div class="collection-hero{% if section.settings.alignment == 'center' %} collection-hero--center{% endif %} reveal">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow{% if section.settings.alignment != 'center' %} eyebrow--ruled{% endif %}">
+            {{ section.settings.eyebrow }}
+          </span>
+        {%- endif -%}
+
+        <h1 class="h1 collection-hero__title">{{ collection.title }}</h1>
+
+        {%- if collection.description != blank and section.settings.show_description -%}
+          <div class="collection-hero__text rte">{{ collection.description }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection heading",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" }
+      ],
+      "default": "parchment"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show the collection image behind the title",
+      "default": true,
+      "info": "The image is set in Shopify admin on the collection itself."
+    },
+    { "type": "checkbox", "id": "show_description", "label": "Show the collection description", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The collection" },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment when there is no image",
+      "options": [
+        { "value": "start", "label": "Left" },
+        { "value": "center", "label": "Centred" }
+      ],
+      "default": "center"
+    }
+  ]
+}
+{% endschema %}

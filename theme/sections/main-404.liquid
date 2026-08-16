@@ -1,0 +1,38 @@
+<section class="section scheme scheme--{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="not-found">
+      {% render 'calyx', size: '3.5rem', opacity: '0.6' %}
+      <h1 class="h2">{{ 'general.404.title' | t }}</h1>
+      <p class="lede" style="max-width: 34rem;">{{ 'general.404.subtext' | t }}</p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;">
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">
+          <span class="btn__label">{{ 'general.404.link' | t }}</span>
+        </a>
+        <a href="{{ routes.root_url }}" class="btn btn--outline">
+          <span class="btn__label">{{ 'general.breadcrumbs.home' | t }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page not found",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" }
+      ],
+      "default": "parchment"
+    }
+  ]
+}
+{% endschema %}

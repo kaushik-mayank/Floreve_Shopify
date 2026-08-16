@@ -1,0 +1,176 @@
+<article
+  class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width page-width--reading">
+    <header class="article__header reveal">
+      <span class="article__meta">
+        {{ article.published_at | date: format: 'date' }}
+        {%- if section.settings.show_author and article.author != blank %}
+          &middot; {{ 'blogs.article.by_author' | t: author: article.author }}
+        {%- endif -%}
+      </span>
+      <h1>{{ article.title }}</h1>
+    </header>
+  </div>
+
+  {%- if article.image and section.settings.show_image -%}
+    <div class="page-width article__hero reveal">
+      <div class="media media--landscape">
+        <img
+          src="{{ article.image | image_url: width: 1600 }}"
+          srcset="{{ article.image | image_url: width: 800 }} 800w, {{ article.image | image_url: width: 1200 }} 1200w, {{ article.image | image_url: width: 1800 }} 1800w"
+          sizes="(min-width: 1440px) 1400px, 100vw"
+          alt="{{ article.image.alt | escape }}"
+          width="{{ article.image.width }}"
+          height="{{ article.image.height }}"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="page-width page-width--reading">
+    <div class="rte reveal">{{ article.content }}</div>
+
+    {%- if article.tags.size > 0 -%}
+      <p class="caption" style="margin-top: var(--space-lg);">
+        {{ 'blogs.article.posted_in' | t }}
+        {%- for tag in article.tags -%}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="link link--plain link--muted">{{ tag }}</a>
+          {%- unless forloop.last %}, {% endunless -%}
+        {%- endfor -%}
+      </p>
+    {%- endif -%}
+
+    <div style="margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--scheme-rule); display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;">
+      <a href="{{ blog.url }}" class="link-arrow">
+        {% render 'icon', name: 'arrow-left' %}
+        {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
+      </a>
+
+      <a href="{{ shop.url }}{{ article.url }}" class="link link--muted" data-share-link>
+        {{ 'blogs.article.share' | t }}
+      </a>
+    </div>
+
+    {%- if blog.comments_enabled? -%}
+      <section style="margin-top: var(--space-2xl);" id="comments">
+        <h2 class="h3" style="margin-bottom: var(--space-md);">
+          {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+        </h2>
+
+        {%- if article.comments_count > 0 -%}
+          <ul role="list" style="list-style: none; padding: 0; margin: 0 0 var(--space-lg);">
+            {%- for comment in article.comments -%}
+              <li style="padding: var(--space-md) 0; border-bottom: 1px solid var(--scheme-rule);">
+                <div class="rte">{{ comment.content }}</div>
+                <p class="caption" style="margin-top: 0.5rem;">
+                  {{ comment.author }} &middot; {{ comment.created_at | date: format: 'date' }}
+                </p>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- form 'new_comment', article, class: 'customer__form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="form-status form-status--success">
+              {%- if blog.moderated? -%}
+                {{ 'blogs.comments.success_moderated' | t }}
+              {%- else -%}
+                {{ 'blogs.comments.success' | t }}
+              {%- endif -%}
+            </p>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <p class="form-status form-status--error">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+
+          <div class="field">
+            <input type="text" id="comment-author" name="comment[author]" class="field__input" placeholder=" " required>
+            <label class="field__label" for="comment-author">{{ 'blogs.comments.name' | t }}</label>
+          </div>
+
+          <div class="field">
+            <input type="email" id="comment-email" name="comment[email]" class="field__input" placeholder=" " required>
+            <label class="field__label" for="comment-email">{{ 'blogs.comments.email' | t }}</label>
+          </div>
+
+          <div class="field">
+            <textarea id="comment-body" name="comment[body]" class="field__input" placeholder=" " required></textarea>
+            <label class="field__label" for="comment-body">{{ 'blogs.comments.message' | t }}</label>
+          </div>
+
+          {%- if blog.moderated? -%}
+            <p class="caption">{{ 'blogs.comments.moderated' | t }}</p>
+          {%- endif -%}
+
+          <button type="submit" class="btn btn--primary" style="align-self: flex-start;">
+            <span class="btn__label">{{ 'blogs.comments.post' | t }}</span>
+          </button>
+        {%- endform -%}
+      </section>
+    {%- endif -%}
+  </div>
+</article>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ article.title | json }},
+    "datePublished": {{ article.published_at | date: '%Y-%m-%d' | json }},
+    {%- if article.image -%}
+      "image": [{{ article.image | image_url: width: 1200 | prepend: 'https:' | json }}],
+    {%- endif -%}
+    "author": { "@type": "Person", "name": {{ article.author | default: shop.name | json }} },
+    "publisher": { "@type": "Organization", "name": {{ shop.name | json }} },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": {{ shop.url | append: article.url | json }} }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Journal entry",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" }
+      ],
+      "default": "parchment"
+    },
+    { "type": "checkbox", "id": "show_image", "label": "Show the feature image", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show the author", "default": false },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 96
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,488 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Florève",
+    "theme_version": "1.0.0",
+    "theme_author": "Maison Florève",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/manual/online-store/themes"
+  },
+
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "paragraph",
+        "content": "The Florève lockup is bundled with the theme. Upload your own files here only if the official artwork changes."
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Primary logo",
+        "info": "Transparent PNG or SVG. Falls back to the bundled Florève lockup."
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_light",
+        "label": "Logo for dark backgrounds",
+        "info": "Used in the footer and on dark sections."
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_mark",
+        "label": "Calyx mark",
+        "info": "The flower mark on its own. Used as a section ornament and loading state."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 90,
+        "max": 260,
+        "step": 5,
+        "unit": "px",
+        "label": "Logo width (desktop)",
+        "default": 150
+      },
+      {
+        "type": "range",
+        "id": "logo_width_mobile",
+        "min": 70,
+        "max": 180,
+        "step": 5,
+        "unit": "px",
+        "label": "Logo width (mobile)",
+        "default": 108
+      },
+      {
+        "type": "header",
+        "content": "Favicon"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Square image, at least 96 × 96 px."
+      },
+      {
+        "type": "header",
+        "content": "Social sharing"
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Default sharing image",
+        "info": "Shown when a page without its own image is shared. 1200 × 630 px recommended."
+      }
+    ]
+  },
+
+  {
+    "name": "Colours",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The Florève palette follows one rule above all: Parchment dominates. Gold is an accent — never a background."
+      },
+      {
+        "type": "header",
+        "content": "Surfaces"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Parchment — page background",
+        "default": "#FAF7F2"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Card and media surface",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_surface_alt",
+        "label": "Alternate surface",
+        "default": "#F0EAE0"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Atelier black — dark sections",
+        "default": "#1A1814"
+      },
+      {
+        "type": "header",
+        "content": "Typography"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Headings and primary text",
+        "default": "#1A1814"
+      },
+      {
+        "type": "color",
+        "id": "color_body",
+        "label": "Body text",
+        "default": "#7A7468",
+        "info": "A warm grey rather than black. This softness is the palette's final luxury signal."
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Muted text and hairlines",
+        "default": "#C5BFB7"
+      },
+      {
+        "type": "header",
+        "content": "Accents"
+      },
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Champagne gold",
+        "default": "#B8975A"
+      },
+      {
+        "type": "color",
+        "id": "color_gold_pale",
+        "label": "Pale gold",
+        "default": "#E8D5A3"
+      },
+      {
+        "type": "color",
+        "id": "color_sage",
+        "label": "Botanical sage",
+        "default": "#4D5A49"
+      },
+      {
+        "type": "color",
+        "id": "color_blush",
+        "label": "Pressed blush",
+        "default": "#E8D0C4"
+      },
+      {
+        "type": "header",
+        "content": "Feedback"
+      },
+      {
+        "type": "color",
+        "id": "color_error",
+        "label": "Error",
+        "default": "#9B4A3B"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "label": "Confirmation",
+        "default": "#4D5A49"
+      }
+    ]
+  },
+
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Display serif"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Headings and wordmark",
+        "default": "cormorant_garamond_n4",
+        "info": "A high-contrast serif. Keep the weight light — Florève headings are never bold."
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "min": 85,
+        "max": 130,
+        "step": 5,
+        "unit": "%",
+        "label": "Heading size",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "heading_tracking",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "unit": "‰",
+        "label": "Heading letter-spacing",
+        "default": 4
+      },
+      {
+        "type": "header",
+        "content": "Geometric sans"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body, labels and interface",
+        "default": "montserrat_n4"
+      },
+      {
+        "type": "range",
+        "id": "body_scale",
+        "min": 90,
+        "max": 120,
+        "step": 5,
+        "unit": "%",
+        "label": "Body size",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Labels"
+      },
+      {
+        "type": "range",
+        "id": "label_tracking",
+        "min": 10,
+        "max": 60,
+        "step": 2,
+        "unit": "‰",
+        "label": "Label letter-spacing",
+        "default": 34,
+        "info": "Applies to eyebrow labels, navigation and buttons."
+      }
+    ]
+  },
+
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "min": 1200,
+        "max": 1800,
+        "step": 20,
+        "unit": "px",
+        "label": "Maximum content width",
+        "default": 1440
+      },
+      {
+        "type": "range",
+        "id": "section_spacing",
+        "min": 70,
+        "max": 140,
+        "step": 5,
+        "unit": "%",
+        "label": "Vertical rhythm between sections",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "grid_gap",
+        "min": 12,
+        "max": 64,
+        "step": 4,
+        "unit": "px",
+        "label": "Grid gap",
+        "default": 32
+      },
+      {
+        "type": "header",
+        "content": "Corners"
+      },
+      {
+        "type": "range",
+        "id": "radius",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "unit": "px",
+        "label": "Corner radius",
+        "default": 0,
+        "info": "Florève uses square corners. Anything above 2px begins to read as a generic template."
+      }
+    ]
+  },
+
+  {
+    "name": "Product cards",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Image shape",
+        "options": [
+          { "value": "portrait", "label": "Portrait (4:5)" },
+          { "value": "square", "label": "Square (1:1)" },
+          { "value": "tall", "label": "Tall (2:3)" },
+          { "value": "natural", "label": "Natural" }
+        ],
+        "default": "portrait"
+      },
+      {
+        "type": "select",
+        "id": "card_image_fit",
+        "label": "Image fit",
+        "options": [
+          { "value": "contain", "label": "Contain — shows the whole piece" },
+          { "value": "cover", "label": "Cover — fills the frame" }
+        ],
+        "default": "contain",
+        "info": "Contain suits jewellery photographed on a plain ground."
+      },
+      {
+        "type": "checkbox",
+        "id": "card_hover_image",
+        "label": "Reveal the second image on hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_quick_add",
+        "label": "Show quick add",
+        "default": true,
+        "info": "Adds single-variant pieces straight to the bag. Pieces with options open the product page."
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_swatches",
+        "label": "Show colour options",
+        "default": true,
+        "info": "Displays the number of available options when a piece has more than one."
+      }
+    ]
+  },
+
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart behaviour",
+        "options": [
+          { "value": "drawer", "label": "Slide-out bag" },
+          { "value": "page", "label": "Go to the bag page" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes",
+        "label": "Allow a note with the order",
+        "default": true,
+        "info": "Useful for engraving requests and gift instructions."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_dynamic_checkout",
+        "label": "Show accelerated checkout buttons in the bag",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_note_label",
+        "label": "Note field label",
+        "default": "Add a note or engraving request"
+      }
+    ]
+  },
+
+  {
+    "name": "Motion",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_reveal",
+        "label": "Reveal sections as they enter the viewport",
+        "default": true,
+        "info": "Always disabled for visitors who prefer reduced motion."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_image_zoom",
+        "label": "Slow zoom on image hover",
+        "default": true
+      }
+    ]
+  },
+
+  {
+    "name": "Search",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "predictive_search",
+        "label": "Suggest results while typing",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_collections",
+        "label": "Include collections in suggestions",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_pages",
+        "label": "Include pages and journal entries in suggestions",
+        "default": true
+      }
+    ]
+  },
+
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram",
+        "info": "https://instagram.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      }
+    ]
+  },
+
+  {
+    "name": "Currency",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "currency_code_enabled",
+        "label": "Show the currency code beside prices",
+        "default": false,
+        "info": "Recommended when you sell into more than one country."
+      }
+    ]
+  }
+]

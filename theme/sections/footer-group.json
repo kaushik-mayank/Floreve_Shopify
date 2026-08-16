@@ -1,0 +1,81 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "services": {
+      "type": "service-pillars",
+      "blocks": {
+        "pillar-1": {
+          "type": "pillar",
+          "settings": {
+            "icon": "atelier",
+            "title": "Made by hand",
+            "text": "Every piece is assembled and finished by a person, not a machine."
+          }
+        },
+        "pillar-2": {
+          "type": "pillar",
+          "settings": {
+            "icon": "gift",
+            "title": "Presented to keep",
+            "text": "Each order arrives in a box designed to outlast the occasion."
+          }
+        },
+        "pillar-3": {
+          "type": "pillar",
+          "settings": {
+            "icon": "shipping",
+            "title": "Shipped worldwide",
+            "text": "Tracked and insured from the atelier to your door."
+          }
+        },
+        "pillar-4": {
+          "type": "pillar",
+          "settings": {
+            "icon": "return",
+            "title": "Considered returns",
+            "text": "Change your mind within the window set out in our policy."
+          }
+        }
+      },
+      "block_order": ["pillar-1", "pillar-2", "pillar-3", "pillar-4"],
+      "settings": {
+        "color_scheme": "parchment",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-1": {
+          "type": "menu",
+          "settings": {
+            "heading": "The house",
+            "menu": "footer"
+          }
+        },
+        "menu-2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Client care",
+            "menu": "footer"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Correspondence",
+            "text": "Notes on new pieces, written rarely and sent to a small list."
+          }
+        }
+      },
+      "block_order": ["menu-1", "menu-2", "newsletter"],
+      "settings": {
+        "color_scheme": "alt",
+        "show_payment_icons": true
+      }
+    }
+  },
+  "order": ["services", "footer"]
+}

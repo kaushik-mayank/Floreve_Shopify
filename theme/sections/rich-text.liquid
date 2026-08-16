@@ -1,0 +1,177 @@
+<section
+  class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width{% if section.settings.width == 'narrow' %} page-width--narrow{% elsif section.settings.width == 'reading' %} page-width--reading{% endif %}">
+    <div
+      class="stack reveal"
+      style="{% if section.settings.alignment == 'center' %}text-align: center; margin-inline: auto; max-width: 46rem;{% endif %}"
+    >
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'mark' -%}
+            <div {% if section.settings.alignment == 'center' %}style="display: flex; justify-content: center;"{% endif %} {{ block.shopify_attributes }}>
+              {% render 'calyx', size: '2.5rem' %}
+            </div>
+
+          {%- when 'eyebrow' -%}
+            <span class="eyebrow" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+
+          {%- when 'heading' -%}
+            <h2 class="{{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+
+          {%- when 'lede' -%}
+            <p class="lede" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+
+          {%- when 'text' -%}
+            <div class="rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+
+          {%- when 'button' -%}
+            <div {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.url }}" class="btn btn--{{ block.settings.style }}">
+                <span class="btn__label">{{ block.settings.label }}</span>
+              </a>
+            </div>
+
+          {%- when 'divider' -%}
+            <div {{ block.shopify_attributes }}>
+              {% render 'calyx', size: '1.5rem', divider: true %}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" },
+        { "value": "dark", "label": "Atelier black" },
+        { "value": "sage", "label": "Botanical sage" },
+        { "value": "blush", "label": "Pressed blush" }
+      ],
+      "default": "parchment"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "options": [
+        { "value": "full", "label": "Full" },
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "reading", "label": "Reading column" }
+      ],
+      "default": "narrow"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "start", "label": "Left" },
+        { "value": "center", "label": "Centred" }
+      ],
+      "default": "center"
+    },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    { "type": "mark", "name": "Calyx mark", "settings": [] },
+    {
+      "type": "eyebrow",
+      "name": "Eyebrow",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "The house" }]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Heading", "default": "A short history" },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            { "value": "h3", "label": "Small" },
+            { "value": "h2", "label": "Medium" },
+            { "value": "h1", "label": "Large" }
+          ],
+          "default": "h2"
+        }
+      ]
+    },
+    {
+      "type": "lede",
+      "name": "Opening line",
+      "settings": [{ "type": "textarea", "id": "text", "label": "Text" }]
+    },
+    {
+      "type": "text",
+      "name": "Paragraphs",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Tell the part of the story that only you can tell.</p>"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Explore the collection" },
+        { "type": "url", "id": "url", "label": "Link" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "primary", "label": "Solid" },
+            { "value": "outline", "label": "Outline" }
+          ],
+          "default": "primary"
+        }
+      ]
+    },
+    { "type": "divider", "name": "Divider", "settings": [] }
+  ],
+  "presets": [
+    {
+      "name": "Text",
+      "blocks": [{ "type": "eyebrow" }, { "type": "heading" }, { "type": "text" }]
+    }
+  ]
+}
+{% endschema %}

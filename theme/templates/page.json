@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": { "color_scheme": "parchment", "show_mark": true, "padding_top": 88, "padding_bottom": 96 }
+    }
+  },
+  "order": ["main"]
+}

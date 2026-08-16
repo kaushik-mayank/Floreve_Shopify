@@ -1,0 +1,39 @@
+{%- comment -%}
+  The section header used across the store so every section opens the same way.
+
+  Accepts:
+  - eyebrow, heading, text
+  - alignment: 'start' (default), 'center', 'split'
+  - link_url, link_label: the trailing action, used with the split alignment
+  - heading_tag: defaults to h2
+{%- endcomment -%}
+
+{%- liquid
+  assign tag = heading_tag | default: 'h2'
+  assign align = alignment | default: 'start'
+-%}
+
+{%- if eyebrow != blank or heading != blank or text != blank -%}
+  <div class="section-header{% if align == 'center' %} section-header--center{% elsif align == 'split' %} section-header--split{% endif %} reveal">
+    <div class="section-header__text">
+      {%- if eyebrow != blank -%}
+        <span class="eyebrow eyebrow--ruled">{{ eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if heading != blank -%}
+        <{{ tag }} class="section-header__title">{{ heading }}</{{ tag }}>
+      {%- endif -%}
+
+      {%- if text != blank -%}
+        <p class="lede">{{ text }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if align == 'split' and link_url != blank and link_label != blank -%}
+      <a href="{{ link_url }}" class="link-arrow">
+        {{ link_label }}
+        {% render 'icon', name: 'arrow-right' %}
+      </a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

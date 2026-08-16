@@ -1,0 +1,93 @@
+{%- liquid
+  assign order_date = order.created_at | date: format: 'date'
+-%}
+
+<section class="section">
+  <div class="page-width">
+    <div class="customer customer--wide">
+      <div class="section-header">
+        <span class="eyebrow eyebrow--ruled">{{ 'customer.order.date_html' | t: date: order_date }}</span>
+        <h1 class="section-header__title">{{ 'customer.order.title' | t: name: order.name }}</h1>
+      </div>
+
+      {%- if order.cancelled -%}
+        {%- assign cancelled_date = order.cancelled_at | date: format: 'date' -%}
+        <p class="form-status form-status--error" style="margin-bottom: var(--space-md);">
+          {{ 'customer.order.cancelled_html' | t: date: cancelled_date }}
+          {{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason_label }}
+        </p>
+      {%- endif -%}
+
+      <table class="order-table" style="margin-bottom: var(--space-lg);">
+        <thead>
+          <tr>
+            <th scope="col">{{ 'customer.order.product' | t }}</th>
+            <th scope="col">{{ 'customer.order.price' | t }}</th>
+            <th scope="col">{{ 'customer.order.quantity' | t }}</th>
+            <th scope="col">{{ 'customer.order.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for line_item in order.line_items -%}
+            <tr>
+              <td data-label="{{ 'customer.order.product' | t }}">
+                <a href="{{ line_item.product.url }}" class="link link--plain">{{ line_item.title }}</a>
+                {%- if line_item.sku != blank -%}
+                  <br>
+                  <span class="caption">{{ 'customer.order.sku' | t }}: {{ line_item.sku }}</span>
+                {%- endif -%}
+              </td>
+              <td data-label="{{ 'customer.order.price' | t }}">{{ line_item.price | money }}</td>
+              <td data-label="{{ 'customer.order.quantity' | t }}">{{ line_item.quantity }}</td>
+              <td data-label="{{ 'customer.order.total' | t }}">{{ line_item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" data-label="{{ 'customer.order.subtotal' | t }}">{{ 'customer.order.subtotal' | t }}</td>
+            <td data-label="{{ 'customer.order.subtotal' | t }}">{{ order.line_items_subtotal_price | money }}</td>
+          </tr>
+          {%- for shipping_method in order.shipping_methods -%}
+            <tr>
+              <td colspan="3" data-label="{{ 'customer.order.shipping' | t }}">
+                {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
+              </td>
+              <td data-label="{{ 'customer.order.shipping' | t }}">{{ shipping_method.price | money }}</td>
+            </tr>
+          {%- endfor -%}
+          {%- for tax_line in order.tax_lines -%}
+            <tr>
+              <td colspan="3" data-label="{{ 'customer.order.tax' | t }}">
+                {{ 'customer.order.tax' | t }} ({{ tax_line.title }})
+              </td>
+              <td data-label="{{ 'customer.order.tax' | t }}">{{ tax_line.price | money }}</td>
+            </tr>
+          {%- endfor -%}
+          <tr>
+            <td colspan="3" data-label="{{ 'customer.order.total' | t }}">{{ 'customer.order.total' | t }}</td>
+            <td data-label="{{ 'customer.order.total' | t }}">{{ order.total_price | money }}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="grid" style="--cols: 1; --cols-md: 2;">
+        <div>
+          <h2 class="h4" style="margin-bottom: 0.75rem;">{{ 'customer.order.billing_address' | t }}</h2>
+          <p class="caption">{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</p>
+          <div class="rte" style="font-size: var(--fs-body-sm);">{{ order.billing_address | format_address }}</div>
+        </div>
+        <div>
+          <h2 class="h4" style="margin-bottom: 0.75rem;">{{ 'customer.order.shipping_address' | t }}</h2>
+          <p class="caption">{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</p>
+          <div class="rte" style="font-size: var(--fs-body-sm);">{{ order.shipping_address | format_address }}</div>
+        </div>
+      </div>
+
+      <a href="{{ routes.account_url }}" class="link-arrow" style="margin-top: var(--space-lg);">
+        {% render 'icon', name: 'arrow-left' %}
+        {{ 'customer.account.return' | t }}
+      </a>
+    </div>
+  </div>
+</section>

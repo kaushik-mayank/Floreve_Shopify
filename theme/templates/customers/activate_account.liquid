@@ -1,0 +1,52 @@
+<section class="section">
+  <div class="page-width">
+    <div class="customer">
+      <div class="section-header section-header--center">
+        <h1 class="section-header__title">{{ 'customer.activate_account.title' | t }}</h1>
+        <p class="text-body">{{ 'customer.activate_account.subtext' | t }}</p>
+      </div>
+
+      {%- form 'activate_customer_password', class: 'customer__form', novalidate: 'novalidate' -%}
+        {%- if form.errors -%}
+          <div class="form-status form-status--error">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+
+        <div class="field">
+          <input
+            type="password"
+            id="activate-password"
+            name="customer[password]"
+            class="field__input"
+            placeholder=" "
+            autocomplete="new-password"
+            required
+          >
+          <label class="field__label" for="activate-password">{{ 'customer.activate_account.password' | t }}</label>
+        </div>
+
+        <div class="field">
+          <input
+            type="password"
+            id="activate-password-confirm"
+            name="customer[password_confirmation]"
+            class="field__input"
+            placeholder=" "
+            autocomplete="new-password"
+            required
+          >
+          <label class="field__label" for="activate-password-confirm">
+            {{ 'customer.activate_account.password_confirm' | t }}
+          </label>
+        </div>
+
+        <button type="submit" name="commit" class="btn btn--primary btn--full">
+          <span class="btn__label">{{ 'customer.activate_account.submit' | t }}</span>
+        </button>
+
+        <button type="submit" name="decline" class="btn btn--outline btn--full">
+          <span class="btn__label">{{ 'customer.activate_account.cancel' | t }}</span>
+        </button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>

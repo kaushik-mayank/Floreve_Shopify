@@ -1,0 +1,153 @@
+{%- comment -%}
+  Address form fields.
+
+  The province list is driven by the data-provinces attribute Shopify puts on
+  each country option, so no external script is needed.
+
+  Accepts:
+  - prefix:  unique id prefix (required)
+  - address: the address being edited, if any
+{%- endcomment -%}
+
+<div class="grid" style="--cols: 1; --cols-md: 2; --grid-gap: 1rem; margin-bottom: 1rem;">
+  <div class="field">
+    <input
+      type="text"
+      id="{{ prefix }}-first-name"
+      name="address[first_name]"
+      class="field__input"
+      value="{{ address.first_name }}"
+      placeholder=" "
+      autocomplete="given-name"
+    >
+    <label class="field__label" for="{{ prefix }}-first-name">{{ 'customer.addresses.first_name' | t }}</label>
+  </div>
+
+  <div class="field">
+    <input
+      type="text"
+      id="{{ prefix }}-last-name"
+      name="address[last_name]"
+      class="field__input"
+      value="{{ address.last_name }}"
+      placeholder=" "
+      autocomplete="family-name"
+    >
+    <label class="field__label" for="{{ prefix }}-last-name">{{ 'customer.addresses.last_name' | t }}</label>
+  </div>
+</div>
+
+<div class="field">
+  <input
+    type="text"
+    id="{{ prefix }}-company"
+    name="address[company]"
+    class="field__input"
+    value="{{ address.company }}"
+    placeholder=" "
+    autocomplete="organization"
+  >
+  <label class="field__label" for="{{ prefix }}-company">{{ 'customer.addresses.company' | t }}</label>
+</div>
+
+<div class="field">
+  <input
+    type="text"
+    id="{{ prefix }}-address1"
+    name="address[address1]"
+    class="field__input"
+    value="{{ address.address1 }}"
+    placeholder=" "
+    autocomplete="address-line1"
+  >
+  <label class="field__label" for="{{ prefix }}-address1">{{ 'customer.addresses.address1' | t }}</label>
+</div>
+
+<div class="field">
+  <input
+    type="text"
+    id="{{ prefix }}-address2"
+    name="address[address2]"
+    class="field__input"
+    value="{{ address.address2 }}"
+    placeholder=" "
+    autocomplete="address-line2"
+  >
+  <label class="field__label" for="{{ prefix }}-address2">{{ 'customer.addresses.address2' | t }}</label>
+</div>
+
+<div class="grid" style="--cols: 1; --cols-md: 2; --grid-gap: 1rem; margin-bottom: 1rem;">
+  <div class="field">
+    <input
+      type="text"
+      id="{{ prefix }}-city"
+      name="address[city]"
+      class="field__input"
+      value="{{ address.city }}"
+      placeholder=" "
+      autocomplete="address-level2"
+    >
+    <label class="field__label" for="{{ prefix }}-city">{{ 'customer.addresses.city' | t }}</label>
+  </div>
+
+  <div class="field">
+    <input
+      type="text"
+      id="{{ prefix }}-zip"
+      name="address[zip]"
+      class="field__input"
+      value="{{ address.zip }}"
+      placeholder=" "
+      autocomplete="postal-code"
+      autocapitalize="characters"
+    >
+    <label class="field__label" for="{{ prefix }}-zip">{{ 'customer.addresses.zip' | t }}</label>
+  </div>
+</div>
+
+<div class="grid" style="--cols: 1; --cols-md: 2; --grid-gap: 1rem; margin-bottom: 1rem;">
+  <div class="field">
+    <select
+      id="{{ prefix }}-country"
+      name="address[country]"
+      class="field__input"
+      autocomplete="country"
+      data-country-select
+      data-province-target="{{ prefix }}-province-wrapper"
+      data-default="{{ address.country }}"
+    >
+      {{ country_option_tags }}
+    </select>
+    <label class="field__label" for="{{ prefix }}-country">{{ 'customer.addresses.country' | t }}</label>
+  </div>
+
+  <div class="field" id="{{ prefix }}-province-wrapper" data-province-wrapper hidden>
+    <select
+      id="{{ prefix }}-province"
+      name="address[province]"
+      class="field__input"
+      autocomplete="address-level1"
+      data-province-select
+      data-default="{{ address.province }}"
+    ></select>
+    <label class="field__label" for="{{ prefix }}-province">{{ 'customer.addresses.province' | t }}</label>
+  </div>
+</div>
+
+<div class="field">
+  <input
+    type="tel"
+    id="{{ prefix }}-phone"
+    name="address[phone]"
+    class="field__input"
+    value="{{ address.phone }}"
+    placeholder=" "
+    autocomplete="tel"
+  >
+  <label class="field__label" for="{{ prefix }}-phone">{{ 'customer.addresses.phone' | t }}</label>
+</div>
+
+<label class="checkbox" style="margin-bottom: 1rem;">
+  {{ form.set_as_default_checkbox }}
+  <span>{{ 'customer.addresses.set_default' | t }}</span>
+</label>

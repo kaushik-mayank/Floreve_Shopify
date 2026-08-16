@@ -1,0 +1,84 @@
+{%- comment -%}
+  The purchase block.
+
+  Accepts:
+  - product:              the product (required)
+  - section_id:           the rendering section id (required)
+  - show_quantity:        show the quantity stepper
+  - show_dynamic_checkout: show Shopify's accelerated checkout buttons
+{%- endcomment -%}
+
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign form_id = 'product-form-' | append: section_id
+-%}
+
+<div class="product__buy">
+  {%- comment -%}
+    The form is found by class rather than by a data attribute: `class` is the
+    one attribute the Liquid form tag is guaranteed to pass through.
+  {%- endcomment -%}
+  {%- form 'product', product, id: form_id, class: 'product-form js-product-form', novalidate: 'novalidate' -%}
+    <input
+      type="hidden"
+      name="id"
+      value="{{ variant.id }}"
+      data-variant-id
+      data-section-id="{{ section_id }}"
+    >
+
+    {%- comment -%} Without JavaScript the visitor still gets a working selector. {%- endcomment -%}
+    <noscript>
+      <div class="field" style="margin-bottom: 1rem;">
+        <label class="variant-option__name" for="{{ form_id }}-variant">
+          {{ 'products.product.choose_options' | t }}
+        </label>
+        <select id="{{ form_id }}-variant" name="id" class="field__input">
+          {%- for option in product.variants -%}
+            <option
+              value="{{ option.id }}"
+              {% if option == variant %}selected{% endif %}
+              {% unless option.available %}disabled{% endunless %}
+            >
+              {{ option.title }}
+              {%- unless option.available %} — {{ 'products.product.sold_out' | t }}{% endunless %}
+              — {{ option.price | money }}
+            </option>
+          {%- endfor -%}
+        </select>
+      </div>
+    </noscript>
+
+    <div class="product__buy-row">
+      {%- if show_quantity -%}
+        {%- assign quantity_id = form_id | append: '-quantity' -%}
+        {% render 'quantity-input', id: quantity_id, value: 1, min: 1, label: product.title %}
+      {%- endif -%}
+
+      <button
+        type="submit"
+        name="add"
+        class="btn btn--primary"
+        data-add-to-cart
+        data-section-id="{{ section_id }}"
+        {% unless variant.available %}disabled{% endunless %}
+      >
+        <span class="btn__label">
+          {%- if variant.available -%}
+            {{ 'products.product.add_to_cart' | t }}
+          {%- else -%}
+            {{ 'products.product.sold_out' | t }}
+          {%- endif -%}
+        </span>
+      </button>
+    </div>
+
+    <p class="field__error" data-form-error hidden></p>
+
+    {%- if show_dynamic_checkout -%}
+      <div data-dynamic-checkout data-section-id="{{ section_id }}" {% unless variant.available %}hidden{% endunless %}>
+        {{ form | payment_button }}
+      </div>
+    {%- endif -%}
+  {%- endform -%}
+</div>

@@ -1,0 +1,162 @@
+<section
+  class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div data-cart-section="{{ section.id }}">
+      <div class="section-header">
+        <span class="eyebrow eyebrow--ruled">{{ section.settings.eyebrow }}</span>
+        <h1 class="section-header__title">
+          {{ 'sections.cart.title' | t }}
+          {%- if cart.item_count > 0 %} <span class="text-body">({{ cart.item_count }})</span>{% endif -%}
+        </h1>
+      </div>
+
+      {%- if cart.item_count == 0 -%}
+        <div class="cart__empty">
+          {% render 'calyx', size: '3.5rem', opacity: '0.5' %}
+          <p class="h3">{{ 'sections.cart.empty' | t }}</p>
+          <p class="text-body" style="max-width: 34rem;">{{ 'sections.cart.empty_subtext' | t }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">
+            <span class="btn__label">{{ 'sections.cart.continue' | t }}</span>
+          </a>
+        </div>
+      {%- else -%}
+        <form action="{{ routes.cart_url }}" method="post" novalidate class="cart">
+          <div>
+            {% render 'cart-items' %}
+
+            <div style="margin-top: var(--space-md); display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center;">
+              <a href="{{ routes.all_products_collection_url }}" class="link link--muted">
+                {{ 'general.continue_shopping' | t }}
+              </a>
+            </div>
+
+            {%- if settings.cart_notes -%}
+              <div class="field" style="margin-top: var(--space-lg);">
+                <textarea
+                  id="cart-note"
+                  name="note"
+                  class="field__input"
+                  data-cart-note
+                  rows="3"
+                  placeholder=" "
+                >{{ cart.note }}</textarea>
+                <label class="field__label" for="cart-note">{{ settings.cart_note_label }}</label>
+              </div>
+            {%- endif -%}
+          </div>
+
+          <aside class="cart__summary" aria-label="{{ 'sections.cart.total' | t }}">
+            <div class="cart__totals">
+              <div class="cart__total-row">
+                <span>{{ 'sections.cart.subtotal' | t }}</span>
+                <span>{{ cart.items_subtotal_price | money }}</span>
+              </div>
+
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <div class="cart__total-row" style="color: var(--color-success);">
+                  <span>{{ discount.title }}</span>
+                  <span>&minus;{{ discount.total_allocated_amount | money }}</span>
+                </div>
+              {%- endfor -%}
+
+              <div class="cart__total-row cart__total-row--grand">
+                <span>{{ 'sections.cart.estimated_total' | t }}</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+            </div>
+
+            <p class="caption">
+              {%- if cart.taxes_included -%}
+                {{ 'sections.cart.taxes_included_shipping_at_checkout' | t }}
+              {%- else -%}
+                {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+              {%- endif -%}
+            </p>
+
+            <button type="submit" name="checkout" class="btn btn--primary btn--full">
+              <span class="btn__label">{{ 'sections.cart.checkout' | t }}</span>
+            </button>
+
+            {%- if settings.cart_show_dynamic_checkout and additional_checkout_buttons -%}
+              <div>{{ content_for_additional_checkout_buttons }}</div>
+            {%- endif -%}
+
+            {%- if section.settings.show_assurances -%}
+              <div class="product__assurances" style="border-bottom: 0;">
+                {%- if section.settings.assurance_one != blank -%}
+                  <p class="assurance">
+                    <span class="assurance__icon">{% render 'icon', name: 'shield' %}</span>
+                    <span>{{ section.settings.assurance_one }}</span>
+                  </p>
+                {%- endif -%}
+                {%- if section.settings.assurance_two != blank -%}
+                  <p class="assurance">
+                    <span class="assurance__icon">{% render 'icon', name: 'shipping' %}</span>
+                    <span>{{ section.settings.assurance_two }}</span>
+                  </p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </aside>
+        </form>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bag",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" }
+      ],
+      "default": "parchment"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your selection" },
+    { "type": "checkbox", "id": "show_assurances", "label": "Show assurances beside the total", "default": true },
+    {
+      "type": "text",
+      "id": "assurance_one",
+      "label": "First assurance",
+      "default": "Secure checkout, handled by Shopify."
+    },
+    {
+      "type": "text",
+      "id": "assurance_two",
+      "label": "Second assurance",
+      "default": "Shipping is calculated before you pay."
+    },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 96
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+{%- comment -%}
+  The calyx mark on its own — used as a section ornament and divider.
+
+  Accepts:
+  - size:    CSS length, defaults to 2.25rem
+  - opacity: 0–1
+  - divider: true renders the mark flanked by two hairlines
+{%- endcomment -%}
+
+{%- liquid
+  assign mark = settings.logo_mark
+  assign mark_size = size | default: '2.25rem'
+-%}
+
+{%- if divider -%}<div class="calyx-divider" aria-hidden="true">{%- endif -%}
+
+{%- if mark != blank -%}
+  <img
+    src="{{ mark | image_url: width: 160 }}"
+    alt=""
+    width="{{ mark.width }}"
+    height="{{ mark.height }}"
+    class="calyx"
+    style="--calyx-size: {{ mark_size }};{% if opacity %} --calyx-opacity: {{ opacity }};{% endif %}"
+    loading="lazy"
+    aria-hidden="true"
+  >
+{%- else -%}
+  <img
+    src="{{ 'floreve-mark.png' | asset_url }}"
+    alt=""
+    width="438"
+    height="458"
+    class="calyx"
+    style="--calyx-size: {{ mark_size }};{% if opacity %} --calyx-opacity: {{ opacity }};{% endif %}"
+    loading="lazy"
+    aria-hidden="true"
+  >
+{%- endif -%}
+
+{%- if divider -%}</div>{%- endif -%}

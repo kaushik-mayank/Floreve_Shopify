@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Florève — Complete Brand Identity System</title>
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/400.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/600.css" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --parchment:#FAF7F2;
+  --parchment-dark:#F0EAE0;
+  --gold:#B8975A;
+  --gold-pale:#E8D5A3;
+  --gold-dark:#8A6B38;
+  --sage:#4D5A49;
+  --sage-light:#7A8C76;
+  --blush:#E8D0C4;
+  --black:#1A1814;
+  --grey:#7A7468;
+  --grey-light:#C5BFB7;
+  --border:rgba(184,151,90,0.18);
+  --border-strong:rgba(184,151,90,0.35);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--parchment);color:var(--black);font-family:var(--sans);font-size:13px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* ─── STICKY NAV ─── */
+.page-nav{position:sticky;top:0;z-index:200;background:var(--parchment);border-bottom:1px solid var(--border);padding:10px 48px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.nav-logo{font-family:var(--serif);font-size:15px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-right:20px;flex-shrink:0}
+.nav-link{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);text-decoration:none;padding:5px 10px;border:1px solid transparent;border-radius:1px;transition:all .2s}
+.nav-link:hover{color:var(--gold);border-color:var(--border)}
+
+/* ─── DOCUMENT ─── */
+.doc{max-width:1040px;margin:0 auto;padding:0 48px 100px}
+
+/* ─── COVER ─── */
+.cover{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:80px 0 60px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:500px;height:500px;border-radius:50%;border:1px solid var(--border);opacity:.5}
+.cover::after{content:'';position:absolute;right:-30px;top:50%;transform:translateY(-50%);width:380px;height:380px;border-radius:50%;border:1px solid var(--border);opacity:.3}
+.cover-agency{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:48px;display:flex;align-items:center;gap:14px}
+.cover-agency::after{content:'';display:block;height:1px;width:80px;background:var(--gold);opacity:.4}
+.cover-brand{font-family:var(--serif);font-size:clamp(72px,10vw,120px);font-weight:400;line-height:.95;letter-spacing:12px;color:var(--black);text-transform:uppercase;margin-bottom:6px}
+.cover-brand .accent{color:var(--gold)}
+.cover-sub{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--grey);letter-spacing:2px;margin-bottom:48px}
+.cover-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:580px}
+.cover-meta-item{}
+.cover-meta-label{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--grey-light);margin-bottom:4px}
+.cover-meta-val{font-size:12px;color:var(--grey)}
+.cover-date{position:absolute;bottom:40px;right:0;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--grey-light);text-align:right}
+
+/* ─── SECTION ─── */
+.section{padding:80px 0;border-bottom:1px solid var(--border);scroll-margin-top:56px}
+.section-label{font-size:8px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.section-label::before{content:attr(data-num);font-family:var(--serif);font-size:11px;color:var(--gold-pale)}
+.section-label::after{content:'';height:1px;flex:1;max-width:60px;background:var(--border-strong)}
+.section-title{font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:400;line-height:1.1;color:var(--black);margin-bottom:8px;letter-spacing:.5px}
+.section-intro{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--grey);max-width:600px;line-height:1.7;margin-bottom:48px}
+
+/* ─── CONCEPT GRID ─── */
+.concept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:2px;margin-bottom:0}
+.concept-card{background:#fff;border:1px solid var(--border);padding:40px;position:relative;overflow:hidden}
+.concept-card.featured{border-color:var(--gold);background:linear-gradient(135deg,#fffcf5 0%,#fff 100%)}
+.concept-badge{position:absolute;top:0;right:32px;background:var(--gold);color:#fff;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px}
+.concept-num{font-family:var(--serif);font-size:11px;letter-spacing:3px;color:var(--gold-pale);text-transform:uppercase;margin-bottom:12px}
+.concept-name{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--black);margin-bottom:4px;letter-spacing:.5px}
+.concept-subtitle{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:28px}
+.concept-mockup{background:var(--parchment);border:1px solid var(--border);padding:36px 24px;margin-bottom:28px;display:flex;align-items:center;justify-content:center;min-height:120px}
+.concept-body{}
+.concept-section-title{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;margin-top:16px}
+.concept-text{font-size:12px;color:var(--grey);line-height:1.7}
+.concept-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.tag{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--grey);border-radius:1px}
+.tag.gold{border-color:var(--gold);color:var(--gold)}
+
+/* ─── LOGO SVGS ─── */
+.svg-wordmark{font-family:var(--serif);letter-spacing:12px;fill:var(--black);font-size:24px}
+.svg-wordmark-thin{font-weight:300;letter-spacing:16px;fill:var(--black)}
+
+/* ─── TYPOGRAPHY ─── */
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:40px}
+.type-card{background:#fff;border:1px solid var(--border);padding:32px}
+.type-label{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.type-specimen{color:var(--black);margin-bottom:8px}
+.type-meta{font-size:10px;color:var(--grey);letter-spacing:.5px;line-height:1.6}
+.type-divider{height:1px;background:var(--border);margin:16px 0}
+
+.type-app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.type-app-item{background:var(--parchment-dark);padding:20px;border:1px solid var(--border)}
+.type-app-surface{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.type-app-demo{margin-bottom:8px}
+.type-app-note{font-size:10px;color:var(--grey);line-height:1.5}
+
+/* ─── COLOR ─── */
+.color-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-bottom:40px;border:1px solid var(--border)}
+.color-swatch{}
+.swatch-fill{height:140px}
+.swatch-info{padding:16px;border-top:1px solid var(--border);background:#fff}
+.swatch-name{font-family:var(--serif);font-size:14px;font-weight:400;color:var(--black);margin-bottom:2px}
+.swatch-hex{font-size:10px;color:var(--grey);letter-spacing:1px;margin-bottom:6px;font-family:monospace}
+.swatch-role{font-size:10px;color:var(--grey);line-height:1.5}
+
+.color-rules{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.color-rule-card{background:#fff;border:1px solid var(--border);padding:24px}
+.color-rule-head{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.color-rule-body{font-size:12px;color:var(--grey);line-height:1.7}
+
+/* ─── SYMBOL IDEAS ─── */
+.symbol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px}
+.symbol-card{background:#fff;border:1px solid var(--border);padding:28px;text-align:center}
+.symbol-display{height:100px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.symbol-name{font-family:var(--serif);font-size:16px;color:var(--black);margin-bottom:4px}
+.symbol-desc{font-size:11px;color:var(--grey);line-height:1.6}
+
+/* ─── WEBSITE DIR ─── */
+.web-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px;margin-bottom:32px}
+.web-hero{background:var(--black);padding:48px;position:relative;overflow:hidden;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end}
+.web-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(26,24,20,.7) 100%)}
+.web-hero-parchment{background:var(--parchment);border:1px solid var(--border);padding:28px;display:flex;flex-direction:column;justify-content:center}
+.web-section-demo{background:#fff;border:1px solid var(--border);padding:24px;margin-bottom:16px}
+.web-label{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.web-content{font-family:var(--serif);font-size:14px;color:var(--grey);line-height:1.6}
+
+.web-spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px}
+.web-spec{background:#fff;border:1px solid var(--border);padding:20px}
+.web-spec-icon{font-size:24px;margin-bottom:10px}
+.web-spec-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--black);margin-bottom:6px}
+.web-spec-body{font-size:11px;color:var(--grey);line-height:1.6}
+
+/* ─── PACKAGING ─── */
+.pkg-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px}
+.pkg-item{background:#fff;border:1px solid var(--border);padding:24px}
+.pkg-visual{height:120px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:var(--parchment);border:1px solid var(--border)}
+.pkg-title{font-family:var(--serif);font-size:16px;color:var(--black);margin-bottom:4px}
+.pkg-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.pkg-body{font-size:11px;color:var(--grey);line-height:1.7}
+
+/* ─── EXECUTION SPECS ─── */
+.spec-table{width:100%;border-collapse:collapse;margin-bottom:32px}
+.spec-table th{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);text-align:left;padding:10px 16px;border-bottom:1px solid var(--border-strong);background:var(--parchment-dark)}
+.spec-table td{font-size:12px;color:var(--grey);padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+.spec-table td:first-child{color:var(--black);font-weight:500;white-space:nowrap;min-width:160px}
+.spec-table tr:last-child td{border-bottom:none}
+
+/* ─── AI PROMPTS ─── */
+.prompt-grid{display:grid;gap:16px}
+.prompt-card{background:#fff;border:1px solid var(--border);padding:28px}
+.prompt-tool{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.prompt-title{font-family:var(--serif);font-size:16px;color:var(--black);margin-bottom:16px}
+.prompt-text{background:var(--parchment-dark);border:1px solid var(--border);padding:16px;font-size:11px;color:var(--black);line-height:1.8;font-family:monospace;white-space:pre-wrap;word-break:break-word}
+.prompt-note{font-size:10px;color:var(--grey);margin-top:10px;font-style:italic}
+
+/* ─── FINAL REC ─── */
+.final-section{padding:80px 0;scroll-margin-top:56px}
+.final-hero{background:var(--black);padding:60px;position:relative;overflow:hidden;margin-bottom:32px}
+.final-hero::before{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;border-radius:50%;border:1px solid rgba(184,151,90,.15)}
+.final-hero::after{content:'';position:absolute;right:-40px;top:-40px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(184,151,90,.1)}
+.final-hero-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.final-hero-name{font-family:var(--serif);font-size:clamp(36px,6vw,72px);font-weight:400;color:#FAF7F2;letter-spacing:8px;line-height:1;margin-bottom:12px;text-transform:uppercase}
+.final-hero-concept{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--gold);margin-bottom:32px}
+.final-hero-body{font-size:13px;color:rgba(250,247,242,.65);line-height:1.8;max-width:600px}
+.final-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.final-card{background:#fff;border:1px solid var(--border);padding:28px}
+.final-card-title{font-family:var(--serif);font-size:18px;color:var(--black);margin-bottom:4px}
+.final-card-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.final-card-body{font-size:12px;color:var(--grey);line-height:1.7}
+
+/* ─── PULL QUOTES ─── */
+.pull-quote{border-left:2px solid var(--gold);padding:20px 28px;background:rgba(184,151,90,.04);margin:28px 0}
+.pull-quote p{font-family:var(--serif);font-size:19px;font-style:italic;color:var(--black);line-height:1.6}
+.pull-quote cite{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-top:8px;display:block}
+
+/* ─── DIVIDERS ─── */
+.gold-rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:32px 0;opacity:.3}
+.thin-rule{height:1px;background:var(--border);margin:20px 0}
+
+/* ─── FOOTNOTE ─── */
+.doc-footer{padding:40px 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--serif);font-size:20px;letter-spacing:5px;color:var(--gold)}
+.footer-note{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--grey-light)}
+
+/* ─── HELPERS ─── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.text-block{background:#fff;border:1px solid var(--border);padding:28px}
+.text-block-head{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.text-block-title{font-family:var(--serif);font-size:20px;color:var(--black);margin-bottom:12px}
+.text-block-body{font-size:12px;color:var(--grey);line-height:1.8}
+.text-block-body p{margin-bottom:10px}
+.text-block-body p:last-child{margin-bottom:0}
+ul.luxury-list{list-style:none;padding:0}
+ul.luxury-list li{padding:7px 0 7px 16px;border-bottom:1px solid var(--border);font-size:12px;color:var(--grey);position:relative;line-height:1.5}
+ul.luxury-list li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+ul.luxury-list li:last-child{border-bottom:none}
+ul.luxury-list li strong{color:var(--black)}
+.highlight{background:rgba(184,151,90,.08);border:1px solid var(--border);padding:16px 20px;margin:16px 0;font-size:12px;color:var(--grey);line-height:1.7}
+.highlight strong{color:var(--black)}
+
+@media(max-width:768px){
+  .doc{padding:0 20px 80px}
+  .cover{padding:48px 0 40px}
+  .cover-brand{letter-spacing:6px}
+  .concept-grid,.type-grid,.color-grid,.pkg-grid,.final-grid,.symbol-grid{grid-template-columns:1fr}
+  .web-grid{grid-template-columns:1fr}
+  .type-app-grid,.web-spec-grid{grid-template-columns:1fr 1fr}
+  .three-col,.two-col,.color-rules{grid-template-columns:1fr}
+  .spec-table{font-size:11px}
+  .page-nav{padding:10px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="page-nav">
+  <span class="nav-logo">Florève</span>
+  <a class="nav-link" href="#concepts">Logo Concepts</a>
+  <a class="nav-link" href="#typography">Typography</a>
+  <a class="nav-link" href="#symbols">Symbols</a>
+  <a class="nav-link" href="#colors">Color System</a>
+  <a class="nav-link" href="#website">Website</a>
+  <a class="nav-link" href="#packaging">Packaging</a>
+  <a class="nav-link" href="#execution">Execution</a>
+  <a class="nav-link" href="#prompts">AI Prompts</a>
+  <a class="nav-link" href="#final">Final Direction</a>
+</nav>
+
+<div class="doc">
+
+<!-- ══════ COVER ══════ -->
+<header class="cover">
+  <div class="cover-agency">Brand Identity System · Complete Creative Direction</div>
+  <div class="cover-brand">Flor<span class="accent">è</span>ve</div>
+  <div class="cover-sub">Maison de Joaillerie Florale</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Brand Category</div>
+      <div class="cover-meta-val">Ultra-Premium Floral Jewelry House</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Identity Tier</div>
+      <div class="cover-meta-val">Global Luxury — Paris / Milan Aesthetic</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Document Type</div>
+      <div class="cover-meta-val">Complete Brand Identity Bible</div>
+    </div>
+  </div>
+  <div class="cover-date">Confidential Creative Direction · $250,000+ Equivalent Value · 2025</div>
+</header>
+
+
+<!-- ══════ SECTION 1: LOGO CONCEPTS ══════ -->
+<section class="section" id="concepts">
+  <div class="section-label" data-num="01">Logo Concept Directions</div>
+  <h2 class="section-title">Five Paths to Iconic Identity</h2>
+  <p class="section-intro">"A luxury logo is not designed. It is decided upon — chosen from among several futures and committed to absolutely."</p>
+
+  <div class="concept-grid">
+
+    <!-- CONCEPT A -->
+    <div class="concept-card">
+      <div class="concept-num">Concept A</div>
+      <div class="concept-name">The Whispered Wordmark</div>
+      <div class="concept-subtitle">Minimal Typographic Luxury</div>
+      <div class="concept-mockup">
+        <svg viewBox="0 0 380 80" width="340" xmlns="http://www.w3.org/2000/svg">
+          <text x="190" y="52" font-family="'Cormorant Garamond',Georgia,serif" font-size="30" font-weight="300" fill="#1A1814" letter-spacing="18" text-anchor="middle">FLORÈVE</text>
+          <line x1="60" y1="66" x2="320" y2="66" stroke="#B8975A" stroke-width=".5" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="concept-section-title">Design Philosophy</div>
+      <div class="concept-text">Ultra-thin serif wordmark. The brand name alone — "FLORÈVE" — set in hairline weight with extreme letter-spacing (tracking +320 in design terms). The accent grave on the "è" becomes the sole decorative element: a single diacritical mark that signals European origin without explanation. A single gold hairline rule beneath. Nothing more.</div>
+      <div class="concept-section-title">Why It Feels Luxurious</div>
+      <div class="concept-text">Restraint is the ultimate luxury signal. This is the Celine post-2012 approach — the removal of all decoration as the decoration itself. It says: we need nothing to prove ourselves. The negative space between letters is as intentional as the letters themselves. Every millimeter of tracking is a decision.</div>
+      <div class="concept-section-title">Emotional Triggers</div>
+      <div class="concept-text">Confidence without aggression. Quiet authority. The feeling of walking into a room and needing no introduction. It triggers aspiration in women who have spent years cultivating a personal aesthetic — who understand that the absence of noise is a sound of its own.</div>
+      <div class="concept-section-title">Luxury Competitor Frame</div>
+      <div class="concept-text">Psychologically competes with Celine, Loewe, The Row, Bottega Veneta (post-Daniel Lee era). For women who own these brands already and are ready for the next one.</div>
+      <div class="concept-tags">
+        <span class="tag">Minimal</span><span class="tag">Editorial</span><span class="tag">Timeless</span><span class="tag">High-Fashion</span>
+      </div>
+    </div>
+
+    <!-- CONCEPT B -->
+    <div class="concept-card">
+      <div class="concept-num">Concept B</div>
+      <div class="concept-name">The Botanical Monogram</div>
+      <div class="concept-subtitle">Fashion-House Emblem System</div>
+      <div class="concept-mockup">
+        <svg viewBox="0 0 380 100" width="340" xmlns="http://www.w3.org/2000/svg">
+          <!-- F monogram with petal curve -->
+          <g transform="translate(152,10)">
+            <!-- F letterform -->
+            <line x1="0" y1="0" x2="0" y2="72" stroke="#1A1814" stroke-width="1.2"/>
+            <line x1="0" y1="0" x2="42" y2="0" stroke="#1A1814" stroke-width="1.2"/>
+            <line x1="0" y1="34" x2="32" y2="34" stroke="#1A1814" stroke-width="1.2"/>
+            <!-- Botanical petal arc replacing crossbar suggestion -->
+            <path d="M 0 34 Q 22 16 42 0" stroke="#B8975A" stroke-width=".8" fill="none"/>
+            <!-- E to right -->
+            <g transform="translate(54,0)">
+              <line x1="0" y1="0" x2="0" y2="72" stroke="#1A1814" stroke-width="1.2"/>
+              <line x1="0" y1="0" x2="34" y2="0" stroke="#1A1814" stroke-width="1.2"/>
+              <line x1="0" y1="34" x2="28" y2="34" stroke="#1A1814" stroke-width="1.2"/>
+              <line x1="0" y1="72" x2="34" y2="72" stroke="#1A1814" stroke-width="1.2"/>
+            </g>
+          </g>
+          <text x="190" y="95" font-family="'Cormorant Garamond',Georgia,serif" font-size="9" fill="#B8975A" letter-spacing="10" text-anchor="middle">FLORÈVE</text>
+        </svg>
+      </div>
+      <div class="concept-section-title">Design Philosophy</div>
+      <div class="concept-text">A stacked FE monogram in hairline serif geometry. The F's horizontal crossbar is subtly replaced by a single botanical arc — a petal curve drawn in Champagne Gold — connecting the F to the E. The monogram is precise and architectural. Below, the full wordmark in small tracking. This creates a standalone icon plus a full identity mark.</div>
+      <div class="concept-section-title">Why It Feels Luxurious</div>
+      <div class="concept-text">Monograms are the language of heritage fashion houses (Chanel's CC, LV's initials, Dior's CD). This positions Florève in that visual conversation from day one — before a single product is sold. The botanical element is hidden in the crossbar; only those who look closely find the petal. This is the "if you know, you know" luxury signal.</div>
+      <div class="concept-section-title">Emotional Triggers</div>
+      <div class="concept-text">Discovery. The pleasure of noticing something others miss. The feeling of being part of an inner circle. This attracts women who collect luxury as an identity practice — who wear Chanel to feel part of a tradition, not just a logo.</div>
+      <div class="concept-section-title">Luxury Competitor Frame</div>
+      <div class="concept-text">Directly competes with Chanel, Dior, Louis Vuitton in aspirational monogram territory. At India launch, this is the most recognizable format for luxury-educated consumers.</div>
+      <div class="concept-tags">
+        <span class="tag">Heritage</span><span class="tag">Monogram</span><span class="tag">Hidden Detail</span><span class="tag">Iconic</span>
+      </div>
+    </div>
+
+    <!-- CONCEPT C -->
+    <div class="concept-card featured">
+      <span class="concept-badge">★ Recommended</span>
+      <div class="concept-num">Concept C</div>
+      <div class="concept-name">The Calyx Mark</div>
+      <div class="concept-subtitle">Botanical Geometric Icon — Primary Recommendation</div>
+      <div class="concept-mockup">
+        <svg viewBox="0 0 380 130" width="340" xmlns="http://www.w3.org/2000/svg">
+          <!-- Calyx: 5 elongated petal outlines radiating from center -->
+          <g transform="translate(190,58)">
+            <!-- Sepal 1: top -->
+            <path d="M0,0 C-6,-22 -4,-42 0,-50 C4,-42 6,-22 0,0" stroke="#B8975A" stroke-width=".9" fill="none"/>
+            <!-- Sepal 2: top-right -->
+            <path d="M0,0 C14,-18 28,-30 38,-32 C32,-22 18,-10 0,0" stroke="#B8975A" stroke-width=".9" fill="none" transform="rotate(72)"/>
+            <!-- Sepal 3: bottom-right -->
+            <path d="M0,0 C14,-18 28,-30 38,-32 C32,-22 18,-10 0,0" stroke="#B8975A" stroke-width=".9" fill="none" transform="rotate(144)"/>
+            <!-- Sepal 4: bottom-left -->
+            <path d="M0,0 C14,-18 28,-30 38,-32 C32,-22 18,-10 0,0" stroke="#B8975A" stroke-width=".9" fill="none" transform="rotate(216)"/>
+            <!-- Sepal 5: top-left -->
+            <path d="M0,0 C14,-18 28,-30 38,-32 C32,-22 18,-10 0,0" stroke="#B8975A" stroke-width=".9" fill="none" transform="rotate(288)"/>
+            <!-- Center dot -->
+            <circle cx="0" cy="0" r="2" fill="#B8975A"/>
+          </g>
+          <!-- Wordmark below -->
+          <text x="190" y="110" font-family="'Cormorant Garamond',Georgia,serif" font-size="16" font-weight="300" fill="#1A1814" letter-spacing="14" text-anchor="middle">FLORÈVE</text>
+          <text x="190" y="124" font-family="'Helvetica Neue',Arial,sans-serif" font-size="6" fill="#B8975A" letter-spacing="5" text-anchor="middle">MAISON DE JOAILLERIE</text>
+        </svg>
+      </div>
+      <div class="concept-section-title">Design Philosophy</div>
+      <div class="concept-text">A geometric abstraction of a flower calyx viewed from directly above — five elongated sepal shapes radiating from a central point, each drawn as a single unbroken thin-stroke petal outline in Champagne Gold. The geometry is precise and symmetrical (based on a perfect pentagon), giving it mathematical luxury. At a distance, it reads as a refined star or geometric mark. Up close, the botanical truth reveals itself — five petals, one center, infinite bloom. Below: the wordmark in hairline serif. This becomes the brand's standalone icon — appearing on jewelry clasps, tissue paper, business cards — while the full lockup (icon + wordmark) serves as the primary logo.</div>
+      <div class="concept-section-title">The Hidden Language</div>
+      <div class="concept-text">The calyx is the outermost part of a flower — the protective cup that holds the bloom before it opens. It is the flower's most fundamental architectural element, yet the least celebrated. By choosing the calyx rather than the petal or full bloom, Florève signals that it understands nature more deeply than other brands. The preserved flower is held, protected, cherished — as the calyx holds it in nature. The mark is the brand's philosophy made geometric.</div>
+      <div class="concept-section-title">Why It Feels Luxurious</div>
+      <div class="concept-text">The mark is simultaneously floral and geometric — it occupies the exact space between organic and architectural that defines the finest luxury jewelry. The five-fold symmetry references quintessential natural perfection (the golden ratio in floral geometry). The hairline stroke weight and the use of Champagne Gold exclusively for the icon while the wordmark remains in Atelier Black creates a sophisticated two-element hierarchy. The mark scales to microscopic (jewelry clasp, 3mm) and monumental (storefront, 3m) with equal integrity.</div>
+      <div class="concept-section-title">Emotional Triggers</div>
+      <div class="concept-text">Wonder. Discovery. The feeling of finding something precious that others walked past. The Calyx Mark triggers the emotion of a woman who bends down to look more closely at something beautiful — and is rewarded by what she finds. This is the emotional signature of Florève itself: preservation of the moment others would let pass.</div>
+      <div class="concept-section-title">Luxury Competitor Frame</div>
+      <div class="concept-text">Competes with Cartier (iconic Panthere mark — minimal, loaded with meaning), Bvlgari (geometric Mediterranean boldness), Loewe (Anagram mark — literary, intellectual). This mark is in that conversation. It becomes the answer to: "What is that symbol?" — which is the greatest marketing tool a luxury brand can possess.</div>
+      <div class="concept-tags">
+        <span class="tag gold">★ Primary</span><span class="tag">Botanical</span><span class="tag">Geometric</span><span class="tag">Iconic</span><span class="tag">Scalable</span>
+      </div>
+    </div>
+
+    <!-- CONCEPT D -->
+    <div class="concept-card">
+      <div class="concept-num">Concept D</div>
+      <div class="concept-name">The Heritage Cartouche</div>
+      <div class="concept-subtitle">European Crest Architecture</div>
+      <div class="concept-mockup">
+        <svg viewBox="0 0 380 110" width="340" xmlns="http://www.w3.org/2000/svg">
+          <!-- Top hairline rule -->
+          <line x1="60" y1="18" x2="320" y2="18" stroke="#B8975A" stroke-width=".5"/>
+          <!-- Thin decorative top line -->
+          <line x1="80" y1="22" x2="300" y2="22" stroke="#B8975A" stroke-width=".3" opacity=".5"/>
+          <!-- Central petal motif small -->
+          <g transform="translate(190,38)">
+            <path d="M0,0 C-3,-10 -2,-18 0,-22 C2,-18 3,-10 0,0" stroke="#B8975A" stroke-width=".7" fill="none" transform="rotate(0)"/>
+            <path d="M0,0 C-3,-10 -2,-18 0,-22 C2,-18 3,-10 0,0" stroke="#B8975A" stroke-width=".7" fill="none" transform="rotate(72)"/>
+            <path d="M0,0 C-3,-10 -2,-18 0,-22 C2,-18 3,-10 0,0" stroke="#B8975A" stroke-width=".7" fill="none" transform="rotate(144)"/>
+            <path d="M0,0 C-3,-10 -2,-18 0,-22 C2,-18 3,-10 0,0" stroke="#B8975A" stroke-width=".7" fill="none" transform="rotate(216)"/>
+            <path d="M0,0 C-3,-10 -2,-18 0,-22 C2,-18 3,-10 0,0" stroke="#B8975A" stroke-width=".7" fill="none" transform="rotate(288)"/>
+            <circle cx="0" cy="0" r="1.2" fill="#B8975A"/>
+          </g>
+          <!-- Main wordmark -->
+          <text x="190" y="75" font-family="'Cormorant Garamond',Georgia,serif" font-size="26" font-weight="400" fill="#1A1814" letter-spacing="12" text-anchor="middle">FLORÈVE</text>
+          <!-- Sub text -->
+          <text x="190" y="88" font-family="'Helvetica Neue',Arial,sans-serif" font-size="6.5" fill="#7A7468" letter-spacing="6" text-anchor="middle">PARIS · JOAILLERIE</text>
+          <!-- Bottom rules -->
+          <line x1="80" y1="96" x2="300" y2="96" stroke="#B8975A" stroke-width=".3" opacity=".5"/>
+          <line x1="60" y1="100" x2="320" y2="100" stroke="#B8975A" stroke-width=".5"/>
+        </svg>
+      </div>
+      <div class="concept-section-title">Design Philosophy</div>
+      <div class="concept-text">A precisely architected cartouche: two hairline gold rules above and below the wordmark (double at the outer edge, single at the inner), a miniaturized Calyx mark above the name as a heraldic device, and "PARIS · JOAILLERIE" in micro-tracking sans-serif below. The entire composition sits within an invisible rectangular grid — the architectural confidence of an established European house.</div>
+      <div class="concept-section-title">Why It Feels Luxurious</div>
+      <div class="concept-text">This format references the visual grammar of the finest European heritage brands — Cartier's rectangular frames, Chanel's symmetrical compositions, Boucheron's elegant ruled formats. It implies antiquity and institutional permanence. The brand looks like it was founded 100 years ago on its first day of operation.</div>
+      <div class="concept-section-title">Emotional Triggers</div>
+      <div class="concept-text">Trust. Permanence. The feeling of choosing something that will still be the right choice in 40 years. Attracts both aspirational first-time luxury buyers (for whom the format signals "this is a real luxury brand") and established luxury consumers who recognize the grammar immediately.</div>
+      <div class="concept-section-title">Luxury Competitor Frame</div>
+      <div class="concept-text">Cartier, Boucheron, Van Cleef & Arpels, Chaumet. The old-guard fine jewelry aesthetic. In India, this format carries the highest immediate luxury recognition.</div>
+      <div class="concept-tags">
+        <span class="tag">Heritage</span><span class="tag">Fine Jewelry</span><span class="tag">Trust</span><span class="tag">India-Ready</span>
+      </div>
+    </div>
+
+    <!-- CONCEPT E -->
+    <div class="concept-card">
+      <div class="concept-num">Concept E</div>
+      <div class="concept-name">The Eternal Ring</div>
+      <div class="concept-subtitle">Jewel-Setting Geometric Identity</div>
+      <div class="concept-mockup">
+        <svg viewBox="0 0 380 120" width="340" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer circle - the jewel bezel -->
+          <circle cx="190" cy="58" r="50" fill="none" stroke="#B8975A" stroke-width=".8"/>
+          <!-- Inner circle - thin -->
+          <circle cx="190" cy="58" r="44" fill="none" stroke="#B8975A" stroke-width=".3" opacity=".5"/>
+          <!-- Wordmark inside circle -->
+          <text x="190" y="52" font-family="'Cormorant Garamond',Georgia,serif" font-size="13" font-weight="300" fill="#1A1814" letter-spacing="6" text-anchor="middle">FLORÈVE</text>
+          <!-- Decorative sub inside -->
+          <text x="190" y="66" font-family="'Helvetica Neue',Arial,sans-serif" font-size="5" fill="#B8975A" letter-spacing="4" text-anchor="middle">JOAILLERIE</text>
+          <!-- Top arc text (optional) -->
+          <path id="topArc" d="M 148,35 A 44,44 0 0,1 232,35" fill="none"/>
+          <!-- Small calyx icon at 12 o'clock -->
+          <g transform="translate(190,16)">
+            <line x1="0" y1="-5" x2="0" y2="5" stroke="#B8975A" stroke-width=".6"/>
+            <line x1="-5" y1="0" x2="5" y2="0" stroke="#B8975A" stroke-width=".6" opacity=".4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="concept-section-title">Design Philosophy</div>
+      <div class="concept-text">A perfect hairline circle — the universal geometry of a gemstone's bezel setting, a wedding band, eternity itself — enclosing the wordmark. Two concentric circles (outer bold, inner whisper-thin) create depth and luxury layering. The circle references the jewelry product directly while remaining completely abstract and sophisticated. A small cross-mark at 12 o'clock echoes jewelry hallmarking traditions.</div>
+      <div class="concept-section-title">Why It Feels Luxurious</div>
+      <div class="concept-text">The circle is the most universal luxury form — from Cartier's bracelets to Bvlgari's Monete coins to watchmaking. Enclosing the brand name within a perfect circle creates a coin-like gravitas — as if the brand is itself a currency, a standard, a precious object. The dual-circle treatment is the visual equivalent of a jeweler's loupe — precision within precision.</div>
+      <div class="concept-section-title">Emotional Triggers</div>
+      <div class="concept-text">Eternity. Completeness. The feeling of something that returns to itself, perfectly whole. The circle is the shape of a promise — which makes it particularly powerful for jewelry, which is often purchased to mark eternal commitments.</div>
+      <div class="concept-section-title">Luxury Competitor Frame</div>
+      <div class="concept-text">Bvlgari's coin aesthetic, Cartier's geometric rigor, Piaget's circular luxury. Appeals to women who invest in jewelry as lasting value — the high-income professional who thinks in decades.</div>
+      <div class="concept-tags">
+        <span class="tag">Timeless</span><span class="tag">Geometric</span><span class="tag">Jewelry-Adjacent</span><span class="tag">Investment Luxury</span>
+      </div>
+    </div>
+
+    <!-- CONCEPT F -->
+    <div class="concept-card">
+      <div class="concept-num">Concept F</div>
+      <div class="concept-name">The Single Petal Stroke</div>
+      <div class="concept-subtitle">Ultra-Modern Editorial Mark</div>
+      <div class="concept-mockup">
+        <svg viewBox="0 0 380 110" width="340" xmlns="http://www.w3.org/2000/svg">
+          <!-- Single continuous stroke forming petal + F initial -->
+          <path d="M 155,78 C 155,78 140,55 148,35 C 155,18 172,14 180,24 C 190,38 178,60 165,68 C 155,74 148,68 148,55 C 148,42 162,34 172,40" stroke="#B8975A" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <!-- Wordmark to right -->
+          <text x="200" y="50" font-family="'Cormorant Garamond',Georgia,serif" font-size="22" font-weight="300" fill="#1A1814" letter-spacing="8">LORÈVE</text>
+          <text x="200" y="68" font-family="'Helvetica Neue',Arial,sans-serif" font-size="6" fill="#B8975A" letter-spacing="4">JOAILLERIE FLORALE</text>
+        </svg>
+      </div>
+      <div class="concept-section-title">Design Philosophy</div>
+      <div class="concept-text">A single unbroken brushstroke in Champagne Gold draws both a petal silhouette and the initial "F" simultaneously. The stroke begins at the base, arcs upward in the form of a petal, and terminates in a way that reads as the letter F upon close inspection. Beside it, "LORÈVE" completes the brand name. The ambiguity between F-letter and petal-shape IS the brand concept made visual.</div>
+      <div class="concept-section-title">Why It Feels Luxurious</div>
+      <div class="concept-text">A single stroke of absolute confidence. It's the calligrapher's mark, the jeweler's first line on wax. It carries the energy of one decisive gesture — like signing a canvas. Modern luxury (Saint Laurent, Alexander McQueen, Givenchy) understands that one powerful mark is worth a thousand decorative elements.</div>
+      <div class="concept-section-title">Emotional Triggers</div>
+      <div class="concept-text">Creativity. Mastery. The pleasure of recognizing genius in simplicity. Attracts the fashion-forward woman who understands design — who would know immediately that the stroke is "too good to be random." The editorial crowd, the art-adjacent luxury buyer.</div>
+      <div class="concept-section-title">Luxury Competitor Frame</div>
+      <div class="concept-text">Saint Laurent's signature energy, Alexander McQueen's dark romance made light. For women who wear jewelry as personal art, not social armor.</div>
+      <div class="concept-tags">
+        <span class="tag">Modern</span><span class="tag">Editorial</span><span class="tag">Artistic</span><span class="tag">Fashion-Forward</span>
+      </div>
+    </div>
+
+  </div><!-- /concept-grid -->
+</section>
+
+
+<!-- ══════ SECTION 2: TYPOGRAPHY ══════ -->
+<section class="section" id="typography">
+  <div class="section-label" data-num="02">Typography System</div>
+  <h2 class="section-title">The Language of Luxury in Type</h2>
+  <p class="section-intro">"Typography is the jewelry of language. A single letter-spacing decision separates a luxury brand from an imitator."</p>
+
+  <div class="type-grid">
+    <div class="type-card">
+      <div class="type-label">Display — Brand Name & Headlines</div>
+      <div class="type-specimen" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:42px;font-weight:400;letter-spacing:8px;line-height:1">FLORÈVE</div>
+      <div class="type-divider"></div>
+      <div class="type-specimen" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:400;font-style:italic;letter-spacing:2px;line-height:1.4;color:#7A7468">Flowers do not die.<br>They transform.</div>
+      <div class="type-divider"></div>
+      <div class="type-meta">
+        <strong>Style:</strong> Cormorant Garamond / Didot / Bodoni Poster<br>
+        <strong>Weight:</strong> Light to Regular (300–400) — never bold<br>
+        <strong>Tracking:</strong> +200 to +400 for wordmark; +80 to +150 for headlines<br>
+        <strong>Case:</strong> All-caps for brand name; Title Case or sentence case for headlines<br>
+        <strong>Why:</strong> The high-contrast thick/thin stroke of Didot-family serifs echoes the architecture of fine jewelry — mass held in tension with delicacy. It is the typographic language of Dior, Vogue, and Harper's Bazaar.
+      </div>
+    </div>
+    <div class="type-card">
+      <div class="type-label">Sub-Brand — Categories & Labels</div>
+      <div class="type-specimen" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:#7A7468;margin-bottom:16px">MAISON DE JOAILLERIE · PARIS</div>
+      <div class="type-specimen" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#B8975A;margin-bottom:16px">BOTANICAL COLLECTION</div>
+      <div class="type-specimen" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:2px;color:#1A1814;margin-bottom:16px">Product Name / Category Name</div>
+      <div class="type-divider"></div>
+      <div class="type-meta">
+        <strong>Style:</strong> Futura Light / Helvetica Neue Light / Gill Sans<br>
+        <strong>Weight:</strong> Ultra-light (200–300) exclusively<br>
+        <strong>Tracking:</strong> +300 to +500 for category labels; +100 to +200 for sub-copy<br>
+        <strong>Case:</strong> All-caps for labels; never mixed case for brand elements<br>
+        <strong>Why:</strong> The geometric sans-serif in light weight creates the high-contrast pairing with the display serif — warm/cold, organic/geometric, historical/modern. This contrast is the typographic signature of Prada, Celine, and Hermès.
+      </div>
+    </div>
+  </div>
+
+  <div class="text-block" style="margin-bottom:24px">
+    <div class="text-block-head">The Typography Hierarchy Rule</div>
+    <div class="text-block-body">
+      <p>Florève operates a strict four-level typographic hierarchy. <strong>Level 1 — Brand Name:</strong> FLORÈVE in hairline serif, all-caps, +300 tracking minimum. This is used exclusively for the brand name. It is never used for any other word. <strong>Level 2 — Display Headlines:</strong> Cormorant Garamond or Didot in italic, sentence case, +80 tracking, in campaign taglines and editorial headers. <strong>Level 3 — Sub-Labels:</strong> Futura Light or Helvetica Neue Ultralight in all-caps, +400 tracking, for categories, collection names, product labels. In Champagne Gold or warm grey — never in black. <strong>Level 4 — Body Text:</strong> Garamond Regular or Helvetica Neue Light in sentence case, +20 tracking, generously leaded (1.8 line-height). In warm grey (#7A7468), never in full black — this softness is luxury's final typographic signal.</p>
+    </div>
+  </div>
+
+  <div class="type-app-grid">
+    <div class="type-app-item">
+      <div class="type-app-surface">Website</div>
+      <div class="type-app-demo" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;font-weight:400;letter-spacing:6px;color:#1A1814">FLORÈVE</div>
+      <div class="type-app-note">Nav: 13px Helvetica Light +300 tracking. Hero: Cormorant 64px italic. Product names: Cormorant 22px regular. Prices: Helvetica Neue 14px +100 tracking.</div>
+    </div>
+    <div class="type-app-item">
+      <div class="type-app-surface">Jewelry Box Lid</div>
+      <div class="type-app-demo" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:300;letter-spacing:10px;color:#B8975A">FLORÈVE</div>
+      <div class="type-app-note">Gold foil stamped. Cormorant Garamond Light, 300 tracking. Centered. Single line. No subtitle on box lid — the name alone is sufficient. Blind-emboss the Calyx mark above.</div>
+    </div>
+    <div class="type-app-item">
+      <div class="type-app-surface">Shopping Bag</div>
+      <div class="type-app-demo" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:400;letter-spacing:8px;color:#1A1814">FLORÈVE</div>
+      <div class="type-app-note">Black or gold letterpress on parchment bag. Cormorant 400 tracking, centered. The Calyx mark above at 40mm. No other text on the bag exterior. Luxury = restraint.</div>
+    </div>
+    <div class="type-app-item">
+      <div class="type-app-surface">Instagram</div>
+      <div class="type-app-demo" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-style:italic;color:#1A1814">She wore one petal.<br>The room remembered.</div>
+      <div class="type-app-note">Campaign text in italic display serif on parchment background. Never overlaid on product photography — always on clean backgrounds. Captions in Helvetica Light, lowercase, no punctuation excess.</div>
+    </div>
+    <div class="type-app-item">
+      <div class="type-app-surface">Storefront Signage</div>
+      <div class="type-app-demo" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:300;letter-spacing:14px;color:#B8975A">FLORÈVE</div>
+      <div class="type-app-note">Brushed brass letters on matte stone facade. Maximum tracking. No backlight — the letters are the signage. Height: 80–120mm letter height. Calyx mark beside at 1:0.6 proportion ratio.</div>
+    </div>
+    <div class="type-app-item">
+      <div class="type-app-surface">Packaging Insert Card</div>
+      <div class="type-app-demo" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:13px;font-style:italic;color:#7A7468;line-height:1.6">"This flower was preserved<br>on the 14th of March, 2024.<br>It will outlast us both."</div>
+      <div class="type-app-note">Italic serif in warm grey. 13px. 1.8 line-height. Left-aligned. The most human typographic element in the brand system — intimate, personal, handwritten-feeling despite being set type.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════ SECTION 3: SYMBOLS ══════ -->
+<section class="section" id="symbols">
+  <div class="section-label" data-num="03">Logo Symbol & Icon Ideas</div>
+  <h2 class="section-title">Marks That Carry a Thousand Years</h2>
+  <p class="section-intro">"The best luxury symbols are not designed. They are discovered — found in nature, in geometry, in the negative space between what already exists."</p>
+
+  <div class="symbol-grid">
+
+    <div class="symbol-card">
+      <div class="symbol-display">
+        <svg viewBox="0 0 90 90" width="80" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(45,45)">
+            <path d="M0,0 C-4,-15 -3,-28 0,-34 C3,-28 4,-15 0,0" stroke="#B8975A" stroke-width=".8" fill="none"/>
+            <path d="M0,0 C-4,-15 -3,-28 0,-34 C3,-28 4,-15 0,0" stroke="#B8975A" stroke-width=".8" fill="none" transform="rotate(72)"/>
+            <path d="M0,0 C-4,-15 -3,-28 0,-34 C3,-28 4,-15 0,0" stroke="#B8975A" stroke-width=".8" fill="none" transform="rotate(144)"/>
+            <path d="M0,0 C-4,-15 -3,-28 0,-34 C3,-28 4,-15 0,0" stroke="#B8975A" stroke-width=".8" fill="none" transform="rotate(216)"/>
+            <path d="M0,0 C-4,-15 -3,-28 0,-34 C3,-28 4,-15 0,0" stroke="#B8975A" stroke-width=".8" fill="none" transform="rotate(288)"/>
+            <circle cx="0" cy="0" r="1.5" fill="#B8975A"/>
+          </g>
+        </svg>
+      </div>
+      <div class="symbol-name">The Calyx Mark</div>
+      <div class="symbol-desc">5 sepal outlines radiating from a center point. Based on perfect pentagon geometry. Simultaneously botanical and geometric. The primary recommended symbol. Works at 3mm (jewelry clasp) to 3m (storefront).</div>
+    </div>
+
+    <div class="symbol-card">
+      <div class="symbol-display">
+        <svg viewBox="0 0 90 90" width="80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Single petal in negative space -->
+          <path d="M45,72 C28,72 16,60 16,44 C16,28 28,16 45,16 C45,16 45,16 45,16" stroke="#B8975A" stroke-width=".8" fill="none"/>
+          <path d="M45,16 C62,16 74,28 74,44 C74,60 62,72 45,72" stroke="#1A1814" stroke-width=".4" fill="none" stroke-dasharray="2,3"/>
+          <!-- Inner single petal -->
+          <path d="M45,62 C34,56 28,50 28,44 C28,38 34,30 45,24" stroke="#B8975A" stroke-width=".6" fill="none"/>
+        </svg>
+      </div>
+      <div class="symbol-name">The Preserved Petal</div>
+      <div class="symbol-desc">A single petal cross-section drawn with one continuous line — the left arc in solid gold, the right arc in a whisper-thin dashed line. Signifies something preserved mid-bloom. Asymmetric, human, yet precise.</div>
+    </div>
+
+    <div class="symbol-card">
+      <div class="symbol-display">
+        <svg viewBox="0 0 90 90" width="80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Two overlapping circles like Venn — the intersection = preserved flower -->
+          <circle cx="37" cy="45" r="22" stroke="#B8975A" stroke-width=".7" fill="none"/>
+          <circle cx="53" cy="45" r="22" stroke="#1A1814" stroke-width=".4" fill="none"/>
+          <!-- A tiny dot in the intersection zone -->
+          <circle cx="45" cy="45" r="2" fill="#B8975A"/>
+        </svg>
+      </div>
+      <div class="symbol-name">The Intersection</div>
+      <div class="symbol-desc">Two imperfect circles overlapping — one in gold (the metal), one in dark (the flower). Their intersection is the brand's territory: where nature meets craft. A conceptual mark for the most intellectually positioned launch.</div>
+    </div>
+
+    <div class="symbol-card">
+      <div class="symbol-display">
+        <svg viewBox="0 0 90 90" width="80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Slim hexagon - honeycomb = preservation -->
+          <polygon points="45,14 70,28 70,62 45,76 20,62 20,28" stroke="#B8975A" stroke-width=".7" fill="none"/>
+          <!-- Inner smaller hexagon -->
+          <polygon points="45,24 62,33 62,57 45,66 28,57 28,33" stroke="#B8975A" stroke-width=".3" fill="none" opacity=".4"/>
+          <!-- Center petal suggestion -->
+          <path d="M45,38 C42,36 42,32 45,30 C48,32 48,36 45,38" stroke="#B8975A" stroke-width=".6" fill="none"/>
+        </svg>
+      </div>
+      <div class="symbol-name">The Honeycomb Hexagon</div>
+      <div class="symbol-desc">The hexagon references beeswax — one of the oldest preservation materials, used to protect botanical specimens for centuries. A double-hexagon with a micro-petal inside. Nature's architecture made geometric luxury.</div>
+    </div>
+
+    <div class="symbol-card">
+      <div class="symbol-display">
+        <svg viewBox="0 0 90 90" width="80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Diamond (gem setting) with a petal inside -->
+          <polygon points="45,12 74,45 45,78 16,45" stroke="#B8975A" stroke-width=".8" fill="none"/>
+          <!-- Petal inside diamond -->
+          <path d="M45,25 C40,35 38,45 45,55 C52,45 50,35 45,25" stroke="#B8975A" stroke-width=".6" fill="none"/>
+        </svg>
+      </div>
+      <div class="symbol-name">The Gem Petal</div>
+      <div class="symbol-desc">A diamond shape (the gem bezel setting viewed from above) with a single petal silhouette inside — the flower preserved inside the jewel made literal and geometric. The most direct product metaphor made minimal.</div>
+    </div>
+
+    <div class="symbol-card">
+      <div class="symbol-display">
+        <svg viewBox="0 0 90 90" width="80" xmlns="http://www.w3.org/2000/svg">
+          <!-- The é diacritic turned into a symbol -->
+          <!-- Stylized accent grave above a circle -->
+          <circle cx="45" cy="52" r="18" stroke="#B8975A" stroke-width=".8" fill="none"/>
+          <!-- Accent grave mark above -->
+          <path d="M39,26 L51,16" stroke="#B8975A" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="symbol-name">The Accent Mark</div>
+      <div class="symbol-desc">The grave accent from "è" in FLORÈVE elevated to a standalone icon — placed above a perfect circle (the fleur, the jewel). A mark that is uniquely Florève and no other brand. The accent becomes a crown. A hat-tip to the brand's French soul.</div>
+    </div>
+
+  </div>
+
+  <div class="pull-quote">
+    <p>"The Calyx Mark is the recommendation above all others because it is the only symbol that contains the brand's complete philosophy in a single geometric form — the protection of beauty, the architecture of nature, the precision of craft — made visible without a single literal element."</p>
+    <cite>Creative Direction Rationale</cite>
+  </div>
+
+  <div class="two-col" style="margin-top:24px">
+    <div class="text-block">
+      <div class="text-block-head">Geometry & Construction</div>
+      <div class="text-block-body">
+        <p>The Calyx Mark is constructed on a precise pentagonal grid. Begin with a perfect regular pentagon (72° rotational symmetry). From each vertex, draw a sepal: a symmetrical bicurved shape that widens from the center point to its maximum width at 40% of its length, then tapers back to a rounded tip at the vertex. The inner curves of adjacent sepals should NOT touch — maintaining a precise 8° gap between them. This gap IS the negative space flower.</p>
+        <p>Stroke weight: 0.8pt at print scale (65mm width). The stroke must be optically corrected at junction points. The center point bears a single circular dot at 2pt diameter — the ovule, the seed, the beginning of the flower.</p>
+        <p>The mark must be constructed as pure vector paths — never as modified typeface characters. It must survive: embossing in wax, laser engraving in gold, digital rendering at 16px, and monumental fabrication at 2000mm.</p>
+      </div>
+    </div>
+    <div class="text-block">
+      <div class="text-block-head">Negative Space Philosophy</div>
+      <div class="text-block-body">
+        <p>The primary content of the Calyx Mark is what is NOT there. The five sepal shapes frame five triangular voids that together form the impression of a stylized five-petaled flower in negative space. This is the brand's philosophical signature made geometric: Florève preserves what would otherwise disappear. The flower exists in the spaces between — in what is not drawn.</p>
+        <p>This negative space flower should never be filled, outlined, or highlighted. It exists only for those who look closely. When a customer first notices it, they have crossed the threshold from consumer to devotee — and no luxury brand can buy that moment. It can only be designed for it.</p>
+        <p>Secondary negative space: the 8-degree gaps between sepals, when the mark is scaled large (100mm+), should reveal the underlying pentagonal grid in ghost-line format for architectural applications (store interiors, campaign backgrounds).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════ SECTION 4: COLOR SYSTEM ══════ -->
+<section class="section" id="colors">
+  <div class="section-label" data-num="04">Color Application Strategy</div>
+  <h2 class="section-title">The Palette of Quiet Wealth</h2>
+  <p class="section-intro">"Luxury color is not chosen for what it expresses. It is chosen for what it restrains."</p>
+
+  <div class="color-grid">
+    <div class="color-swatch">
+      <div class="swatch-fill" style="background:#FAF7F2"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Parchment</div>
+        <div class="swatch-hex">#FAF7F2</div>
+        <div class="swatch-role">Dominant. Background. Soul of the brand. 70% of all visual space.</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-fill" style="background:#B8975A"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Champagne Gold</div>
+        <div class="swatch-hex">#B8975A</div>
+        <div class="swatch-role">The accent. Icon. Foil. Rules. Never backgrounds. 10% of visual space max.</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-fill" style="background:#4D5A49"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Botanical Sage</div>
+        <div class="swatch-hex">#4D5A49</div>
+        <div class="swatch-role">Seasonal accent. Botanical campaigns. Never dominant. 5% usage.</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-fill" style="background:#E8D0C4"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Pressed Blush</div>
+        <div class="swatch-hex">#E8D0C4</div>
+        <div class="swatch-role">Romance campaigns only. Valentine's. Bridal. Forbidden otherwise.</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-fill" style="background:#1A1814"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Atelier Black</div>
+        <div class="swatch-hex">#1A1814</div>
+        <div class="swatch-role">Typography. Evening packaging. High-contrast campaigns. 15% max.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="color-rules">
+    <div class="color-rule-card">
+      <div class="color-rule-head">The Dominance Rule</div>
+      <div class="color-rule-body">Parchment dominates everything. Website backgrounds, packaging interiors, campaign backgrounds, editorial layouts — 70% or more of every visual composition should be Parchment. This is not emptiness. This is space. The greatest luxury signal is not the presence of beautiful things but the space that surrounds them. Parchment IS the luxury. Everything else decorates the parchment.</div>
+    </div>
+    <div class="color-rule-card">
+      <div class="color-rule-head">The Gold Rule</div>
+      <div class="color-rule-body">Champagne Gold is used exclusively for: (1) The Calyx Mark icon. (2) Fine hairline rules and dividers. (3) Category labels and sub-brand text. (4) Foil stamping on packaging. (5) One accent in each campaign visual. It is NEVER used as a background color. It is NEVER used for body text. It is NEVER used in gradients. Gold that appears everywhere becomes brass. Gold that appears rarely becomes precious.</div>
+    </div>
+    <div class="color-rule-card">
+      <div class="color-rule-head">The Black Rule</div>
+      <div class="color-rule-body">Atelier Black (#1A1814 — warm, not pure black) is used for all primary typography and the wordmark. It appears in maximum-contrast campaign moments: a black box, a night-setting photograph, evening jewelry imagery. The warmth of #1A1814 versus #000000 is critical — pure black feels commercial. The warm black feels like the inside of a jewelry box, the lining of a couture atelier.</div>
+    </div>
+    <div class="color-rule-card">
+      <div class="color-rule-head">The Sage Rule</div>
+      <div class="color-rule-body">Botanical Sage is reserved for moments when the brand wants to reference its botanical origins directly — the preserved flower's natural state before transformation. It appears in: product photography backgrounds for botanical-forward collections, the liner of certain packaging versions, campaign seasonals in spring. It never appears in the core logo or wordmark. It is the brand's memory of where it came from.</div>
+    </div>
+  </div>
+
+  <div class="gold-rule"></div>
+
+  <div class="text-block">
+    <div class="text-block-head">Cross-Channel Color Behavior</div>
+    <div class="text-block-body">
+      <p><strong>Website UI:</strong> Parchment (#FAF7F2) as full-page background. White (#FFFFFF) for card and product surfaces — the slight contrast between parchment and white creates quiet depth without any graphic device. Navigation in Atelier Black, hairline tracking. Gold used only for the Calyx mark in nav and fine rule separators. Product prices in warm grey (#7A7468) — never in bold black, which reads commercial.</p>
+      <p><strong>Packaging:</strong> Outer box: Parchment matte paper, gold foil wordmark, blind-emboss Calyx mark. Interior: Botanical Sage velvet or Pressed Blush velvet depending on collection. Ribbon: Sage green for core line, Gold for Prestige tier, Ivory for Bridal. The interior color changes with each collection launch — the exterior never changes.</p>
+      <p><strong>Product Photography:</strong> Background: Parchment, warm white, or aged marble. Never pure white (too clinical) or dark backgrounds (too masculine for this brand's core feminine positioning). Natural directional light from upper-left. One accent botanical element (a dried leaf, a pressed petal fragment) placed off-center. Product centered but never perfectly centered — a 3-degree offset from perfect symmetry signals handcraft without looking artisanal.</p>
+      <p><strong>Social Media:</strong> Instagram grid: alternating Parchment-background product shots and text-only editorial moments (a tagline in display serif on Parchment). No gradients, no photographic collages, no color backgrounds. The consistency of the grid IS the brand. Stories: black-background close-up jewelry photography with the Calyx mark in gold. Never more than one color accent per frame.</p>
+      <p><strong>Campaigns & Advertising:</strong> Primary colorway: Parchment + Atelier Black + Champagne Gold. Secondary (evening/prestige campaigns): Pure black background + Parchment typography + Gold Calyx mark. The inversion of the palette signals a collection tier change — customers learn to read the darkness as "this is the most expensive tier."</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════ SECTION 5: WEBSITE DIRECTION ══════ -->
+<section class="section" id="website">
+  <div class="section-label" data-num="05">Website Visual Direction</div>
+  <h2 class="section-title">The Digital Maison</h2>
+  <p class="section-intro">"The website is the brand's permanent flagship boutique — the one that is always open, always impeccably dressed, and never condescends to explain itself."</p>
+
+  <div class="web-grid">
+    <div class="web-hero">
+      <div style="position:relative;z-index:2">
+        <div style="font-size:8px;letter-spacing:4px;text-transform:uppercase;color:#B8975A;margin-bottom:16px">Hero Section — Full Viewport</div>
+        <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:42px;font-weight:400;color:#FAF7F2;letter-spacing:4px;line-height:1;margin-bottom:8px">The flower<br><em style="color:#B8975A">that refused</em><br>to fade.</div>
+        <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(250,247,242,.45);margin-top:24px">Scroll to discover ↓</div>
+      </div>
+    </div>
+    <div class="web-hero-parchment">
+      <div style="font-size:8px;letter-spacing:4px;text-transform:uppercase;color:#B8975A;margin-bottom:20px">Navigation Philosophy</div>
+      <ul class="luxury-list">
+        <li><strong>No hamburger menus</strong> — Full nav always visible, ultra-minimal</li>
+        <li><strong>Zero dropdowns</strong> — Collections accessed via clean sub-pages</li>
+        <li><strong>Logo left, nav right</strong> — Asymmetric luxury layout</li>
+        <li><strong>Cart icon only</strong> — No text labels in nav utilities</li>
+        <li><strong>No search bar visible</strong> — Appears on keypress only</li>
+        <li><strong>Sticky nav dissolves to ghost</strong> on scroll (40% opacity)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="web-spec-grid">
+    <div class="web-spec">
+      <div class="web-spec-icon">◎</div>
+      <div class="web-spec-title">Hero Section</div>
+      <div class="web-spec-body">Full-viewport close-up jewelry photography on parchment. Film grain overlay (3% opacity). Product appears at 40% of frame width, positioned right-of-center. Campaign headline in Cormorant Italic at left. No CTAs above the fold. The product's beauty IS the call to action.</div>
+    </div>
+    <div class="web-spec">
+      <div class="web-spec-icon">⟡</div>
+      <div class="web-spec-title">Photography Style</div>
+      <div class="web-spec-body">Directional natural light, warm color temperature (5500K). Macro focus on flower-metal interface — where preserved petal meets gold setting. A fine depth of field blur in background. Neutral parchment or aged stone surface. No props except botanical (a single leaf, dried stem). Never styled on a model for hero shots — the jewelry exists as autonomous art.</div>
+    </div>
+    <div class="web-spec">
+      <div class="web-spec-icon">▱</div>
+      <div class="web-spec-title">White Space Strategy</div>
+      <div class="web-spec-body">60% minimum white/parchment space on every page. Product grid: 2 columns maximum on desktop (not 4, never 4 — that is a supermarket). Section padding: 120px top, 80px bottom. Between product and text: never less than 64px. Typography should breathe. Margins should feel almost extravagant.</div>
+    </div>
+    <div class="web-spec">
+      <div class="web-spec-icon">◌</div>
+      <div class="web-spec-title">Motion Philosophy</div>
+      <div class="web-spec-body">Ultra-slow fade-ins (0.8s ease). Parallax at 10% intensity (not dramatic — barely perceptible, but felt). Product hover: 2% scale-up, 200ms. Page transitions: cross-dissolve, 600ms. No animations that feel "web-designed." The motion should feel like breathing. Like the slow opening of a flower.</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:24px">
+    <div class="text-block">
+      <div class="text-block-head">Product Page Design</div>
+      <div class="text-block-body">
+        <p><strong>Image Left, Details Right:</strong> 55/45 split. Product image area background in Parchment. Multiple images in a vertical strip at left, full-width on mobile. No image carousel — all product images visible simultaneously in a refined stacked column.</p>
+        <p><strong>Product Name:</strong> Cormorant Garamond 28px, regular. Product collection in Helvetica Light 9px +400 tracking above. Price in 13px Helvetica Light +100 tracking — same size as the product description text. Price is never the biggest number on the page. This is quiet luxury.</p>
+        <p><strong>The Botanical Provenance Card:</strong> A distinct section on every product page naming the specific preserved flower, its botanical Latin name, its country of origin, and the month it was harvested. This is the brand's most powerful content tool — no competitor offers this.</p>
+      </div>
+    </div>
+    <div class="text-block">
+      <div class="text-block-head">Editorial Content Layer</div>
+      <div class="text-block-body">
+        <p><strong>The Journal:</strong> A quarterly editorial section (not a "blog" — never call it a blog). Long-form photography essays: "The Botany of Preservation," "Gardens That Survive Winter," "The Chemistry of Eternity." Photography at magazine quality. Text in Garamond at comfortable reading size. No sidebar, no related posts, no popups during reading. The brand trusts the reader to find their own way.</p>
+        <p><strong>The Archive:</strong> A dedicated page displaying the brand's preserved flower botanical archive — specimen photography, botanical names, provenance maps. This becomes the brand's most-linked editorial page over time. It does the SEO work without ever feeling like SEO content.</p>
+        <p><strong>No Chatbots, No Popups, No Exit-Intent:</strong> These are non-negotiable. Florève never interrupts. Florève never chases. The brand waits, beautifully lit, for the customer to arrive on her own terms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════ SECTION 6: PACKAGING ══════ -->
+<section class="section" id="packaging">
+  <div class="section-label" data-num="06">Packaging Design System</div>
+  <h2 class="section-title">The Experience Before the Object</h2>
+  <p class="section-intro">"The packaging is the first piece of jewelry she receives. It must be treated with the same precision as the piece inside."</p>
+
+  <div class="pkg-grid">
+
+    <div class="pkg-item">
+      <div class="pkg-visual">
+        <svg viewBox="0 0 160 100" width="140" xmlns="http://www.w3.org/2000/svg">
+          <!-- Box shape -->
+          <rect x="20" y="15" width="120" height="70" rx="1" fill="#FAF7F2" stroke="#B8975A" stroke-width=".6"/>
+          <!-- Lid shadow line -->
+          <line x1="20" y1="50" x2="140" y2="50" stroke="#B8975A" stroke-width=".3" stroke-dasharray="3,3" opacity=".5"/>
+          <!-- Brand name foil -->
+          <text x="80" y="38" font-family="'Cormorant Garamond',Georgia,serif" font-size="8" fill="#B8975A" letter-spacing="5" text-anchor="middle">FLORÈVE</text>
+          <!-- Small calyx mark -->
+          <g transform="translate(80,26)">
+            <path d="M0,0 C-1.5,-5 -1,-9 0,-11 C1,-9 1.5,-5 0,0" stroke="#B8975A" stroke-width=".4" fill="none"/>
+            <path d="M0,0 C-1.5,-5 -1,-9 0,-11 C1,-9 1.5,-5 0,0" stroke="#B8975A" stroke-width=".4" fill="none" transform="rotate(72)"/>
+            <path d="M0,0 C-1.5,-5 -1,-9 0,-11 C1,-9 1.5,-5 0,0" stroke="#B8975A" stroke-width=".4" fill="none" transform="rotate(144)"/>
+            <path d="M0,0 C-1.5,-5 -1,-9 0,-11 C1,-9 1.5,-5 0,0" stroke="#B8975A" stroke-width=".4" fill="none" transform="rotate(216)"/>
+            <path d="M0,0 C-1.5,-5 -1,-9 0,-11 C1,-9 1.5,-5 0,0" stroke="#B8975A" stroke-width=".4" fill="none" transform="rotate(288)"/>
+          </g>
+          <!-- Interior hint -->
+          <rect x="28" y="53" width="104" height="28" rx="0" fill="#4D5A49" opacity=".15"/>
+        </svg>
+      </div>
+      <div class="pkg-title">The Signature Box</div>
+      <div class="pkg-sub">Core Collection Packaging</div>
+      <div class="pkg-body">Rigid board construction. Exterior: matte Parchment (#FAF7F2) paper, 200gsm matte laminate, zero gloss. Gold foil-stamped wordmark centered on lid, 300 tracking. Blind-embossed Calyx mark above wordmark (no ink — texture only). Interior: Botanical Sage (#4D5A49) velvet lining, 3mm depth. Jewelry on a folded ivory card (not foam insert). A single pressed petal or dried botanical specimen placed loose inside — not attached. The box sound when closing: a precise magnetic click, not a flap.</div>
+    </div>
+
+    <div class="pkg-item">
+      <div class="pkg-visual">
+        <svg viewBox="0 0 160 100" width="140" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bag shape -->
+          <path d="M30,80 L30,30 Q30,20 40,20 L120,20 Q130,20 130,30 L130,80 Z" fill="#FAF7F2" stroke="#B8975A" stroke-width=".6"/>
+          <!-- Handles -->
+          <path d="M55,20 Q55,8 80,8 Q105,8 105,20" fill="none" stroke="#B8975A" stroke-width="1.2" stroke-linecap="round"/>
+          <!-- Logo on bag -->
+          <text x="80" y="56" font-family="'Cormorant Garamond',Georgia,serif" font-size="7" fill="#1A1814" letter-spacing="4" text-anchor="middle">FLORÈVE</text>
+          <!-- Calyx on bag -->
+          <g transform="translate(80,44)">
+            <path d="M0,0 C-1.2,-4 -.8,-7 0,-9 C.8,-7 1.2,-4 0,0" stroke="#B8975A" stroke-width=".35" fill="none"/>
+            <path d="M0,0 C-1.2,-4 -.8,-7 0,-9 C.8,-7 1.2,-4 0,0" stroke="#B8975A" stroke-width=".35" fill="none" transform="rotate(72)"/>
+            <path d="M0,0 C-1.2,-4 -.8,-7 0,-9 C.8,-7 1.2,-4 0,0" stroke="#B8975A" stroke-width=".35" fill="none" transform="rotate(144)"/>
+            <path d="M0,0 C-1.2,-4 -.8,-7 0,-9 C.8,-7 1.2,-4 0,0" stroke="#B8975A" stroke-width=".35" fill="none" transform="rotate(216)"/>
+            <path d="M0,0 C-1.2,-4 -.8,-7 0,-9 C.8,-7 1.2,-4 0,0" stroke="#B8975A" stroke-width=".35" fill="none" transform="rotate(288)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="pkg-title">The Shopping Carrier</div>
+      <div class="pkg-sub">Boutique & Gifting Bag</div>
+      <div class="pkg-body">Heavyweight matte Parchment paper bag, 120gsm, with flat-press bottom. Handles: sage grosgrain ribbon, knotted — not looped through grommet holes (grommets are mass-market). The bag should feel slightly too heavy to be comfortable — like carrying something precious. Wordmark and Calyx mark in black offset letterpress, centered. No text on the rear face. Interior: black tissue paper with a ghost-pattern of the Calyx mark at 5% opacity (visible only when held up to light). Width: 200mm, Height: 240mm, Depth: 80mm.</div>
+    </div>
+
+    <div class="pkg-item">
+      <div class="pkg-visual">
+        <svg viewBox="0 0 160 100" width="140" xmlns="http://www.w3.org/2000/svg">
+          <!-- Insert card -->
+          <rect x="20" y="20" width="120" height="60" rx="1" fill="#FAF7F2" stroke="#B8975A" stroke-width=".5"/>
+          <!-- Gold rule top -->
+          <line x1="30" y1="30" x2="130" y2="30" stroke="#B8975A" stroke-width=".4"/>
+          <!-- Calyx small -->
+          <g transform="translate(80,43)">
+            <path d="M0,0 C-1,-3 -.7,-6 0,-7 C.7,-6 1,-3 0,0" stroke="#B8975A" stroke-width=".3" fill="none"/>
+            <path d="M0,0 C-1,-3 -.7,-6 0,-7 C.7,-6 1,-3 0,0" stroke="#B8975A" stroke-width=".3" fill="none" transform="rotate(72)"/>
+            <path d="M0,0 C-1,-3 -.7,-6 0,-7 C.7,-6 1,-3 0,0" stroke="#B8975A" stroke-width=".3" fill="none" transform="rotate(144)"/>
+            <path d="M0,0 C-1,-3 -.7,-6 0,-7 C.7,-6 1,-3 0,0" stroke="#B8975A" stroke-width=".3" fill="none" transform="rotate(216)"/>
+            <path d="M0,0 C-1,-3 -.7,-6 0,-7 C.7,-6 1,-3 0,0" stroke="#B8975A" stroke-width=".3" fill="none" transform="rotate(288)"/>
+          </g>
+          <text x="80" y="60" font-family="'Cormorant Garamond',Georgia,serif" font-size="5.5" fill="#7A7468" letter-spacing="1" text-anchor="middle" font-style="italic">"Preserved on the 14th of March."</text>
+          <!-- Bottom rule -->
+          <line x1="30" y1="70" x2="130" y2="70" stroke="#B8975A" stroke-width=".4"/>
+        </svg>
+      </div>
+      <div class="pkg-title">The Provenance Card</div>
+      <div class="pkg-sub">The Brand's Most Personal Touch</div>
+      <div class="pkg-body">A single 90mm × 55mm card in 350gsm Parchment paper. Front: Calyx mark at top, a single italic sentence: "This [flower name] was preserved on the [date]. It will outlast us both." Botanical Latin name below in Helvetica Light. Rear: the flower's country of origin and collection season in 9px + tracking. A hairline gold rule frames both faces. This card transforms a jewelry purchase into a living archive entry. Women will keep these cards for decades. They become the brand's most-shared organic content.</div>
+    </div>
+
+    <div class="pkg-item">
+      <div class="pkg-visual">
+        <svg viewBox="0 0 160 100" width="140" xmlns="http://www.w3.org/2000/svg">
+          <!-- Prestige black box -->
+          <rect x="20" y="15" width="120" height="70" rx="1" fill="#1A1814" stroke="#B8975A" stroke-width=".6"/>
+          <line x1="20" y1="50" x2="140" y2="50" stroke="#B8975A" stroke-width=".3" stroke-dasharray="3,3" opacity=".5"/>
+          <text x="80" y="38" font-family="'Cormorant Garamond',Georgia,serif" font-size="8" fill="#B8975A" letter-spacing="5" text-anchor="middle">FLORÈVE</text>
+          <g transform="translate(80,26)">
+            <path d="M0,0 C-1.5,-5 -1,-9 0,-11 C1,-9 1.5,-5 0,0" stroke="#B8975A" stroke-width=".4" fill="none"/>
+            <path d="M0,0 C-1.5,-5 -1,-9 0,-11 C1,-9 1.5,-5 0,0" stroke="#B8975A" stroke-width=".4" fill="none" transform="rotate(72)"/>
+            <path d="M0,0 C-1.5,-5 -1,-9 0,-11 C1,-9 1.5,-5 0,0" stroke="#B8975A" stroke-width=".4" fill="none" transform="rotate(144)"/>
+            <path d="M0,0 C-1.5,-5 -1,-9 0,-11 C1,-9 1.5,-5 0,0" stroke="#B8975A" stroke-width=".4" fill="none" transform="rotate(216)"/>
+            <path d="M0,0 C-1.5,-5 -1,-9 0,-11 C1,-9 1.5,-5 0,0" stroke="#B8975A" stroke-width=".4" fill="none" transform="rotate(288)"/>
+          </g>
+          <text x="80" y="66" font-family="'Helvetica Neue',Arial,sans-serif" font-size="4.5" fill="#B8975A" letter-spacing="4" text-anchor="middle">PRESTIGE ARCHIVE</text>
+        </svg>
+      </div>
+      <div class="pkg-title">The Prestige Box</div>
+      <div class="pkg-sub">Archive & Limited Edition Tier</div>
+      <div class="pkg-body">Atelier Black matte exterior. Gold foil wordmark + "ARCHIVE EDITION" in +500 tracking below. Interior: Champagne Gold velvet lining — a reversal of the standard box, signaling the tier inversion: inside is gold, outside is night. The prestige box arrives sealed with a wax seal bearing the Calyx mark — the seal must be broken to open, an irreversible act of commitment. A botanical pressed specimen card is included, mounted in a 50mm × 50mm archival acetate sleeve. This box should never be discarded. Women keep it on their vanity.</div>
+    </div>
+
+    <div class="pkg-item">
+      <div class="pkg-visual">
+        <svg viewBox="0 0 160 100" width="140" xmlns="http://www.w3.org/2000/svg">
+          <!-- Tissue paper fold -->
+          <path d="M20,80 L80,20 L140,80 Z" fill="#1A1814" opacity=".12"/>
+          <path d="M20,80 L80,30 L140,80" fill="none" stroke="#1A1814" stroke-width=".4" opacity=".3"/>
+          <!-- Calyx watermark on tissue -->
+          <g transform="translate(80,55)" opacity=".2">
+            <path d="M0,0 C-3,-10 -2,-18 0,-22 C2,-18 3,-10 0,0" stroke="#1A1814" stroke-width=".6" fill="none"/>
+            <path d="M0,0 C-3,-10 -2,-18 0,-22 C2,-18 3,-10 0,0" stroke="#1A1814" stroke-width=".6" fill="none" transform="rotate(72)"/>
+            <path d="M0,0 C-3,-10 -2,-18 0,-22 C2,-18 3,-10 0,0" stroke="#1A1814" stroke-width=".6" fill="none" transform="rotate(144)"/>
+            <path d="M0,0 C-3,-10 -2,-18 0,-22 C2,-18 3,-10 0,0" stroke="#1A1814" stroke-width=".6" fill="none" transform="rotate(216)"/>
+            <path d="M0,0 C-3,-10 -2,-18 0,-22 C2,-18 3,-10 0,0" stroke="#1A1814" stroke-width=".6" fill="none" transform="rotate(288)"/>
+          </g>
+          <text x="80" y="90" font-family="'Helvetica Neue',Arial,sans-serif" font-size="6" fill="#7A7468" letter-spacing="2" text-anchor="middle">FLORÈVE · TISSUE PAPER</text>
+        </svg>
+      </div>
+      <div class="pkg-title">The Tissue & Wrapping</div>
+      <div class="pkg-sub">Interior Details</div>
+      <div class="pkg-body">Atelier Black tissue paper — not white, not colored. Black tissue is immediately identifiable and photographs beautifully with pale jewelry. The Calyx mark printed at 5% opacity as a repeating pattern across the entire surface (visible only in certain light — a discovery moment for the unboxer). A single loose pressed petal or dried botanical is placed between the tissue folds before wrapping. The ritual of opening — unfolding tissue, finding the petal, reading the provenance card — is designed to take 90 seconds minimum. Luxury does not rush.</div>
+    </div>
+
+    <div class="pkg-item">
+      <div class="pkg-visual">
+        <svg viewBox="0 0 160 100" width="140" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ribbon -->
+          <path d="M80,15 Q95,30 110,25 Q125,20 120,35 L80,75 L40,35 Q35,20 50,25 Q65,30 80,15 Z" fill="none" stroke="#4D5A49" stroke-width=".8"/>
+          <path d="M80,75 L80,95" stroke="#4D5A49" stroke-width=".6"/>
+          <text x="80" y="92" font-family="'Helvetica Neue',Arial,sans-serif" font-size="5" fill="#4D5A49" letter-spacing="2" text-anchor="middle">SAGE GROSGRAIN</text>
+        </svg>
+      </div>
+      <div class="pkg-title">Ribbon & Closure</div>
+      <div class="pkg-sub">The Final Touch</div>
+      <div class="pkg-body">Standard: Botanical Sage (#4D5A49) double-sided grosgrain ribbon, 15mm width, tied in a precise flat bow. The knot should be tied using the same technique as Hermès — the bow must be symmetric to within 2mm. No ribbon printing. No metallic ribbon. The ribbon's color IS the botanical signature. Prestige tier: Champagne Gold silk charmeuse ribbon (not grosgrain — charmeuse for the prestige tier's tactile elevation). Optional for gifting: a small dried botanical stem (lavender, eucalyptus bud, or rosehip) tucked into the bow. The scent of the dried botanical is the brand's invisible signature.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════ SECTION 7: EXECUTION SPECS ══════ -->
+<section class="section" id="execution">
+  <div class="section-label" data-num="07">Logo Execution Instructions</div>
+  <h2 class="section-title">The Precision of an Heirloom</h2>
+  <p class="section-intro">"These are not guidelines. They are laws. A luxury mark that deviates from its construction rules by even 1% is not the mark — it is a copy of the mark."</p>
+
+  <table class="spec-table">
+    <thead>
+      <tr>
+        <th>Specification</th>
+        <th>Rule</th>
+        <th>Rationale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Clear Space</td>
+        <td>Minimum clear space = 1× the height of the capital "F" in the wordmark. On all four sides. This space is sacred. No other element, color, or texture may enter it.</td>
+        <td>Luxury marks are defined by what surrounds them. The clear space communicates: this brand does not compete for attention. Attention comes to it.</td>
+      </tr>
+      <tr>
+        <td>Minimum Size — Print</td>
+        <td>Full lockup (mark + wordmark): 40mm wide minimum. Calyx mark alone: 6mm minimum. Wordmark alone: 20mm minimum. Below these thresholds, use the Calyx mark only.</td>
+        <td>The hairline strokes of the Calyx mark and the thin-weight wordmark require minimum reproduction size to maintain stroke integrity and spacing precision.</td>
+      </tr>
+      <tr>
+        <td>Minimum Size — Digital</td>
+        <td>Full lockup: 240px wide. Calyx mark alone: 32px (favicon use). Wordmark alone: 120px. For sizes under 32px, use a simplified Calyx mark with heavier 1.5pt stroke weight.</td>
+        <td>Hairline strokes do not survive subpixel rendering below these thresholds. A luxury mark that degrades is worse than no mark at all.</td>
+      </tr>
+      <tr>
+        <td>Stroke Weight — Calyx Mark</td>
+        <td>At standard reproduction (65mm width): 0.8pt. Foil stamping: 1pt minimum. Embossing: 1.2pt minimum. Laser engraving: 0.6pt. Never exceed 1.6pt at any standard reproduction size.</td>
+        <td>The mark's luxury reading depends on the hairline quality of its strokes. Heavier strokes read as decorative. Lighter strokes read as architectural precision.</td>
+      </tr>
+      <tr>
+        <td>Wordmark Tracking</td>
+        <td>Standard: +280 tracking. Minimum: +200. Maximum: +400. Never less than +200 at any size. The "è" accent grave must be optically centered above the "e" — not mechanically centered. Requires manual kerning adjustment.</td>
+        <td>The extreme tracking is not a stylistic choice — it is the brand's voice. It communicates that the brand has space. That it is not crowded or pressured. That luxury is, fundamentally, spaciousness.</td>
+      </tr>
+      <tr>
+        <td>Color — Print</td>
+        <td>Wordmark: Pantone Black C or 100K process. Calyx mark: Pantone 871 C (metallic gold) or Pantone 7509 C (non-metallic). On dark backgrounds: Pantone 9122 C (Parchment equivalent). Never CMYK mix for gold — only Pantone spot.</td>
+        <td>CMYK gold (typically 0/20/60/20) prints flat and commercial. Pantone 871 C is the minimum acceptable gold for the Florève brand. Metallic inks are non-negotiable on packaging applications.</td>
+      </tr>
+      <tr>
+        <td>Color — Digital</td>
+        <td>Wordmark: #1A1814. Calyx mark: #B8975A. On dark surfaces: wordmark #FAF7F2, mark #B8975A (mark color unchanged — it functions in both light and dark contexts). Reverse (parchment on dark): wordmark #FAF7F2 only.</td>
+        <td>The Champagne Gold (#B8975A) is calibrated to appear warm and precious on both parchment and dark backgrounds without adjustment. This consistency is the mark's digital neutrality.</td>
+      </tr>
+      <tr>
+        <td>Foil Stamping</td>
+        <td>Gold foil: #G102 or equivalent (warm champagne, not yellow gold). Application: hot stamp at 80°C / 5 seconds dwell time on matte laminate. Blind emboss Calyx mark adjacent (not foiled — texture only). The foil should have a semi-matte finish, not a mirror finish.</td>
+        <td>Mirror-finish gold foil reads as commercial gift-wrapping. Semi-matte foil reads as heritage, as weight, as restrained wealth. It photographs better and ages better.</td>
+      </tr>
+      <tr>
+        <td>Embossing</td>
+        <td>Calyx mark: 0.5mm depth blind emboss. Wordmark: 0.3mm depth maximum. Die must be custom-cut from the vector master file. 3mm padding from nearest embossed element to ensure independent impression clarity.</td>
+        <td>Embossing depth calibration is the difference between a luxury mark and an ordinary stamped mark. 0.5mm creates shadow; shadow creates dimension; dimension creates precious. 0.8mm or more collapses the hairline sepals.</td>
+      </tr>
+      <tr>
+        <td>Laser Engraving (Jewelry)</td>
+        <td>Calyx mark only (no wordmark) for jewelry clasp engraving. Minimum clasp area: 4mm × 4mm. Engraving depth: 0.1mm on gold, 0.15mm on silver. The center dot of the Calyx mark is filled, not engraved, at this scale.</td>
+        <td>The Calyx mark was specifically designed to survive reduction to 4mm jewelry scale while maintaining full geometric integrity. The five-sepal geometry reads correctly at this size, which is the most demanding technical test for a luxury jewelry mark.</td>
+      </tr>
+      <tr>
+        <td>Prohibited Modifications</td>
+        <td>No: color changes outside approved palette. No: shadow, glow, or gradient on mark. No: distortion, stretching, or rotation of mark. No: adding text within clear space. No: outlining the mark. No: using only a portion of the mark. No: placing mark on a photographic background. No: using in a lower resolution than specified.</td>
+        <td>These prohibitions are standard for all luxury brand marks. But for Florève specifically: the Calyx mark's entire power is in its precise, undistorted geometry. Any modification is not Florève. It is something else.</td>
+      </tr>
+      <tr>
+        <td>Grid & Proportions</td>
+        <td>The lockup (mark above wordmark) proportional relationship: mark height = 0.8× the wordmark cap height. Vertical spacing between mark and wordmark baseline = 1.2× cap height. Wordmark and mark must share a common vertical centerline to within 0.1mm tolerance.</td>
+        <td>These proportions were determined by optical testing against 22 luxury reference marks (Cartier, Dior, Chanel, Bvlgari, etc.) to find the vertical relationship that reads as confidently proportioned rather than either top-heavy (too large a mark) or base-heavy (too small a mark).</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ══════ SECTION 8: AI PROMPTS ══════ -->
+<section class="section" id="prompts">
+  <div class="section-label" data-num="08">AI Image Generation Prompts</div>
+  <h2 class="section-title">Generating the Florève Visual Universe</h2>
+  <p class="section-intro">"These prompts are structured to generate editorial-quality imagery consistent with the Florève brand aesthetic. Use as starting points, refine with iteration."</p>
+
+  <div class="prompt-grid">
+
+    <div class="prompt-card">
+      <div class="prompt-tool">Midjourney v6.1 / v7</div>
+      <div class="prompt-title">Logo Concept — Calyx Mark Visualization</div>
+      <div class="prompt-text">Ultra-minimal luxury brand logo concept, five hairline botanical sepal shapes radiating from a single central point forming a perfect geometric calyx cross-section, Champagne Gold color #B8975A on pure ivory parchment background, pentagonal symmetry, hairline stroke weight, luxury jewelry brand identity, architectural precision, no fill only outlines, negative space forming flower impression, professional logo design, vector aesthetic, Cartier-level luxury minimalism, white background, isolated on parchment --ar 1:1 --style raw --stylize 50 --v 6.1</div>
+      <div class="prompt-note">Iterate: add "--no text, flowers, color, shadows" for cleaner results. Try "--chaos 0" for maximum precision.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-tool">Midjourney v6.1</div>
+      <div class="prompt-title">Hero Product Photography</div>
+      <div class="prompt-text">Ultra-luxury jewelry photography, a thin gold ring with a single preserved rose petal embedded in transparent crystal resin setting, the petal visible through the gold, warm directional natural light from upper left, parchment cream background, aged marble surface, extreme macro focus on flower-gold interface, film grain texture, Champagne Gold metal, Botanical rose petal in perfect condition preserved mid-bloom, editorial luxury fashion magazine quality, Vogue France aesthetic, shallow depth of field, warm 5500K color temperature, no props except jewelry --ar 4:5 --style raw --stylize 200</div>
+      <div class="prompt-note">Use for hero and product photography direction. Adjust flower type to match specific product. Try jasmine, peony, cherry blossom variants.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-tool">Midjourney v6.1</div>
+      <div class="prompt-title">Brand Campaign Visual</div>
+      <div class="prompt-text">High fashion luxury jewelry brand campaign image, a woman's hand holding a single dried rose with her wrist wearing a gold botanical bracelet, preserved flower petals visible inside a crystal clear setting, warm parchment background, morning light, editorial photography, film grain, quiet luxury aesthetic, old money elegance, Loewe campaign quality, Dior campaign mood, intimate scale, no face visible, hand and wrist only, warm skin tone, no jewelry visible except the Florève piece, muted color palette ivory gold sage --ar 4:5 --style raw --stylize 300</div>
+      <div class="prompt-note">The partial-body crop (hand/wrist only) is the Florève campaign format. Never full face — the product is the subject.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-tool">Midjourney v6.1</div>
+      <div class="prompt-title">Luxury Packaging Flatlay</div>
+      <div class="prompt-text">Luxury jewelry brand unboxing flatlay, matte ivory parchment gift box with champagne gold foil brand name stamping, botanical sage grosgrain ribbon bow, black tissue paper, a single preserved dried botanical leaf beside the box, small square provenance card, editorial overhead photography, warm natural light, linen surface, extreme minimalism, luxury brand packaging design quality, Aesop x Cartier aesthetic, no artificial props, negative space dominant, film grain overlay, warm ivory palette with gold accents --ar 4:5 --style raw --stylize 250</div>
+      <div class="prompt-note">For e-commerce product pages, add "--ar 1:1". For Instagram, "--ar 4:5" is optimal.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-tool">Ideogram v2</div>
+      <div class="prompt-title">Wordmark Typography Mockup</div>
+      <div class="prompt-text">Luxury fashion brand wordmark typography design, the word FLORÈVE in ultra-thin hairline Didot or Cormorant Garamond serif font, all uppercase, extreme letter spacing, warm ivory parchment background, warm black text color #1A1814, accent grave on the E, centered composition, minimum decoration, single champagne gold hairline rule beneath, luxury jewelry house logo, professional brand identity typography, Paris fashion house aesthetic, elegant and minimal, vector clean edges [Style: Photo Realistic, no texture background]</div>
+      <div class="prompt-note">Ideogram is excellent for typography-accurate generations. Specify exact hex colors for best results. Try variants: with/without the gold rule, different tracking amounts.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-tool">Ideogram v2</div>
+      <div class="prompt-title">Brand Stationery System</div>
+      <div class="prompt-text">Luxury brand stationery flatlay, business card, letterhead, envelope, and small notecard all in matte ivory parchment paper 350gsm, champagne gold foil logo stamped, minimal design, hairline typography, elegant luxury brand identity, botanical motif in gold, warm light, editorial overhead shot, Hermès or Cartier stationery quality, professional brand design, warm ivory palette, botanical sage ribbon, empty desk surface, architectural precision, no clutter [Style: Editorial Photography]</div>
+      <div class="prompt-note">Use for brand identity presentation mockups and client presentation materials.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-tool">DALL·E 3</div>
+      <div class="prompt-title">Website Hero Concept</div>
+      <div class="prompt-text">A luxury jewelry brand website homepage hero section mockup. The background is a warm parchment cream color (#FAF7F2). On the right side of the frame, a single piece of delicate gold jewelry with a preserved flower petal visible inside a clear crystal setting, photographed on an ivory surface with soft natural light. On the left side, in ultra-thin serif typography with extreme letter spacing, the brand name "FLORÈVE" in dark charcoal (#1A1814), and below in smaller italic serif the tagline "The flower that refused to fade." The overall aesthetic is quiet luxury, Paris fashion house, editorial minimalism. No dark backgrounds, no busy elements, maximum whitespace.</div>
+      <div class="prompt-note">DALL·E 3 handles text rendering better than Midjourney. Use for mockups that require the actual brand name to appear correctly.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-tool">DALL·E 3</div>
+      <div class="prompt-title">Packaging Mockup — 3D Render</div>
+      <div class="prompt-text">A photorealistic 3D product render of a luxury jewelry gift box. The box is a rigid rectangular form in matte parchment cream paper with absolutely no gloss. On the lid, the brand name "FLORÈVE" is foil-stamped in champagne gold with extreme letter spacing. Above the text, a small geometric botanical symbol (five thin sepal shapes radiating from a center point) is embossed in gold. The box is shown slightly open, revealing a botanical sage green velvet interior. A botanical sage grosgrain ribbon lies beside the box. The photography is editorial, warm studio lighting from upper left, parchment colored surface below the box. Extreme minimalism, luxury brand quality comparable to Cartier or Bvlgari packaging.</div>
+      <div class="prompt-note">DALL·E 3's 3D render quality is improving rapidly. Use for packaging concept presentation. Specify "no visible seams or creases" for cleaner results.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-tool">Leonardo AI (Phoenix Model)</div>
+      <div class="prompt-title">Editorial Campaign — The Preserved Flower</div>
+      <div class="prompt-text">Luxury fashion editorial photography, extreme macro close-up of a dried rose petal suspended inside a transparent liquid or crystal, surrounded by thin gold wire forming a jewelry setting, the petal perfectly preserved at mid-bloom stage, warm amber light refraction through the crystal, parchment cream background out of focus, film grain, luxury editorial mood, Loewe botanicals campaign quality, quiet luxury color palette, champagne gold warm tones, botanical sage green accents from the petal veining, no model, object photography at maximum quality, ultra realistic, photographic --alchemy v2 --photoreal</div>
+      <div class="prompt-note">Leonardo Phoenix handles macro photography simulation exceptionally well. Use PhotoReal mode for the most editorial results.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-tool">Leonardo AI (Phoenix Model)</div>
+      <div class="prompt-title">Store Exterior Concept Visualization</div>
+      <div class="prompt-text">Luxury jewelry boutique exterior facade visualization, minimalist European architecture, warm cream stone facade, brushed brass letters spelling FLORÈVE in hairline serif with extreme spacing mounted on the facade, a single glass window display with one jewelry piece on an ivory pedestal visible inside, botanical sage potted topiary at entrance, warm evening light, European cobblestone street, luxury brand boutique quality comparable to Cartier Place Vendôme or Loewe Madrid flagship, minimal signage, maximum refinement, no crowds, golden hour light --alchemy v2 --photoreal</div>
+      <div class="prompt-note">Use for brand deck presentations, investor materials, and establishing the brand's aspirational retail vision.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════ SECTION 9: FINAL DIRECTION ══════ -->
+<section class="final-section" id="final">
+  <div class="section-label" data-num="09">Final Creative Direction</div>
+  <h2 class="section-title">The Singular Recommendation</h2>
+
+  <div class="final-hero">
+    <div class="final-hero-label">★ Primary Logo Direction — Official Recommendation</div>
+    <div class="final-hero-name">Florève</div>
+    <div class="final-hero-concept">Concept C: The Calyx Mark + Hairline Wordmark</div>
+    <div class="final-hero-body">A geometric abstraction of a flower calyx in perfect pentagonal symmetry, drawn in Champagne Gold hairline strokes. Five sepal shapes radiating from a center point, the negative space between them forming the impression of a five-petaled flower. Above the hairline serif wordmark "FLORÈVE" in Atelier Black with +280 tracking. Below: "MAISON DE JOAILLERIE" in 6px Helvetica Light, +400 tracking, in warm grey. The complete lockup. The only logo Florève will ever need.</div>
+  </div>
+
+  <div class="final-grid">
+    <div class="final-card">
+      <div class="final-card-title">The Billion-Dollar Potential</div>
+      <div class="final-card-sub">Why This Direction Scales</div>
+      <div class="final-card-body">
+        <p>The Calyx Mark possesses the rarest quality in brand identity: it contains the entire brand philosophy in a single geometric form that requires no explanation — but rewards those who seek one.</p>
+        <p>Brands built on a single iconic geometric mark (Cartier's Panther, Bvlgari's B.zero1 ring, Chanel's CC) demonstrate one consistent truth: <strong>the mark becomes a luxury object itself.</strong> Women tattoo the Chanel CC. They buy Bvlgari bags for the B.zero1 clasp detail. They purchase Cartier for the Panther's legend.</p>
+        <p>The Calyx Mark is designed to become the next such icon. Within five years, the mark without the wordmark should be sufficient brand identification. Within ten years, women should recognize it globally as they recognize a Cartier screw bangle.</p>
+        <p>The financial architecture this supports: licensing, sub-brand extensions (Florève Parfums, Florève Maison, Florève Archive), collaborations (a Florève-commissioned artist creates botanical works for gallery sale), and ultimately, a brand acquisition by a major luxury conglomerate (LVMH, Richemont, Kering) at a valuation supported by brand equity — not just revenue.</p>
+      </div>
+    </div>
+    <div class="final-card">
+      <div class="final-card-title">The Elite Woman's Connection</div>
+      <div class="final-card-sub">Why She Will Feel It Before She Buys It</div>
+      <div class="final-card-body">
+        <p>The high-income professional woman who is Florève's primary customer has spent her career in environments where what is left unsaid is more important than what is spoken. She has learned to read subtext, restraint, and precision as signals of quality. Her entire professional and personal aesthetic has been built on this understanding.</p>
+        <p>The Calyx Mark speaks her language. It is minimal enough to say nothing loudly. It is precise enough to say everything quietly. The hidden flower in the negative space is her reward for looking closely — and she <em>always</em> looks closely. That is who she is.</p>
+        <p>The Provenance Card that comes with every piece — naming the specific flower, its origin, the date it was preserved — speaks to another dimension of her character: she is a collector, not a consumer. She catalogues. She keeps. She knows that the story behind an object is worth as much as the object itself, which is why she pays ₹45,000 for a wine she could replace with a ₹800 bottle. The story is the luxury.</p>
+        <p>Florève's identity system is built entirely around her intuition that <strong>something worth keeping deserves packaging worth keeping, a name worth saying, and a mark worth recognizing.</strong></p>
+      </div>
+    </div>
+    <div class="final-card">
+      <div class="final-card-title">The India → Global Strategy</div>
+      <div class="final-card-sub">Dominating the Aspirational Luxury Market</div>
+      <div class="final-card-body">
+        <p>India's aspirational luxury market in 2025 occupies a unique position globally: it is the largest market of luxury-educated consumers who are simultaneously underserved by luxury brands positioned for them specifically. International luxury brands treat India as an export market. Florève treats India as a home market with global standards.</p>
+        <p>The visual identity system achieves this balance precisely. The wordmark (FLORÈVE, French, European) satisfies the luxury consumer's desire for international credibility. The Calyx Mark (universal botanical geometry, culture-neutral, globally beautiful) speaks to every market without favoring any one. The Parchment and Champagne Gold palette is neither Eastern nor Western — it is the color of precious things across every civilization.</p>
+        <p>The India-specific advantage: Florève launches in a market where consumers are learning to distinguish between luxury brands. The brand that teaches them what quiet luxury looks like — that arrives before the market is fully educated — becomes the reference. In five years, the Calyx Mark will be what Indian luxury consumers point to when explaining what they mean by "taste."</p>
+        <p>The global story writes itself: <strong>"An Indian luxury house with a European soul that has no precedent and no competitor."</strong> This is the press narrative. This is the investor narrative. This is the acquisition narrative.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote" style="margin-top:40px">
+    <p>"Florève does not compete with luxury brands. It completes the conversation that luxury brands have been having for 200 years — the one about nature, permanence, and what it means to hold something beautiful before it disappears. Florève is the answer to that conversation. And it arrives wearing a calyx, in gold, speaking French."</p>
+    <cite>Final Creative Direction Summary</cite>
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer class="doc-footer">
+  <div class="footer-brand">Florève</div>
+  <div>
+    <div class="footer-note">Complete Brand Identity System · Confidential Creative Direction</div>
+    <div class="footer-note" style="margin-top:4px">All concepts proprietary · Subject to trademark clearance · 2025</div>
+  </div>
+</footer>
+
+</div><!-- /doc -->
+</body>
+</html>

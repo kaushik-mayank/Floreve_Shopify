@@ -1,0 +1,46 @@
+{%- comment -%}
+  The Florève lockup. Falls back to the bundled artwork, then to a typographic
+  wordmark so the header is never empty.
+
+  Accepts:
+  - variant: 'dark' (default, for light grounds) or 'light' (for dark grounds)
+  - width:   intrinsic render width in px
+  - class:   extra classes on the <img>
+{%- endcomment -%}
+
+{%- liquid
+  assign variant = variant | default: 'dark'
+  assign render_width = width | default: 300
+  assign retina_width = render_width | times: 2
+
+  if variant == 'light'
+    assign source = settings.logo_light | default: settings.logo
+    assign fallback_asset = 'floreve-logo-light.png'
+  else
+    assign source = settings.logo
+    assign fallback_asset = 'floreve-logo.png'
+  endif
+-%}
+
+{%- if source != blank -%}
+  <img
+    src="{{ source | image_url: width: retina_width }}"
+    srcset="{{ source | image_url: width: render_width }} 1x, {{ source | image_url: width: retina_width }} 2x"
+    alt="{{ shop.name | escape }}"
+    width="{{ source.width }}"
+    height="{{ source.height }}"
+    class="{{ class }}"
+    loading="eager"
+    fetchpriority="high"
+  >
+{%- else -%}
+  <img
+    src="{{ fallback_asset | asset_url }}"
+    alt="{{ shop.name | escape }}"
+    width="918"
+    height="609"
+    class="{{ class }}"
+    loading="eager"
+    fetchpriority="high"
+  >
+{%- endif -%}

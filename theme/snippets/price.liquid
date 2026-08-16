@@ -1,0 +1,71 @@
+{%- comment -%}
+  Price presentation. Never invents a comparison — the struck-through figure
+  only appears when Shopify actually holds a compare-at price.
+
+  Accepts:
+  - product / variant: the source object
+  - use_variant:  true to price the selected variant rather than the product
+  - show_from:    true to prefix "From" when a product's variants differ
+  - section_id:   required for live variant updates on the product page
+  - size:         'large' for the product page
+  - class:        extra classes
+{%- endcomment -%}
+
+{%- liquid
+  if use_variant and product.selected_or_first_available_variant
+    assign target = product.selected_or_first_available_variant
+  elsif variant
+    assign target = variant
+  else
+    assign target = product
+  endif
+
+  assign money_price = target.price | money
+  assign compare_at = target.compare_at_price
+  assign on_sale = false
+  if compare_at and compare_at > target.price
+    assign on_sale = true
+  endif
+
+  assign varies = false
+  if show_from and product.price_varies and use_variant != true
+    assign varies = true
+  endif
+-%}
+
+<div
+  class="price{% if size == 'large' %} price--large{% endif %}{% if class %} {{ class }}{% endif %}"
+  data-price-block
+  {% if section_id %}data-section-id="{{ section_id }}"{% endif %}
+>
+  <span class="visually-hidden">
+    {%- if on_sale -%}
+      {{ 'products.product.price.sale_price' | t }}
+    {%- else -%}
+      {{ 'products.product.price.regular_price' | t }}
+    {%- endif -%}
+  </span>
+
+  {%- if varies -%}
+    <span class="price__from" data-price-from>{{ 'products.product.price.from_price_html' | t: price: '' | strip }}</span>
+  {%- endif -%}
+
+  <span class="price__now{% if on_sale %} price__now--sale{% endif %}" data-price-now>{{ money_price }}</span>
+
+  <s class="price__was" data-price-was {% unless on_sale %}hidden{% endunless %}>
+    {%- if on_sale -%}
+      <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}&nbsp;</span>
+      {{- compare_at | money -}}
+    {%- endif -%}
+  </s>
+
+  {%- if settings.currency_code_enabled -%}
+    <span class="price__code">{{ cart.currency.iso_code }}</span>
+  {%- endif -%}
+
+  <span class="price__unit" data-price-unit {% unless target.unit_price_measurement %}hidden{% endunless %}>
+    {%- if target.unit_price_measurement -%}
+      {{ target.unit_price | money }} / {{ target.unit_price_measurement.reference_value }}{{ target.unit_price_measurement.reference_unit }}
+    {%- endif -%}
+  </span>
+</div>

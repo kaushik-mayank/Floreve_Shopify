@@ -1,0 +1,269 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "eyebrow": { "type": "eyebrow", "settings": { "text": "Maison de Joaillerie" } },
+        "heading": { "type": "heading", "settings": { "text": "Flowers, kept" } },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Jewellery drawn from botanical form and finished by hand, between Italy and India."
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "primary_label": "Discover the collection",
+            "secondary_label": "The house"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "heading", "text", "buttons"],
+      "settings": {
+        "focal_x": 50,
+        "focal_y": 50,
+        "overlay_opacity": 42,
+        "height": "lg",
+        "content_position": "start",
+        "color_scheme": "alt",
+        "use_h1": true,
+        "show_cue": true,
+        "cue_text": "Scroll"
+      }
+    },
+
+    "manifesto": {
+      "type": "brand-manifesto",
+      "blocks": {
+        "one": {
+          "type": "pillar",
+          "settings": {
+            "title": "Studied",
+            "text": "Every form begins with a real flower, observed before it is drawn."
+          }
+        },
+        "two": {
+          "type": "pillar",
+          "settings": {
+            "title": "Made",
+            "text": "Built by hand in small numbers, in an atelier rather than a factory."
+          }
+        },
+        "three": {
+          "type": "pillar",
+          "settings": {
+            "title": "Worn",
+            "text": "Weighted and finished to sit comfortably against the body, every day."
+          }
+        }
+      },
+      "block_order": ["one", "two", "three"],
+      "settings": {
+        "color_scheme": "parchment",
+        "eyebrow": "The house",
+        "statement": "A flower lasts a season. Held in metal, it lasts a life.",
+        "text": "<p>Florève begins where botany and metalwork meet. Each form is studied from a living flower, then rebuilt by hand — petal by petal — in materials chosen to hold that shape long after the season has passed.</p><p>The result is not a copy of nature. It is nature, given a second structure.</p>",
+        "link_label": "Read our story",
+        "padding_top": 112,
+        "padding_bottom": 96
+      }
+    },
+
+    "signature": {
+      "type": "featured-collection",
+      "settings": {
+        "color_scheme": "parchment",
+        "eyebrow": "Signature",
+        "heading": "The pieces we are known for",
+        "alignment": "split",
+        "link_label": "View all",
+        "products_to_show": 4,
+        "columns": 4,
+        "columns_mobile": "2",
+        "mobile_layout": "grid",
+        "padding_top": 16,
+        "padding_bottom": 112
+      }
+    },
+
+    "botany": {
+      "type": "editorial-story",
+      "blocks": {
+        "eyebrow": { "type": "eyebrow", "settings": { "text": "Botany" } },
+        "heading": { "type": "heading", "settings": { "text": "Why a flower?" } },
+        "lede": {
+          "type": "lede",
+          "settings": {
+            "text": "Because nothing else is asked to be beautiful and brief at the same time."
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A flower is the shape a living thing makes when it has something to say. It opens once, completely, and then it is gone — which is precisely why it has been carried, pressed, painted and worn for as long as people have made things at all.</p><p>Our work begins there: not with an ornament that resembles a flower, but with the particular gesture of one. The turn of a petal at its edge. The way a stem carries weight it was never built for.</p>"
+          }
+        },
+        "button": { "type": "button", "settings": { "label": "The philosophy", "style": "outline" } }
+      },
+      "block_order": ["eyebrow", "heading", "lede", "text", "button"],
+      "settings": {
+        "color_scheme": "white",
+        "image_ratio": "portrait",
+        "media_position": "start",
+        "wide_media": true,
+        "padding_top": 112,
+        "padding_bottom": 112
+      }
+    },
+
+    "collections": {
+      "type": "collection-showcase",
+      "blocks": {
+        "one": { "type": "tile", "settings": {} },
+        "two": { "type": "tile", "settings": {} },
+        "three": { "type": "tile", "settings": {} }
+      },
+      "block_order": ["one", "two", "three"],
+      "settings": {
+        "color_scheme": "parchment",
+        "eyebrow": "Collections",
+        "heading": "Where would you like to begin?",
+        "alignment": "split",
+        "link_label": "All collections",
+        "image_ratio": "tall",
+        "show_count": true,
+        "cue_label": "Explore",
+        "padding_top": 112,
+        "padding_bottom": 112
+      }
+    },
+
+    "craft": {
+      "type": "editorial-story",
+      "blocks": {
+        "eyebrow": { "type": "eyebrow", "settings": { "text": "Craft" } },
+        "heading": { "type": "heading", "settings": { "text": "Two hands, two countries" } },
+        "lede": {
+          "type": "lede",
+          "settings": { "text": "Drawn with Italian proportion. Finished with Indian patience." }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A Florève piece passes through more hands than a machine-made one ever could. The line comes first — the restraint of a European drawing table, where a petal is reduced until only its gesture remains.</p><p>Then the work moves to the bench, where setting, finishing and polishing are done slowly, in the way that ornament has been made on the subcontinent for centuries. Neither tradition is decoration for the other. The piece needs both.</p>"
+          }
+        },
+        "details": {
+          "type": "details",
+          "settings": {
+            "label_one": "Drawn in",
+            "value_one": "Italy",
+            "label_two": "Made in",
+            "value_two": "India"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "heading", "lede", "text", "details"],
+      "settings": {
+        "color_scheme": "alt",
+        "image_ratio": "portrait",
+        "media_position": "end",
+        "wide_media": true,
+        "padding_top": 112,
+        "padding_bottom": 112
+      }
+    },
+
+    "chapters": {
+      "type": "craft-chapters",
+      "blocks": {
+        "one": {
+          "type": "chapter",
+          "settings": {
+            "title": "The study",
+            "text": "A flower is photographed, measured and drawn before a single line is committed to metal."
+          }
+        },
+        "two": {
+          "type": "chapter",
+          "settings": {
+            "title": "The bench",
+            "text": "Forms are shaped, soldered and set by hand, one piece at a time."
+          }
+        },
+        "three": {
+          "type": "chapter",
+          "settings": {
+            "title": "The finish",
+            "text": "Surfaces are polished by hand until the light moves across them the way it moves across a petal."
+          }
+        }
+      },
+      "block_order": ["one", "two", "three"],
+      "settings": {
+        "color_scheme": "white",
+        "eyebrow": "The making",
+        "heading": "From a living thing to a lasting one",
+        "alignment": "center",
+        "show_index": true,
+        "image_ratio": "landscape",
+        "padding_top": 112,
+        "padding_bottom": 112
+      }
+    },
+
+    "running-line": {
+      "type": "marquee",
+      "blocks": {
+        "one": { "type": "phrase", "settings": { "text": "Made by hand" } },
+        "two": { "type": "phrase", "settings": { "text": "Drawn from botany" } },
+        "three": { "type": "phrase", "settings": { "text": "Finished in small numbers" } },
+        "four": { "type": "phrase", "settings": { "text": "Italy and India" } }
+      },
+      "block_order": ["one", "two", "three", "four"],
+      "settings": { "color_scheme": "parchment", "speed": 45 }
+    },
+
+    "statement": {
+      "type": "statement",
+      "settings": {
+        "color_scheme": "dark",
+        "show_mark": true,
+        "quote": "Ornament is not decoration. It is the part of us we choose to make visible.",
+        "padding_top": 140,
+        "padding_bottom": 140
+      }
+    },
+
+    "invitation": {
+      "type": "invitation",
+      "settings": {
+        "color_scheme": "alt",
+        "height": "md",
+        "overlay_opacity": 45,
+        "focal_x": 50,
+        "focal_y": 50,
+        "show_mark": true,
+        "eyebrow": "The collection",
+        "heading": "Find the one that is yours",
+        "text": "Every piece is made in small numbers. Take your time — and write to us if you would like to see one in person.",
+        "primary_label": "Explore the collection",
+        "secondary_label": "Write to us"
+      }
+    }
+  },
+
+  "order": [
+    "hero",
+    "manifesto",
+    "signature",
+    "botany",
+    "collections",
+    "craft",
+    "chapters",
+    "running-line",
+    "statement",
+    "invitation"
+  ]
+}

@@ -1,0 +1,109 @@
+{%- comment -%}
+  Variant selection.
+
+  Combinations that do not exist are struck through rather than hidden, so the
+  visitor can always see the full range of a piece and never hits a dead end.
+
+  Accepts:
+  - product:    the product (required)
+  - section_id: the rendering section id (required)
+  - update_url: false inside quick views
+{%- endcomment -%}
+
+{%- unless product.has_only_default_variant -%}
+  <div
+    class="variant-picker"
+    data-variant-picker
+    data-product-id="{{ product.id }}"
+    data-section-id="{{ section_id }}"
+    data-product-url="{{ product.url }}"
+    data-update-url="{% if update_url == false %}false{% else %}true{% endif %}"
+  >
+    <script type="application/json" data-variant-data>
+      [
+        {%- for variant in product.variants -%}
+          {%- comment -%}
+            A bucketed stock status rather than a raw count, so the page never
+            publishes more about the inventory than the visitor needs.
+          {%- endcomment -%}
+          {%- liquid
+            assign threshold = low_threshold | default: 5
+            assign inventory_status = 'in_stock'
+            assign inventory_count = 'null'
+
+            unless variant.available
+              assign inventory_status = 'out'
+            else
+              if variant.inventory_management != blank
+                if variant.inventory_quantity <= 0
+                  assign inventory_status = 'backorder'
+                elsif variant.inventory_quantity <= threshold
+                  assign inventory_status = 'low'
+                  assign inventory_count = variant.inventory_quantity
+                endif
+              endif
+            endunless
+          -%}
+          {
+            "id": {{ variant.id }},
+            "inventory": { "status": {{ inventory_status | json }}, "count": {{ inventory_count }} },
+            "available": {{ variant.available }},
+            "options": {{ variant.options | json }},
+            "price": {{ variant.price }},
+            "compare_at_price": {{ variant.compare_at_price | default: 'null' }},
+            "sku": {{ variant.sku | json }},
+            "featured_media": {% if variant.featured_media %}{ "id": {{ variant.featured_media.id }} }{% else %}null{% endif %},
+            "unit_price": {{ variant.unit_price | default: 'null' }},
+            "unit_price_measurement": {% if variant.unit_price_measurement %}{ "reference_unit": {{ variant.unit_price_measurement.reference_unit | json }}, "reference_value": {{ variant.unit_price_measurement.reference_value }} }{% else %}null{% endif %}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    </script>
+
+    {%- for option in product.options_with_values -%}
+      {%- liquid
+        assign option_index = forloop.index0
+        assign group_id = section_id | append: '-option-' | append: option_index
+      -%}
+      <fieldset class="variant-option" data-option-group>
+        <div class="variant-option__header">
+          <legend class="variant-option__name">{{ option.name }}</legend>
+          <span class="variant-option__value" data-option-selected>{{ option.selected_value }}</span>
+        </div>
+
+        <div class="variant-option__values">
+          {%- for value in option.values -%}
+            {%- liquid
+              assign input_id = group_id | append: '-' | append: forloop.index
+              assign swatch = value.swatch
+            -%}
+            <div class="variant-swatch{% if swatch %} variant-swatch--color{% endif %}">
+              <input
+                type="radio"
+                id="{{ input_id }}"
+                name="{{ group_id }}"
+                value="{{ value | escape }}"
+                data-option-index="{{ option_index }}"
+                {% if option.selected_value == value %}checked{% endif %}
+              >
+              <label
+                for="{{ input_id }}"
+                {% if swatch.color %}
+                  style="--swatch: {{ swatch.color }};"
+                {% elsif swatch.image %}
+                  style="--swatch: url({{ swatch.image | image_url: width: 80 }});"
+                {% endif %}
+              >
+                {%- if swatch -%}
+                  <span class="visually-hidden">{{ value }}</span>
+                {%- else -%}
+                  {{ value }}
+                {%- endif -%}
+              </label>
+            </div>
+          {%- endfor -%}
+        </div>
+      </fieldset>
+    {%- endfor -%}
+  </div>
+{%- endunless -%}

@@ -1,0 +1,138 @@
+{%- comment -%}
+  Product media.
+
+  On small screens the media is always a swipeable, snapping rail. On desktop
+  it becomes either a rail with thumbnails or a stacked editorial column,
+  depending on the section setting.
+
+  Accepts:
+  - product:    the product (required)
+  - section_id: the rendering section id (required)
+  - layout:     'carousel' or 'stacked'
+  - ratio:      'natural', 'square', 'portrait', 'landscape'
+{%- endcomment -%}
+
+{%- liquid
+  assign gallery_layout = layout | default: 'carousel'
+  assign media_items = product.media
+  assign featured = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+
+  case ratio
+    when 'square'
+      assign ratio_value = '1 / 1'
+    when 'portrait'
+      assign ratio_value = '4 / 5'
+    when 'landscape'
+      assign ratio_value = '3 / 2'
+    else
+      assign ratio_value = featured.aspect_ratio | default: 1
+  endcase
+-%}
+
+<div
+  class="product-gallery product-gallery--{{ gallery_layout }}"
+  data-gallery
+  data-section-id="{{ section_id }}"
+  style="--gallery-ratio: {{ ratio_value }};"
+>
+  <div class="product-gallery__stage">
+    <div class="product-gallery__slides" data-gallery-slides>
+      {%- if media_items.size > 0 -%}
+        {%- for media in media_items -%}
+          <div class="product-gallery__slide" data-gallery-slide data-media-id="{{ media.id }}">
+            {%- case media.media_type -%}
+              {%- when 'image' -%}
+                <img
+                  src="{{ media | image_url: width: 1200 }}"
+                  srcset="
+                    {{ media | image_url: width: 500 }} 500w,
+                    {{ media | image_url: width: 800 }} 800w,
+                    {{ media | image_url: width: 1100 }} 1100w,
+                    {{ media | image_url: width: 1500 }} 1500w,
+                    {{ media | image_url: width: 1900 }} 1900w
+                  "
+                  sizes="(min-width: 990px) 55vw, 100vw"
+                  data-full="{{ media | image_url: width: 2000 }}"
+                  alt="{{ media.alt | default: product.title | escape }}"
+                  width="{{ media.width }}"
+                  height="{{ media.height }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  {% if forloop.first %}fetchpriority="high"{% endif %}
+                >
+
+              {%- when 'external_video' -%}
+                <div class="product-gallery__video">
+                  {{ media | external_video_tag: loading: 'lazy', title: media.alt }}
+                </div>
+
+              {%- when 'video' -%}
+                {{ media | video_tag: controls: true, preload: 'metadata', image_size: '1200x' }}
+
+              {%- when 'model' -%}
+                {{ media | model_viewer_tag: reveal: 'interaction', toggleable: true }}
+
+              {%- else -%}
+                {{ media | media_tag }}
+            {%- endcase -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="product-gallery__slide" data-gallery-slide>
+          <div class="placeholder-media" style="aspect-ratio: 1 / 1;">
+            {{ 'product-1' | placeholder_svg_tag }}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if media_items.size > 0 -%}
+      <button
+        type="button"
+        class="product-gallery__zoom"
+        data-gallery-open
+        aria-label="{{ 'products.product.open_media' | t }}"
+      >
+        {% render 'icon', name: 'zoom' %}
+      </button>
+    {%- endif -%}
+  </div>
+
+  {%- if media_items.size > 1 -%}
+    <div class="product-gallery__dots" role="tablist" aria-label="{{ 'products.product.media_gallery' | t }}">
+      {%- for media in media_items -%}
+        <button
+          type="button"
+          class="product-gallery__dot"
+          data-gallery-dot
+          data-index="{{ forloop.index0 }}"
+          role="tab"
+          aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-label="{{ 'general.accessibility.select_image' | t: number: forloop.index }}"
+        ></button>
+      {%- endfor -%}
+    </div>
+
+    <div class="product-gallery__thumbs" role="tablist" aria-label="{{ 'products.product.media_gallery' | t }}">
+      {%- for media in media_items -%}
+        <button
+          type="button"
+          class="product-gallery__thumb"
+          data-gallery-thumb
+          data-index="{{ forloop.index0 }}"
+          role="tab"
+          aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-label="{{ 'general.accessibility.select_image' | t: number: forloop.index }}"
+        >
+          <img
+            src="{{ media.preview_image | image_url: width: 160 }}"
+            srcset="{{ media.preview_image | image_url: width: 160 }} 1x, {{ media.preview_image | image_url: width: 320 }} 2x"
+            alt=""
+            width="80"
+            height="80"
+            loading="lazy"
+          >
+        </button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>

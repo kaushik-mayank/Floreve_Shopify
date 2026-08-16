@@ -1,0 +1,82 @@
+{%- paginate customer.addresses by 6 -%}
+  <section class="section">
+    <div class="page-width">
+      <div class="customer customer--wide">
+        <div class="section-header section-header--split">
+          <div class="section-header__text">
+            <span class="eyebrow eyebrow--ruled">{{ customer.name }}</span>
+            <h1 class="section-header__title">{{ 'customer.addresses.title' | t }}</h1>
+          </div>
+          <a href="{{ routes.account_url }}" class="link link--muted">{{ 'customer.account.return' | t }}</a>
+        </div>
+
+        <div class="accordion" style="margin-bottom: var(--space-lg);">
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              {{ 'customer.addresses.add_new' | t }}
+              <span class="accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="accordion__panel">
+              {%- form 'customer_address', customer.new_address, class: 'customer__form' -%}
+                {% render 'address-fields', form: form, prefix: 'new' %}
+                <button type="submit" class="btn btn--primary" style="align-self: flex-start;">
+                  <span class="btn__label">{{ 'customer.addresses.add' | t }}</span>
+                </button>
+              {%- endform -%}
+            </div>
+          </details>
+        </div>
+
+        {%- if customer.addresses.size > 0 -%}
+          <div class="grid" style="--cols: 1; --cols-md: 2; --cols-lg: 3; align-items: start;">
+            {%- for address in customer.addresses -%}
+              <div style="border: 1px solid var(--scheme-rule); padding: var(--space-md);">
+                {%- if address == customer.default_address -%}
+                  <span class="badge" style="margin-bottom: 0.75rem;">{{ 'customer.addresses.default' | t }}</span>
+                {%- endif -%}
+
+                <div class="rte" style="font-size: var(--fs-body-sm);">{{ address | format_address }}</div>
+
+                <div class="accordion" style="margin-top: var(--space-sm);">
+                  <details class="accordion__item" style="border-bottom: 0;">
+                    <summary class="accordion__summary" style="padding-block: 0.75rem;">
+                      {{ 'customer.addresses.edit' | t }}
+                      <span class="accordion__icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="accordion__panel">
+                      {%- form 'customer_address', address, class: 'customer__form' -%}
+                        {%- assign address_prefix = 'address-' | append: address.id -%}
+                        {% render 'address-fields', form: form, prefix: address_prefix, address: address %}
+
+                        <button type="submit" class="btn btn--primary btn--small" style="align-self: flex-start;">
+                          <span class="btn__label">{{ 'customer.addresses.update' | t }}</span>
+                        </button>
+                      {%- endform -%}
+
+                      {%- comment -%}
+                        Deletion is its own form so it is a real POST rather than a
+                        link, and so it never nests inside the edit form.
+                      {%- endcomment -%}
+                      <form method="post" action="{{ address.url }}" style="margin-top: 0.75rem;">
+                        <input type="hidden" name="_method" value="delete">
+                        <button
+                          type="submit"
+                          class="btn btn--outline btn--small"
+                          data-confirm="{{ 'customer.addresses.delete_confirm' | t | escape }}"
+                        >
+                          <span class="btn__label">{{ 'customer.addresses.delete' | t }}</span>
+                        </button>
+                      </form>
+                    </div>
+                  </details>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          {% render 'pagination', paginate: paginate %}
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endpaginate -%}

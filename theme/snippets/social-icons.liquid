@@ -1,0 +1,39 @@
+{%- comment -%}
+  Renders only the networks the merchant has actually filled in.
+{%- endcomment -%}
+
+{%- liquid
+  assign networks = 'instagram,facebook,pinterest,youtube,tiktok' | split: ','
+  assign has_any = false
+  for network in networks
+    assign key = 'social_' | append: network
+    if settings[key] != blank
+      assign has_any = true
+      break
+    endif
+  endfor
+-%}
+
+{%- if has_any -%}
+  <ul class="social" role="list">
+    {%- for network in networks -%}
+      {%- liquid
+        assign key = 'social_' | append: network
+        assign url = settings[key]
+      -%}
+      {%- if url != blank -%}
+        <li>
+          <a
+            href="{{ url }}"
+            class="social__link"
+            target="_blank"
+            rel="noopener"
+            aria-label="{{ network | capitalize }} ({{ 'general.accessibility.link_opens_new_window' | t }})"
+          >
+            {% render 'icon', name: network %}
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

@@ -1,0 +1,56 @@
+{%- comment -%}
+  Accepts:
+  - paginate: the paginate object (required)
+  - ajax:     true to let the facets script swap results in place
+{%- endcomment -%}
+
+{%- if paginate.pages > 1 -%}
+  <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+    {%- if paginate.previous -%}
+      <a
+        href="{{ paginate.previous.url }}"
+        class="pagination__item"
+        aria-label="{{ 'general.pagination.previous' | t }}"
+        {% if ajax %}data-pagination-link{% endif %}
+      >
+        {% render 'icon', name: 'chevron-left' %}
+      </a>
+    {%- else -%}
+      <span class="pagination__item pagination__item--disabled" aria-hidden="true">
+        {% render 'icon', name: 'chevron-left' %}
+      </span>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <a
+          href="{{ part.url }}"
+          class="pagination__item"
+          aria-label="{{ 'general.accessibility.page' | t: number: part.title }}"
+          {% if ajax %}data-pagination-link{% endif %}
+        >
+          {{ part.title }}
+        </a>
+      {%- elsif part.title == paginate.current_page -%}
+        <span class="pagination__item" aria-current="page">{{ part.title }}</span>
+      {%- else -%}
+        <span class="pagination__item pagination__item--disabled">{{ part.title }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <a
+        href="{{ paginate.next.url }}"
+        class="pagination__item"
+        aria-label="{{ 'general.pagination.next' | t }}"
+        {% if ajax %}data-pagination-link{% endif %}
+      >
+        {% render 'icon', name: 'chevron-right' %}
+      </a>
+    {%- else -%}
+      <span class="pagination__item pagination__item--disabled" aria-hidden="true">
+        {% render 'icon', name: 'chevron-right' %}
+      </span>
+    {%- endif -%}
+  </nav>
+{%- endif -%}

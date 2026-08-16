@@ -1,0 +1,147 @@
+{%- liquid
+  if section.settings.source == 'all'
+    assign collection_list = collections
+  else
+    assign collection_list = section.settings.list.collections
+  endif
+-%}
+
+<section
+  class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="section-header section-header--center reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1 class="section-header__title">{{ section.settings.heading | default: page_title }}</h1>
+      {%- if section.settings.text != blank -%}
+        <p class="lede">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="grid" style="--cols: 1; --cols-md: 2; --cols-lg: {{ section.settings.columns }};">
+      {%- for list_collection in collection_list -%}
+        {%- if list_collection.products_count == 0 and section.settings.hide_empty -%}
+          {%- continue -%}
+        {%- endif -%}
+
+        <a
+          href="{{ list_collection.url }}"
+          class="collection-tile media--{{ section.settings.image_ratio }} reveal"
+          style="--reveal-delay: {{ forloop.index0 | modulo: 3 | times: 80 }}ms;"
+        >
+          {%- if list_collection.featured_image -%}
+            <div class="media{% if settings.enable_image_zoom %} media--zoom{% endif %}" style="position: absolute; inset: 0;">
+              <img
+                src="{{ list_collection.featured_image | image_url: width: 900 }}"
+                srcset="{{ list_collection.featured_image | image_url: width: 500 }} 500w, {{ list_collection.featured_image | image_url: width: 900 }} 900w"
+                sizes="(min-width: 990px) 30vw, (min-width: 750px) 45vw, 100vw"
+                alt=""
+                width="{{ list_collection.featured_image.width }}"
+                height="{{ list_collection.featured_image.height }}"
+                loading="lazy"
+              >
+            </div>
+          {%- else -%}
+            <div class="placeholder-media" style="position: absolute; inset: 0;">
+              {{ 'collection-1' | placeholder_svg_tag }}
+            </div>
+          {%- endif -%}
+
+          <span class="collection-tile__scrim" aria-hidden="true"></span>
+
+          <span class="collection-tile__content">
+            <span class="collection-tile__title">{{ list_collection.title }}</span>
+            <span class="collection-tile__count">
+              {{ 'collections.general.items_with_count' | t: count: list_collection.products_count }}
+            </span>
+            <span class="collection-tile__cue">
+              {{ section.settings.cue_label }}
+              {% render 'icon', name: 'arrow-right' %}
+            </span>
+          </span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" }
+      ],
+      "default": "parchment"
+    },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Which collections",
+      "options": [
+        { "value": "all", "label": "All collections" },
+        { "value": "list", "label": "A chosen list" }
+      ],
+      "default": "all"
+    },
+    { "type": "collection_list", "id": "list", "label": "Collections", "limit": 12 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The collections" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Tile shape",
+      "options": [
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "square", "label": "Square" },
+        { "value": "tall", "label": "Tall" },
+        { "value": "landscape", "label": "Landscape" }
+      ],
+      "default": "portrait"
+    },
+    { "type": "checkbox", "id": "hide_empty", "label": "Hide collections with no pieces", "default": true },
+    { "type": "text", "id": "cue_label", "label": "Hover cue", "default": "Explore" },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 96
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,80 @@
+{
+  "sections": {
+    "heading": {
+      "type": "rich-text",
+      "blocks": {
+        "eyebrow": { "type": "eyebrow", "settings": { "text": "Client care" } },
+        "heading": { "type": "heading", "settings": { "text": "How may we help?", "size": "h1" } },
+        "lede": {
+          "type": "lede",
+          "settings": {
+            "text": "Whether it is a question of size, a request for photographs, or a piece made to order, a member of the atelier will answer you."
+          }
+        }
+      },
+      "block_order": ["eyebrow", "heading", "lede"],
+      "settings": {
+        "color_scheme": "parchment",
+        "width": "narrow",
+        "alignment": "center",
+        "padding_top": 88,
+        "padding_bottom": 24
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "blocks": {
+        "email": { "type": "detail", "settings": { "label": "Email", "value": "" } },
+        "hours": { "type": "detail", "settings": { "label": "Replies", "value": "Within two working days" } }
+      },
+      "block_order": ["email", "hours"],
+      "settings": {
+        "color_scheme": "parchment",
+        "eyebrow": "",
+        "heading": "Write to the atelier",
+        "text": "<p>Questions about a piece, a size, or a commission — we answer every message personally.</p>",
+        "show_phone": false,
+        "button_label": "Send",
+        "padding_top": 40,
+        "padding_bottom": 96
+      }
+    },
+    "questions": {
+      "type": "faq",
+      "blocks": {
+        "one": {
+          "type": "question",
+          "settings": {
+            "question": "How should I care for my piece?",
+            "answer": "<p>Describe the care your materials actually need.</p>"
+          }
+        },
+        "two": {
+          "type": "question",
+          "settings": {
+            "question": "Can a piece be made to order?",
+            "answer": "<p>Explain what you are able to offer, and how long it takes.</p>"
+          }
+        },
+        "three": {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>State your real dispatch and delivery times.</p>"
+          }
+        }
+      },
+      "block_order": ["one", "two", "three"],
+      "settings": {
+        "color_scheme": "alt",
+        "layout": "split",
+        "eyebrow": "Before you write",
+        "heading": "Questions we are often asked",
+        "link_label": "",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["heading", "form", "questions"]
+}

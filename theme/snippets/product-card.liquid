@@ -1,0 +1,174 @@
+{%- comment -%}
+  Product card.
+
+  Badges are only ever drawn from real Shopify data: availability, a genuine
+  compare-at price, or a merchant-applied tag in the form `badge:Made to order`.
+  Nothing here invents scarcity or popularity.
+
+  Accepts:
+  - product:        the product (required)
+  - index:          position in the grid, used to prioritise the first images
+  - show_quick_add: override the theme setting
+  - image_ratio:    override the theme setting
+  - sizes:          override the responsive sizes attribute
+{%- endcomment -%}
+
+{%- liquid
+  assign ratio = image_ratio | default: settings.card_image_ratio
+  assign fit = settings.card_image_fit
+  assign quick_add = show_quick_add
+  if quick_add == nil
+    assign quick_add = settings.card_quick_add
+  endif
+
+  assign image_sizes = sizes | default: '(min-width: 1200px) 22vw, (min-width: 750px) 30vw, 45vw'
+  assign eager = false
+  if index and index < 4
+    assign eager = true
+  endif
+
+  assign primary = product.featured_media
+  assign secondary = product.media[1]
+  if settings.card_hover_image == false
+    assign secondary = nil
+  endif
+
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+
+  assign variant = product.selected_or_first_available_variant
+  assign single_variant = false
+  if product.variants.size == 1
+    assign single_variant = true
+  endif
+-%}
+
+<div class="product-card{% unless product.available %} product-card--sold-out{% endunless %}">
+  {%- comment -%}
+    A natural ratio is applied inline rather than through the media--natural
+    class, which would take the stacked images out of their absolute position.
+  {%- endcomment -%}
+  <div
+    class="product-card__media-wrap{% unless ratio == 'natural' %} media--{{ ratio }}{% endunless %}{% if fit == 'contain' %} product-card__media-wrap--contain{% endif %}"
+    {% if ratio == 'natural' %}style="aspect-ratio: {{ primary.aspect_ratio | default: 1 }};"{% endif %}
+  >
+    {%- if primary -%}
+      <img
+        src="{{ primary | image_url: width: 800 }}"
+        srcset="
+          {{ primary | image_url: width: 300 }} 300w,
+          {{ primary | image_url: width: 500 }} 500w,
+          {{ primary | image_url: width: 700 }} 700w,
+          {{ primary | image_url: width: 900 }} 900w,
+          {{ primary | image_url: width: 1200 }} 1200w
+        "
+        sizes="{{ image_sizes }}"
+        alt="{{ primary.alt | default: product.title | escape }}"
+        width="{{ primary.width }}"
+        height="{{ primary.height }}"
+        class="product-card__media product-card__media--primary{% if secondary %} has-secondary{% endif %}{% if settings.enable_image_zoom and secondary == nil %} product-card__media--zoom{% endif %}"
+        loading="{% if eager %}eager{% else %}lazy{% endif %}"
+        {% if eager %}fetchpriority="high"{% endif %}
+      >
+
+      {%- if secondary -%}
+        <img
+          src="{{ secondary | image_url: width: 800 }}"
+          srcset="
+            {{ secondary | image_url: width: 300 }} 300w,
+            {{ secondary | image_url: width: 500 }} 500w,
+            {{ secondary | image_url: width: 700 }} 700w,
+            {{ secondary | image_url: width: 900 }} 900w
+          "
+          sizes="{{ image_sizes }}"
+          alt=""
+          width="{{ secondary.width }}"
+          height="{{ secondary.height }}"
+          class="product-card__media product-card__media--secondary"
+          loading="lazy"
+          aria-hidden="true"
+        >
+      {%- endif -%}
+    {%- else -%}
+      <div class="product-card__media placeholder-media">
+        {{ 'product-1' | placeholder_svg_tag }}
+      </div>
+    {%- endif -%}
+
+    {%- liquid
+      assign badge_tag = ''
+      for tag in product.tags
+        if tag contains 'badge:'
+          assign badge_tag = tag | remove_first: 'badge:' | strip
+          break
+        endif
+      endfor
+    -%}
+
+    {%- if product.available == false or on_sale or badge_tag != blank -%}
+      <div class="product-card__badges">
+        {%- unless product.available -%}
+          <span class="badge badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
+        {%- endunless -%}
+        {%- if on_sale and product.available -%}
+          <span class="badge badge--sale">{{ 'products.product.on_sale' | t }}</span>
+        {%- endif -%}
+        {%- if badge_tag != blank -%}
+          <span class="badge">{{ badge_tag }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if quick_add and product.available -%}
+      <div class="product-card__quick-add">
+        {%- if single_variant -%}
+          {%- liquid
+            assign card_index = index | default: 0
+            assign quick_add_id = 'quick-add-' | append: product.id | append: '-' | append: card_index
+          -%}
+          {%- form 'product', product, id: quick_add_id, class: 'quick-add-form js-product-form' -%}
+            <input type="hidden" name="id" value="{{ variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="btn btn--small btn--full" data-add-to-cart>
+              <span class="btn__label">{{ 'sections.quick_add.add' | t }}</span>
+            </button>
+            <p class="field__error" data-form-error hidden></p>
+          {%- endform -%}
+        {%- else -%}
+          <a href="{{ product.url }}" class="btn btn--small btn--full">
+            <span class="btn__label">{{ 'sections.quick_add.choose_options' | t }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="product-card__info">
+    {%- if settings.card_show_vendor and product.vendor != blank -%}
+      <span class="product-card__vendor">{{ product.vendor }}</span>
+    {%- endif -%}
+
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}" class="product-card__link">{{ product.title | escape }}</a>
+    </h3>
+
+    {% render 'price', product: product, show_from: true %}
+
+    {%- if settings.card_show_swatches and product.has_only_default_variant == false -%}
+      {%- liquid
+        assign option_note = ''
+        for option in product.options_with_values
+          if option.values.size > 1
+            assign option_note = option.values.size | append: ' ' | append: option.name | downcase
+            break
+          endif
+        endfor
+      -%}
+      {%- if option_note != blank -%}
+        <span class="product-card__options">{{ option_note }}</span>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>

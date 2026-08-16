@@ -1,0 +1,76 @@
+{%- liquid
+  assign items = section.blocks | where: 'type', 'phrase'
+-%}
+
+{%- if items.size > 0 -%}
+  <section class="scheme scheme--{{ section.settings.color_scheme }}">
+    <div class="marquee" style="--marquee-duration: {{ section.settings.speed }}s;">
+      {%- comment -%}
+        The track is rendered twice so the loop meets itself without a gap. The
+        second copy is hidden from assistive technology.
+      {%- endcomment -%}
+      {%- for pass in (1..2) -%}
+        <div class="marquee__track" {% if pass == 2 %}aria-hidden="true"{% endif %}>
+          {%- for block in items -%}
+            <span class="marquee__item" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+              <span class="marquee__dot" aria-hidden="true">&mdash;</span>
+            </span>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Running line",
+  "tag": "div",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "alt", "label": "Warm parchment" },
+        { "value": "dark", "label": "Atelier black" },
+        { "value": "sage", "label": "Botanical sage" }
+      ],
+      "default": "parchment"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 20,
+      "max": 90,
+      "step": 5,
+      "unit": "s",
+      "label": "Seconds for one pass",
+      "default": 45,
+      "info": "Slower reads as more considered. The line pauses on hover and stops entirely for visitors who prefer reduced motion."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "phrase",
+      "name": "Phrase",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Phrase", "default": "Made by hand" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Running line",
+      "blocks": [
+        { "type": "phrase", "settings": { "text": "Made by hand" } },
+        { "type": "phrase", "settings": { "text": "Drawn from botany" } },
+        { "type": "phrase", "settings": { "text": "Finished in small numbers" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

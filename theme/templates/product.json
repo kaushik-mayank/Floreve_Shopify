@@ -1,0 +1,74 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "show_vendor": false } },
+        "price": { "type": "price", "settings": { "tax_note": "" } },
+        "inventory": { "type": "inventory", "settings": {} },
+        "short_description": { "type": "short_description", "settings": {} },
+        "variant_picker": { "type": "variant_picker", "settings": {} },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": { "show_quantity": true, "show_dynamic_checkout": true }
+        },
+        "assurances": { "type": "assurances", "settings": {} },
+        "description": {
+          "type": "description",
+          "settings": { "collapsible": true, "heading": "Description" }
+        },
+        "materials": {
+          "type": "metafield_accordion",
+          "settings": {
+            "heading": "Materials and measurements",
+            "namespace": "custom",
+            "key": "materials"
+          }
+        },
+        "care": {
+          "type": "metafield_accordion",
+          "settings": { "heading": "Care", "namespace": "custom", "key": "care" }
+        },
+        "meta": { "type": "meta", "settings": { "show_sku": true, "show_type": false } },
+        "share": { "type": "share", "settings": {} }
+      },
+      "block_order": [
+        "heading",
+        "price",
+        "inventory",
+        "short_description",
+        "variant_picker",
+        "buy_buttons",
+        "assurances",
+        "description",
+        "materials",
+        "care",
+        "meta",
+        "share"
+      ],
+      "settings": {
+        "color_scheme": "parchment",
+        "show_breadcrumb": true,
+        "show_buy_bar": true,
+        "low_stock_threshold": 5,
+        "gallery_layout": "carousel",
+        "gallery_ratio": "square",
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "color_scheme": "alt",
+        "heading": "Complete the composition",
+        "alignment": "center",
+        "products_to_show": 4,
+        "mobile_layout": "rail",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["main", "recommendations"]
+}

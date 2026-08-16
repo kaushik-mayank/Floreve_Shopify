@@ -1,0 +1,156 @@
+{%- paginate search.results by section.settings.results_per_page -%}
+  <section
+    class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+    style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+  >
+    <div class="page-width">
+      <div class="section-header section-header--center">
+        <span class="eyebrow">{{ 'general.search.search' | t }}</span>
+        <h1 class="section-header__title">
+          {%- if search.terms != blank -%}
+            {{ 'general.search.results_for' | t: terms: search.terms }}
+          {%- else -%}
+            {{ 'general.search.search' | t }}
+          {%- endif -%}
+        </h1>
+      </div>
+
+      <form action="{{ routes.search_url }}" method="get" role="search" style="max-width: 34rem; margin: 0 auto clamp(2rem, 5vw, 4rem);">
+        <div class="field">
+          <input
+            type="search"
+            id="search-page-input"
+            name="q"
+            class="field__input"
+            value="{{ search.terms | escape }}"
+            placeholder=" "
+          >
+          <label class="field__label" for="search-page-input">{{ 'general.search.placeholder' | t }}</label>
+        </div>
+        <input type="hidden" name="options[prefix]" value="last">
+      </form>
+
+      {%- if search.performed -%}
+        {%- if search.results_count > 0 -%}
+          {% render 'facets',
+            results: search,
+            enable_filter: section.settings.enable_filtering,
+            enable_sort: section.settings.enable_sorting
+          %}
+
+          <div data-collection-results aria-live="polite">
+            <div
+              class="product-grid"
+              style="--grid-cols-lg: {{ section.settings.columns }}; --grid-cols-md: 3; --grid-cols-sm: 2;"
+            >
+              {%- for item in search.results -%}
+                <div class="reveal">
+                  {%- case item.object_type -%}
+                    {%- when 'product' -%}
+                      {% render 'product-card', product: item, index: forloop.index0 %}
+
+                    {%- when 'article' -%}
+                      <a href="{{ item.url }}" class="article-card">
+                        {%- if item.image -%}
+                          <div class="media media--landscape">
+                            <img
+                              src="{{ item.image | image_url: width: 700 }}"
+                              alt="{{ item.image.alt | escape }}"
+                              width="{{ item.image.width }}"
+                              height="{{ item.image.height }}"
+                              loading="lazy"
+                            >
+                          </div>
+                        {%- endif -%}
+                        <span class="article__meta">{{ 'general.search.articles' | t }}</span>
+                        <h3 class="article-card__title">{{ item.title }}</h3>
+                      </a>
+
+                    {%- else -%}
+                      <a href="{{ item.url }}" class="article-card">
+                        <span class="article__meta">{{ 'general.search.pages' | t }}</span>
+                        <h3 class="article-card__title">{{ item.title }}</h3>
+                      </a>
+                  {%- endcase -%}
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {% render 'pagination', paginate: paginate, ajax: true %}
+          </div>
+
+        {%- else -%}
+          <div class="collection-empty">
+            {% render 'calyx', size: '3rem', opacity: '0.5' %}
+            <p class="h3">{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+            <p class="text-body">{{ 'general.search.no_results_help' | t }}</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline">
+              <span class="btn__label">{{ 'collections.general.browse' | t }}</span>
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Search results",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" }
+      ],
+      "default": "parchment"
+    },
+    {
+      "type": "range",
+      "id": "results_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "label": "Results per page",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    { "type": "checkbox", "id": "enable_filtering", "label": "Enable filtering", "default": true },
+    { "type": "checkbox", "id": "enable_sorting", "label": "Enable sorting", "default": true },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 96
+    }
+  ]
+}
+{% endschema %}

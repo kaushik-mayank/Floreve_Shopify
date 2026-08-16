@@ -1,0 +1,85 @@
+{%- comment -%}
+  Hairline icon set. One stroke weight throughout — the same restraint the
+  calyx mark is drawn with.
+
+  Accepts:
+  - name:  icon key (required)
+  - class: extra classes
+{%- endcomment -%}
+
+<svg
+  class="icon icon--{{ name }}{% if class %} {{ class }}{% endif %}"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+{%- case name -%}
+  {%- when 'search' -%}
+    <circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 21 21"/>
+  {%- when 'close' -%}
+    <path d="M5 5l14 14M19 5L5 19"/>
+  {%- when 'bag' -%}
+    <path d="M4.5 7.5h15l-1 12.5h-13z"/><path d="M8.75 10V6.75a3.25 3.25 0 0 1 6.5 0V10"/>
+  {%- when 'account' -%}
+    <circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.2-3.9 4-6 7.5-6s6.3 2.1 7.5 6"/>
+  {%- when 'menu' -%}
+    <path d="M3 7h18M3 12h18M3 17h18"/>
+  {%- when 'chevron-down' -%}
+    <path d="M5 9l7 7 7-7"/>
+  {%- when 'chevron-up' -%}
+    <path d="M5 15l7-7 7 7"/>
+  {%- when 'chevron-left' -%}
+    <path d="M15 5l-7 7 7 7"/>
+  {%- when 'chevron-right' -%}
+    <path d="M9 5l7 7-7 7"/>
+  {%- when 'arrow-right' -%}
+    <path d="M3 12h18M15 6l6 6-6 6"/>
+  {%- when 'arrow-left' -%}
+    <path d="M21 12H3M9 6l-6 6 6 6"/>
+  {%- when 'minus' -%}
+    <path d="M5 12h14"/>
+  {%- when 'plus' -%}
+    <path d="M12 5v14M5 12h14"/>
+  {%- when 'check' -%}
+    <path d="M4 12.5l5 5L20 6.5"/>
+  {%- when 'zoom' -%}
+    <circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 21 21M8 10.5h5M10.5 8v5"/>
+  {%- when 'shipping' -%}
+    <path d="M2.5 6.5h11v10h-11z"/><path d="M13.5 10h4l4 3.5v3h-8z"/><circle cx="7" cy="18.5" r="1.8"/><circle cx="17" cy="18.5" r="1.8"/>
+  {%- when 'return' -%}
+    <path d="M4 9h11a5 5 0 0 1 0 10H8"/><path d="M7.5 5.5 4 9l3.5 3.5"/>
+  {%- when 'gift' -%}
+    <path d="M3.5 9.5h17v3h-17zM5 12.5h14v8H5z"/><path d="M12 9.5v11"/><path d="M12 9.5S10.6 4 8.2 4a2.2 2.2 0 0 0 0 5.5zM12 9.5S13.4 4 15.8 4a2.2 2.2 0 0 1 0 5.5z"/>
+  {%- when 'shield' -%}
+    <path d="M12 3l7.5 3v6c0 4.3-3 8-7.5 9.5C7.5 20 4.5 16.3 4.5 12V6z"/><path d="M9 12l2 2 4-4"/>
+  {%- when 'atelier' -%}
+    <path d="M4 20V9.5L12 4l8 5.5V20"/><path d="M9.5 20v-6h5v6"/>
+  {%- when 'certificate' -%}
+    <circle cx="12" cy="9.5" r="5.5"/><path d="M8.5 14 7 21l5-2.4L17 21l-1.5-7"/>
+  {%- when 'filter' -%}
+    <path d="M3 6h18M6 12h12M10 18h4"/>
+  {%- when 'grid' -%}
+    <path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/>
+  {%- when 'instagram' -%}
+    <rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".9" fill="currentColor" stroke="none"/>
+  {%- when 'facebook' -%}
+    <path d="M14.5 8.5h2.2V5.4h-2.6c-2.3 0-3.7 1.5-3.7 3.9v1.6H8.2v3.1h2.2V21h3.3v-7h2.4l.4-3.1h-2.8V9.6c0-.8.3-1.1.8-1.1z" fill="currentColor" stroke="none"/>
+  {%- when 'pinterest' -%}
+    <path d="M12 3.5a8.5 8.5 0 0 0-3.1 16.4c-.1-.7-.1-1.8.02-2.6l1.05-4.4s-.27-.54-.27-1.33c0-1.25.72-2.18 1.62-2.18.77 0 1.14.57 1.14 1.26 0 .77-.49 1.92-.74 2.98-.21.9.45 1.63 1.33 1.63 1.6 0 2.83-1.69 2.83-4.12 0-2.15-1.55-3.66-3.76-3.66-2.56 0-4.06 1.92-4.06 3.9 0 .77.3 1.6.67 2.05a.27.27 0 0 1 .06.26l-.25 1.03c-.04.17-.13.2-.3.12-1.13-.53-1.83-2.18-1.83-3.5 0-2.85 2.07-5.47 5.97-5.47 3.13 0 5.57 2.23 5.57 5.22 0 3.11-1.96 5.62-4.69 5.62-.91 0-1.77-.48-2.07-1.04l-.56 2.15c-.2.78-.75 1.76-1.12 2.36A8.5 8.5 0 1 0 12 3.5z" fill="currentColor" stroke="none"/>
+  {%- when 'youtube' -%}
+    <rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.5 9.5l5 2.5-5 2.5z" fill="currentColor" stroke="none"/>
+  {%- when 'tiktok' -%}
+    <path d="M14.2 3h2.6a4.9 4.9 0 0 0 4.2 4.2v2.6a7.4 7.4 0 0 1-4.2-1.4v6.1a5.9 5.9 0 1 1-5.9-5.9c.3 0 .6 0 .9.06v2.7a3.2 3.2 0 1 0 2.4 3.1z" fill="currentColor" stroke="none"/>
+  {%- when 'play' -%}
+    <circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/>
+  {%- when 'alert' -%}
+    <circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.2v.1"/>
+  {%- else -%}
+    <circle cx="12" cy="12" r="9"/>
+{%- endcase -%}
+</svg>

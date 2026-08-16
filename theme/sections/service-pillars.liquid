@@ -1,0 +1,143 @@
+<section
+  class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      {% render 'section-header', eyebrow: section.settings.eyebrow, heading: section.settings.heading, alignment: 'center' %}
+    {%- endif -%}
+
+    <div class="services" style="--service-cols: {{ section.blocks.size | at_most: 4 | at_least: 1 }};">
+      {%- for block in section.blocks -%}
+        <div class="service reveal" style="--reveal-delay: {{ forloop.index0 | times: 80 }}ms;" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != 'none' -%}
+            <span class="service__icon">{% render 'icon', name: block.settings.icon %}</span>
+          {%- endif -%}
+          <h3 class="service__title">{{ block.settings.title }}</h3>
+          <p class="service__text">{{ block.settings.text }}</p>
+          {%- if block.settings.link_label != blank and block.settings.link_url != blank -%}
+            <a href="{{ block.settings.link_url }}" class="link" style="align-self: flex-start; margin-top: 0.35rem;">
+              {{ block.settings.link_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Service pillars",
+  "tag": "div",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Use this for facts you can stand behind. Link each pillar to the policy or page that explains it."
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" },
+        { "value": "dark", "label": "Atelier black" }
+      ],
+      "default": "parchment"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "atelier", "label": "Atelier" },
+            { "value": "gift", "label": "Presentation box" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "return", "label": "Returns" },
+            { "value": "shield", "label": "Secure" },
+            { "value": "certificate", "label": "Certificate" }
+          ],
+          "default": "atelier"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Made by hand" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Every piece is assembled and finished by a person, not a machine."
+        },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link_url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service pillars",
+      "blocks": [
+        { "type": "pillar", "settings": { "icon": "atelier", "title": "Made by hand" } },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "gift",
+            "title": "Presented to keep",
+            "text": "Each order arrives in a box designed to outlast the occasion."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "shipping",
+            "title": "Shipped worldwide",
+            "text": "Tracked and insured from the atelier to your door."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "return",
+            "title": "Considered returns",
+            "text": "Change your mind within the window set out in our policy."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,43 @@
+{%- comment -%}
+  Accepts:
+  - id:    input id (required, must be unique)
+  - name:  input name, defaults to "quantity"
+  - value: starting quantity
+  - min / max
+  - label: accessible label
+  - line:  cart line index, when used inside the bag
+{%- endcomment -%}
+
+<div class="quantity">
+  <button
+    type="button"
+    class="quantity__button"
+    data-quantity-change="down"
+    aria-label="{{ 'products.product.decrease_quantity' | t: title: label }}"
+  >
+    {% render 'icon', name: 'minus' %}
+  </button>
+
+  <label class="visually-hidden" for="{{ id }}">{{ 'products.product.quantity_for' | t: title: label }}</label>
+  <input
+    class="quantity__input"
+    type="number"
+    id="{{ id }}"
+    name="{{ name | default: 'quantity' }}"
+    value="{{ value | default: 1 }}"
+    min="{{ min | default: 1 }}"
+    {% if max %}max="{{ max }}"{% endif %}
+    step="1"
+    inputmode="numeric"
+    {% if line %}data-cart-quantity data-line="{{ line }}"{% endif %}
+  >
+
+  <button
+    type="button"
+    class="quantity__button"
+    data-quantity-change="up"
+    aria-label="{{ 'products.product.increase_quantity' | t: title: label }}"
+  >
+    {% render 'icon', name: 'plus' %}
+  </button>
+</div>

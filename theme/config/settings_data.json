@@ -1,0 +1,59 @@
+{
+  "current": {
+    "logo_width": 150,
+    "logo_width_mobile": 108,
+
+    "color_background": "#FAF7F2",
+    "color_surface": "#FFFFFF",
+    "color_surface_alt": "#F0EAE0",
+    "color_dark": "#1A1814",
+    "color_ink": "#1A1814",
+    "color_body": "#7A7468",
+    "color_muted": "#C5BFB7",
+    "color_gold": "#B8975A",
+    "color_gold_pale": "#E8D5A3",
+    "color_sage": "#4D5A49",
+    "color_blush": "#E8D0C4",
+    "color_error": "#9B4A3B",
+    "color_success": "#4D5A49",
+
+    "font_heading": "cormorant_garamond_n4",
+    "heading_scale": 100,
+    "heading_tracking": 4,
+    "font_body": "montserrat_n4",
+    "body_scale": 100,
+    "label_tracking": 34,
+
+    "page_width": 1440,
+    "section_spacing": 100,
+    "grid_gap": 32,
+    "radius": 0,
+
+    "card_image_ratio": "portrait",
+    "card_image_fit": "contain",
+    "card_hover_image": true,
+    "card_quick_add": true,
+    "card_show_vendor": false,
+    "card_show_swatches": true,
+
+    "cart_type": "drawer",
+    "cart_notes": true,
+    "cart_show_dynamic_checkout": true,
+    "cart_note_label": "Add a note or engraving request",
+
+    "enable_reveal": true,
+    "enable_image_zoom": true,
+
+    "predictive_search": true,
+    "predictive_search_collections": true,
+    "predictive_search_pages": true,
+
+    "social_instagram": "",
+    "social_facebook": "",
+    "social_pinterest": "",
+    "social_youtube": "",
+    "social_tiktok": "",
+
+    "currency_code_enabled": false
+  }
+}

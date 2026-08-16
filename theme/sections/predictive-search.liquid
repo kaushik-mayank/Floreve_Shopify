@@ -1,0 +1,110 @@
+{%- comment -%}
+  Rendered only through Shopify's predictive search endpoint. The panel script
+  fetches this section and lifts out [data-predictive-results].
+{%- endcomment -%}
+
+<div data-predictive-results>
+  {%- liquid
+    assign products = predictive_search.resources.products
+    assign collections = predictive_search.resources.collections
+    assign pages = predictive_search.resources.pages
+    assign articles = predictive_search.resources.articles
+    assign has_results = false
+    if products.size > 0 or collections.size > 0 or pages.size > 0 or articles.size > 0
+      assign has_results = true
+    endif
+  -%}
+
+  {%- if predictive_search.performed -%}
+    {%- if has_results -%}
+      <div class="grid" style="--cols: 1; --cols-md: 2;">
+        {%- if products.size > 0 -%}
+          <div class="search-panel__section">
+            <div class="search-panel__heading">
+              <span class="eyebrow">{{ 'general.search.products' | t }}</span>
+            </div>
+            <ul class="search-suggestion-list" role="list">
+              {%- for product in products -%}
+                <li>
+                  <a href="{{ product.url }}" class="search-suggestion">
+                    {%- if product.featured_media -%}
+                      <span class="search-suggestion__media media media--square">
+                        <img
+                          src="{{ product.featured_media | image_url: width: 160 }}"
+                          alt="{{ product.featured_media.alt | escape }}"
+                          width="60"
+                          height="60"
+                          loading="lazy"
+                        >
+                      </span>
+                    {%- endif -%}
+                    <span>
+                      <span class="search-suggestion__title">{{ product.title }}</span>
+                      <span class="search-suggestion__meta">{{ product.price | money }}</span>
+                    </span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if collections.size > 0 or pages.size > 0 or articles.size > 0 -%}
+          <div class="search-panel__section">
+            {%- if collections.size > 0 -%}
+              <div class="search-panel__heading">
+                <span class="eyebrow">{{ 'general.search.collections' | t }}</span>
+              </div>
+              <ul class="search-suggestion-list" role="list">
+                {%- for item in collections -%}
+                  <li>
+                    <a href="{{ item.url }}" class="search-suggestion">
+                      <span class="search-suggestion__title">{{ item.title }}</span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            {%- if pages.size > 0 or articles.size > 0 -%}
+              <div class="search-panel__heading" style="margin-top: 1.5rem;">
+                <span class="eyebrow">{{ 'general.search.pages' | t }}</span>
+              </div>
+              <ul class="search-suggestion-list" role="list">
+                {%- for item in pages -%}
+                  <li>
+                    <a href="{{ item.url }}" class="search-suggestion">
+                      <span class="search-suggestion__title">{{ item.title }}</span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+                {%- for item in articles -%}
+                  <li>
+                    <a href="{{ item.url }}" class="search-suggestion">
+                      <span class="search-suggestion__title">{{ item.title }}</span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <p style="margin-top: 1.5rem;">
+        <a href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}" class="link">
+          {{ 'general.search.view_all' | t: terms: predictive_search.terms }}
+        </a>
+      </p>
+    {%- else -%}
+      <p class="lede">{{ 'general.search.no_results' | t: terms: predictive_search.terms }}</p>
+      <p class="text-body">{{ 'general.search.no_results_help' | t }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Predictive search"
+}
+{% endschema %}

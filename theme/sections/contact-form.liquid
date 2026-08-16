@@ -1,0 +1,181 @@
+<section
+  class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="editorial">
+      <div class="editorial__content reveal">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow eyebrow--ruled">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <dl class="manifesto__pillars" style="grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));">
+            {%- for block in section.blocks -%}
+              <div {{ block.shopify_attributes }}>
+                <dt class="eyebrow eyebrow--muted">{{ block.settings.label }}</dt>
+                <dd style="margin: 0.4rem 0 0;">
+                  {%- if block.settings.link != blank -%}
+                    <a href="{{ block.settings.link }}" class="link link--plain">{{ block.settings.value }}</a>
+                  {%- else -%}
+                    {{ block.settings.value }}
+                  {%- endif -%}
+                </dd>
+              </div>
+            {%- endfor -%}
+          </dl>
+        {%- endif -%}
+      </div>
+
+      <div class="reveal" style="--reveal-delay: 100ms;">
+        {%- form 'contact', class: 'customer__form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="form-status form-status--success">{{ 'contact.form.success' | t }}</p>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div class="form-status form-status--error">
+              <span>{{ 'contact.form.error' | t }}</span>
+              <ul class="form-status__list">
+                {%- for field in form.errors -%}
+                  <li>{{ form.errors.translated_fields[field] }} {{ form.errors.messages[field] }}</li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="field">
+            <input
+              type="text"
+              id="contact-name"
+              name="contact[name]"
+              class="field__input"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder=" "
+              autocomplete="name"
+              required
+            >
+            <label class="field__label" for="contact-name">{{ 'contact.form.name' | t }}</label>
+          </div>
+
+          <div class="field{% if form.errors contains 'email' %} field--error{% endif %}">
+            <input
+              type="email"
+              id="contact-email"
+              name="contact[email]"
+              class="field__input"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              placeholder=" "
+              autocomplete="email"
+              required
+            >
+            <label class="field__label" for="contact-email">{{ 'contact.form.email' | t }}</label>
+          </div>
+
+          {%- if section.settings.show_phone -%}
+            <div class="field">
+              <input
+                type="tel"
+                id="contact-phone"
+                name="contact[phone]"
+                class="field__input"
+                value="{{ form.phone }}"
+                placeholder=" "
+                autocomplete="tel"
+              >
+              <label class="field__label" for="contact-phone">{{ 'contact.form.phone' | t }}</label>
+            </div>
+          {%- endif -%}
+
+          <div class="field">
+            <textarea
+              id="contact-body"
+              name="contact[body]"
+              class="field__input"
+              placeholder=" "
+              rows="5"
+              required
+            >{{ form.body }}</textarea>
+            <label class="field__label" for="contact-body">{{ 'contact.form.message' | t }}</label>
+          </div>
+
+          <button type="submit" class="btn btn--primary" style="align-self: flex-start;">
+            <span class="btn__label">{{ section.settings.button_label }}</span>
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact",
+  "tag": "div",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" }
+      ],
+      "default": "parchment"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Client care" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Write to the atelier" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Questions about a piece, a size, or a commission — we answer every message personally.</p>"
+    },
+    { "type": "checkbox", "id": "show_phone", "label": "Ask for a phone number", "default": false },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Send" },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "detail",
+      "name": "Detail",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Email" },
+        { "type": "text", "id": "value", "label": "Value" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Contact" }]
+}
+{% endschema %}

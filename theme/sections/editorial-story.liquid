@@ -1,0 +1,278 @@
+{%- liquid
+  assign image = section.settings.image
+  assign inset = section.settings.image_inset
+-%}
+
+<section
+  class="section-padded scheme scheme--{{ section.settings.color_scheme }}"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="editorial{% if section.settings.media_position == 'end' %} editorial--media-end{% endif %}{% if section.settings.wide_media %} editorial--wide-media{% endif %}">
+      <div class="editorial__media reveal">
+        {%- if image != blank -%}
+          <div class="media media--{{ section.settings.image_ratio }}{% if settings.enable_image_zoom %} media--zoom{% endif %} media-zoom-parent">
+            <img
+              src="{{ image | image_url: width: 1200 }}"
+              srcset="
+                {{ image | image_url: width: 500 }} 500w,
+                {{ image | image_url: width: 800 }} 800w,
+                {{ image | image_url: width: 1200 }} 1200w,
+                {{ image | image_url: width: 1600 }} 1600w
+              "
+              sizes="(min-width: 990px) 50vw, 100vw"
+              alt="{{ image.alt | escape }}"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+              loading="lazy"
+            >
+          </div>
+        {%- else -%}
+          <div class="media media--{{ section.settings.image_ratio }} placeholder-media">
+            {{ 'lifestyle-1' | placeholder_svg_tag }}
+          </div>
+        {%- endif -%}
+
+        {%- if inset != blank -%}
+          <div class="editorial__media-inset">
+            <div class="media media--portrait">
+              <img
+                src="{{ inset | image_url: width: 600 }}"
+                srcset="{{ inset | image_url: width: 400 }} 400w, {{ inset | image_url: width: 700 }} 700w"
+                sizes="20vw"
+                alt="{{ inset.alt | escape }}"
+                width="{{ inset.width }}"
+                height="{{ inset.height }}"
+                loading="lazy"
+              >
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.caption != blank -%}
+          <p class="editorial__caption">{{ section.settings.caption }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="editorial__content reveal" style="--reveal-delay: 120ms;">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'eyebrow' -%}
+              <span class="eyebrow eyebrow--ruled" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+
+            {%- when 'heading' -%}
+              <h2 {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+
+            {%- when 'lede' -%}
+              <p class="lede" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+
+            {%- when 'text' -%}
+              <div class="rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+
+            {%- when 'details' -%}
+              <dl class="manifesto__pillars" style="grid-template-columns: repeat(2, minmax(0, 1fr));" {{ block.shopify_attributes }}>
+                <div>
+                  <dt class="eyebrow eyebrow--muted">{{ block.settings.label_one }}</dt>
+                  <dd class="pillar__title" style="margin: 0.35rem 0 0;">{{ block.settings.value_one }}</dd>
+                </div>
+                <div>
+                  <dt class="eyebrow eyebrow--muted">{{ block.settings.label_two }}</dt>
+                  <dd class="pillar__title" style="margin: 0.35rem 0 0;">{{ block.settings.value_two }}</dd>
+                </div>
+              </dl>
+
+            {%- when 'button' -%}
+              <div {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.url }}" class="btn btn--{{ block.settings.style }}">
+                  <span class="btn__label">{{ block.settings.label }}</span>
+                </a>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial story",
+  "tag": "div",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "parchment", "label": "Parchment" },
+        { "value": "white", "label": "White" },
+        { "value": "alt", "label": "Warm parchment" },
+        { "value": "dark", "label": "Atelier black" },
+        { "value": "sage", "label": "Botanical sage" },
+        { "value": "blush", "label": "Pressed blush" }
+      ],
+      "default": "parchment"
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_inset",
+      "label": "Offset second image",
+      "info": "A smaller image laid over the corner of the first. Optional."
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image shape",
+      "options": [
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "square", "label": "Square" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "tall", "label": "Tall" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "Image position",
+      "options": [
+        { "value": "start", "label": "Left" },
+        { "value": "end", "label": "Right" }
+      ],
+      "default": "start"
+    },
+    {
+      "type": "checkbox",
+      "id": "wide_media",
+      "label": "Give the image more width",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 112
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 112
+    }
+  ],
+  "blocks": [
+    {
+      "type": "eyebrow",
+      "name": "Eyebrow",
+      "limit": 1,
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Craft" }]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [{ "type": "text", "id": "text", "label": "Heading", "default": "Two hands, two countries" }]
+    },
+    {
+      "type": "lede",
+      "name": "Opening line",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Drawn with Italian proportion. Finished with Indian patience."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Paragraphs",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>A Florève piece passes through more hands than a machine-made one ever could. The line comes first — the restraint of a European drawing table, where a petal is reduced until only its gesture remains.</p><p>Then the work moves to the bench, where setting, finishing and polishing are done slowly, in the way that ornament has been made on the subcontinent for centuries.</p>"
+        }
+      ]
+    },
+    {
+      "type": "details",
+      "name": "Two details",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label_one", "label": "First label", "default": "Drawn in" },
+        { "type": "text", "id": "value_one", "label": "First value", "default": "Italy" },
+        { "type": "text", "id": "label_two", "label": "Second label", "default": "Made in" },
+        { "type": "text", "id": "value_two", "label": "Second value", "default": "India" }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Inside the atelier" },
+        { "type": "url", "id": "url", "label": "Link" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "primary", "label": "Solid" },
+            { "value": "outline", "label": "Outline" }
+          ],
+          "default": "outline"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial story",
+      "blocks": [
+        { "type": "eyebrow" },
+        { "type": "heading" },
+        { "type": "lede" },
+        { "type": "text" },
+        { "type": "details" },
+        { "type": "button" }
+      ]
+    }
+  ]
+}
+{% endschema %}
