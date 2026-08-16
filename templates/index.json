@@ -23,7 +23,7 @@
       "settings": {
         "focal_x": 50,
         "focal_y": 50,
-        "overlay_opacity": 42,
+        "overlay_opacity": 40,
         "height": "lg",
         "content_position": "start",
         "color_scheme": "alt",

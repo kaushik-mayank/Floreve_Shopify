@@ -55,7 +55,7 @@
         "step": 5,
         "unit": "px",
         "label": "Logo width (mobile)",
-        "default": 108
+        "default": 110
       },
       {
         "type": "header",
@@ -196,7 +196,7 @@
         "type": "font_picker",
         "id": "font_heading",
         "label": "Headings and wordmark",
-        "default": "cormorant_garamond_n4",
+        "default": "playfair_display_n4",
         "info": "A high-contrast serif. Keep the weight light — Florève headings are never bold."
       },
       {

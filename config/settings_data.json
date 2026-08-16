@@ -1,7 +1,7 @@
 {
   "current": {
     "logo_width": 150,
-    "logo_width_mobile": 108,
+    "logo_width_mobile": 110,
 
     "color_background": "#FAF7F2",
     "color_surface": "#FFFFFF",
@@ -17,7 +17,7 @@
     "color_error": "#9B4A3B",
     "color_success": "#4D5A49",
 
-    "font_heading": "cormorant_garamond_n4",
+    "font_heading": "playfair_display_n4",
     "heading_scale": 100,
     "heading_tracking": 4,
     "font_body": "montserrat_n4",

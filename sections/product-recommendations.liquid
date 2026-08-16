@@ -1,12 +1,7 @@
 {%- liquid
   assign limit = section.settings.products_to_show
-  assign recommendation_url = routes.product_recommendations_url
-    | append: '?section_id='
-    | append: section.id
-    | append: '&product_id='
-    | append: product.id
-    | append: '&limit='
-    | append: limit
+  assign recommendation_query = '?section_id=' | append: section.id | append: '&product_id=' | append: product.id | append: '&limit=' | append: limit
+  assign recommendation_url = routes.product_recommendations_url | append: recommendation_query
 -%}
 
 {%- comment -%}
