@@ -1,0 +1,6 @@
+﻿# Build artefact, not part of the theme
+floreve-theme.zip
+
+# OS noise
+Thumbs.db
+.DS_Store
