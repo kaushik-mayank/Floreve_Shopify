@@ -3,8 +3,19 @@
     "heading": {
       "type": "rich-text",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "Client care" } },
-        "heading": { "type": "heading", "settings": { "text": "How may we help?", "size": "h1" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "Client care"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "How may we help?",
+            "size": "h1"
+          }
+        },
         "lede": {
           "type": "lede",
           "settings": {
@@ -12,9 +23,13 @@
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "lede"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "lede"
+      ],
       "settings": {
-        "color_scheme": "parchment",
+        "color_scheme": "white",
         "width": "narrow",
         "alignment": "center",
         "padding_top": 88,
@@ -24,15 +39,30 @@
     "form": {
       "type": "contact-form",
       "blocks": {
-        "email": { "type": "detail", "settings": { "label": "Email", "value": "" } },
-        "hours": { "type": "detail", "settings": { "label": "Replies", "value": "Within two working days" } }
+        "email": {
+          "type": "detail",
+          "settings": {
+            "label": "Email",
+            "value": ""
+          }
+        },
+        "hours": {
+          "type": "detail",
+          "settings": {
+            "label": "Replies",
+            "value": "Within two working days"
+          }
+        }
       },
-      "block_order": ["email", "hours"],
+      "block_order": [
+        "email",
+        "hours"
+      ],
       "settings": {
-        "color_scheme": "parchment",
+        "color_scheme": "white",
         "eyebrow": "",
         "heading": "Write to the atelier",
-        "text": "<p>Questions about a piece, a size, or a commission — we answer every message personally.</p>",
+        "text": "<p>A question about a size, a stone, or a piece made for an occasion — every message is answered by a person here.</p>",
         "show_phone": false,
         "button_label": "Send",
         "padding_top": 40,
@@ -64,9 +94,13 @@
           }
         }
       },
-      "block_order": ["one", "two", "three"],
+      "block_order": [
+        "one",
+        "two",
+        "three"
+      ],
       "settings": {
-        "color_scheme": "alt",
+        "color_scheme": "parchment",
         "layout": "split",
         "eyebrow": "Before you write",
         "heading": "Questions we are often asked",
@@ -76,5 +110,9 @@
       }
     }
   },
-  "order": ["heading", "form", "questions"]
+  "order": [
+    "heading",
+    "form",
+    "questions"
+  ]
 }

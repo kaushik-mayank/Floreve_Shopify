@@ -94,20 +94,30 @@
       {
         "type": "color",
         "id": "color_background",
-        "label": "Parchment — page background",
-        "default": "#FAF7F2"
+        "label": "Page background",
+        "default": "#FFFFFF",
+        "info": "White keeps the store bright and gives the eye somewhere to rest. The warm tones below are surfaces, not grounds."
       },
       {
         "type": "color",
         "id": "color_surface",
-        "label": "Card and media surface",
-        "default": "#FFFFFF"
+        "label": "Media surface",
+        "default": "#FFFFFF",
+        "info": "The ground a photograph sits on."
+      },
+      {
+        "type": "color",
+        "id": "color_tint",
+        "label": "Card surface",
+        "default": "#FAF7F3",
+        "info": "The face of a card or panel — a warm off-white that separates it from the page."
       },
       {
         "type": "color",
         "id": "color_surface_alt",
-        "label": "Alternate surface",
-        "default": "#F0EAE0"
+        "label": "Accent band",
+        "default": "#F4EFE7",
+        "info": "For the occasional full-width warm section."
       },
       {
         "type": "color",

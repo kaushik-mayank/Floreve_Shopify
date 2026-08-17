@@ -59,9 +59,10 @@ summary::-webkit-details-marker { display: none; }
 
 :root {
   /* Palette — overridden from theme settings */
-  --color-bg: #FAF7F2;
+  --color-bg: #FFFFFF;
   --color-surface: #FFFFFF;
-  --color-surface-alt: #F0EAE0;
+  --color-tint: #FAF7F3;
+  --color-surface-alt: #F4EFE7;
   --color-dark: #1A1814;
   --color-ink: #1A1814;
   --color-body: #7A7468;
@@ -78,7 +79,7 @@ summary::-webkit-details-marker { display: none; }
 
   --color-gold-rgb: 184, 151, 90;
   --color-ink-rgb: 26, 24, 20;
-  --color-bg-rgb: 250, 247, 242;
+  --color-bg-rgb: 255, 255, 255;
 
   /* Type */
   --font-heading: Georgia, 'Times New Roman', serif;
@@ -128,6 +129,14 @@ summary::-webkit-details-marker { display: none; }
   --grid-gap: 2rem;
   --radius: 0px;
 
+  /* A card lifts on hover rather than sitting under a permanent shadow */
+  --lift: 0 14px 34px -22px rgba(var(--color-ink-rgb), 0.45);
+  --lift-strong: 0 20px 44px -22px rgba(var(--color-ink-rgb), 0.5);
+
+  /* Gradients stay almost invisible — they warm an edge, they do not decorate */
+  --fade-warm: linear-gradient(180deg, rgba(var(--color-ink-rgb), 0) 0%, var(--color-tint) 100%);
+  --fade-tint: linear-gradient(180deg, var(--color-tint) 0%, rgba(var(--color-ink-rgb), 0) 70%);
+
   /* Rules & shadows — hairlines only, never soft drop shadows */
   --rule: rgba(var(--color-gold-rgb), 0.34);
   --rule-strong: rgba(var(--color-gold-rgb), 0.55);
@@ -145,9 +154,10 @@ summary::-webkit-details-marker { display: none; }
   --z-drawer: 90;
   --z-overlay: 80;
 
-  /* Default (parchment) scheme */
+  /* Default scheme — white ground, warm card faces */
   --scheme-bg: var(--color-bg);
   --scheme-surface: var(--color-surface);
+  --scheme-tint: var(--color-tint);
   --scheme-ink: var(--color-ink);
   --scheme-body: var(--color-body);
   --scheme-muted: var(--color-muted);
@@ -161,14 +171,24 @@ summary::-webkit-details-marker { display: none; }
 
 /* ------------------------------------------------------- 3. Colour schemes */
 
+/*
+ * White is the resting state of the store. The warm tones are surfaces —
+ * cards, panels, the occasional accent band — so the page stays bright and
+ * the eye gets somewhere to rest between sections.
+ *
+ * --scheme-surface  the ground a photograph sits on (kept white)
+ * --scheme-tint     the face of a card or panel
+ */
+
 .scheme {
   background-color: var(--scheme-bg);
   color: var(--scheme-body);
 }
 
-.scheme--parchment {
+.scheme--white {
   --scheme-bg: var(--color-bg);
   --scheme-surface: var(--color-surface);
+  --scheme-tint: var(--color-tint);
   --scheme-ink: var(--color-ink);
   --scheme-body: var(--color-body);
   --scheme-muted: var(--color-muted);
@@ -180,9 +200,10 @@ summary::-webkit-details-marker { display: none; }
   --scheme-btn-ink: var(--color-bg);
 }
 
-.scheme--white {
-  --scheme-bg: var(--color-surface);
-  --scheme-surface: var(--color-bg);
+.scheme--parchment {
+  --scheme-bg: var(--color-tint);
+  --scheme-surface: var(--color-surface);
+  --scheme-tint: var(--color-surface);
   --scheme-ink: var(--color-ink);
   --scheme-body: var(--color-body);
   --scheme-muted: var(--color-muted);
@@ -197,6 +218,7 @@ summary::-webkit-details-marker { display: none; }
 .scheme--alt {
   --scheme-bg: var(--color-surface-alt);
   --scheme-surface: var(--color-surface);
+  --scheme-tint: var(--color-surface);
   --scheme-ink: var(--color-ink);
   --scheme-body: var(--color-body);
   --scheme-muted: var(--color-muted);
@@ -210,7 +232,8 @@ summary::-webkit-details-marker { display: none; }
 
 .scheme--dark {
   --scheme-bg: var(--color-dark);
-  --scheme-surface: rgba(var(--color-bg-rgb), 0.05);
+  --scheme-surface: rgba(var(--color-bg-rgb), 0.06);
+  --scheme-tint: rgba(var(--color-bg-rgb), 0.06);
   --scheme-ink: var(--color-bg);
   --scheme-body: rgba(var(--color-bg-rgb), 0.78);
   --scheme-muted: rgba(var(--color-bg-rgb), 0.58);
@@ -224,7 +247,8 @@ summary::-webkit-details-marker { display: none; }
 
 .scheme--sage {
   --scheme-bg: var(--color-sage);
-  --scheme-surface: rgba(var(--color-bg-rgb), 0.07);
+  --scheme-surface: rgba(var(--color-bg-rgb), 0.08);
+  --scheme-tint: rgba(var(--color-bg-rgb), 0.08);
   --scheme-ink: var(--color-bg);
   --scheme-body: rgba(var(--color-bg-rgb), 0.82);
   --scheme-muted: rgba(var(--color-bg-rgb), 0.6);
@@ -239,9 +263,10 @@ summary::-webkit-details-marker { display: none; }
 .scheme--blush {
   --scheme-bg: var(--color-blush);
   --scheme-surface: var(--color-surface);
+  --scheme-tint: var(--color-surface);
   --scheme-ink: var(--color-ink);
-  --scheme-body: rgba(var(--color-ink-rgb), 0.72);
-  --scheme-muted: rgba(var(--color-ink-rgb), 0.42);
+  --scheme-body: rgba(var(--color-ink-rgb), 0.78);
+  --scheme-muted: rgba(var(--color-ink-rgb), 0.6);
   --scheme-accent: var(--color-ink);
   --scheme-accent-text: var(--color-ink);
   --scheme-rule: rgba(var(--color-ink-rgb), 0.16);

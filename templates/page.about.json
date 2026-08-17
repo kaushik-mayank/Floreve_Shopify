@@ -3,14 +3,30 @@
     "hero": {
       "type": "hero",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "The house" } },
-        "heading": { "type": "heading", "settings": { "text": "Florève" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "The house"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "Florève"
+          }
+        },
         "text": {
           "type": "text",
-          "settings": { "text": "A jewellery house built on a single observation about flowers." }
+          "settings": {
+            "text": "A jewellery house built on what a flower means, and on the discipline of leaving things out."
+          }
         }
       },
-      "block_order": ["eyebrow", "heading", "text"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text"
+      ],
       "settings": {
         "focal_x": 50,
         "focal_y": 50,
@@ -25,18 +41,31 @@
     "story": {
       "type": "rich-text",
       "blocks": {
-        "mark": { "type": "mark", "settings": {} },
-        "heading": { "type": "heading", "settings": { "text": "How we began", "size": "h2" } },
+        "mark": {
+          "type": "mark",
+          "settings": {}
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "How we began",
+            "size": "h2"
+          }
+        },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Replace this with the true account of how Florève started — who began it, where, and what they were trying to make that did not exist yet.</p>"
+            "text": "<p>Replace this with the true account of how Florève started — who began it, what they kept noticing about the way flowers are given, and what they wanted to make that did not exist yet.</p>"
           }
         }
       },
-      "block_order": ["mark", "heading", "text"],
+      "block_order": [
+        "mark",
+        "heading",
+        "text"
+      ],
       "settings": {
-        "color_scheme": "parchment",
+        "color_scheme": "white",
         "width": "reading",
         "alignment": "center",
         "padding_top": 96,
@@ -46,27 +75,42 @@
     "craft": {
       "type": "editorial-story",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "Craft" } },
-        "heading": { "type": "heading", "settings": { "text": "Two hands, two countries" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "Inspiration"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "An Indian heart, an Italian line"
+          }
+        },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Describe the working relationship between the design studio and the atelier in your own words.</p>"
+            "text": "<p>Describe, in your own words, what you take from each tradition: the meaning a flower carries in Indian life, and the restraint of Italian design.</p>"
           }
         },
         "details": {
           "type": "details",
           "settings": {
-            "label_one": "Drawn in",
-            "value_one": "Italy",
-            "label_two": "Made in",
-            "value_two": "India"
+            "label_one": "Inspired by",
+            "value_one": "Indian symbolism",
+            "label_two": "Shaped by",
+            "value_two": "Italian restraint"
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "text", "details"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text",
+        "details"
+      ],
       "settings": {
-        "color_scheme": "white",
+        "color_scheme": "parchment",
         "image_ratio": "portrait",
         "media_position": "end",
         "wide_media": true,
@@ -79,7 +123,7 @@
       "settings": {
         "color_scheme": "sage",
         "show_mark": true,
-        "quote": "We are not trying to preserve a flower. We are trying to keep the moment you noticed one.",
+        "quote": "We are not preserving a flower. We are keeping the moment it was given.",
         "padding_top": 120,
         "padding_bottom": 120
       }
@@ -101,5 +145,11 @@
       }
     }
   },
-  "order": ["hero", "story", "craft", "statement", "invitation"]
+  "order": [
+    "hero",
+    "story",
+    "craft",
+    "statement",
+    "invitation"
+  ]
 }

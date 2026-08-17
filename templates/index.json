@@ -3,23 +3,38 @@
     "hero": {
       "type": "hero",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "Maison de Joaillerie" } },
-        "heading": { "type": "heading", "settings": { "text": "Flowers, kept" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "Maison de Joaillerie"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "Flowers, kept"
+          }
+        },
         "text": {
           "type": "text",
           "settings": {
-            "text": "Jewellery drawn from botanical form and finished by hand, between Italy and India."
+            "text": "Jewellery born from what a flower means, drawn with an Italian eye for line and finished entirely by hand."
           }
         },
         "buttons": {
           "type": "buttons",
           "settings": {
             "primary_label": "Discover the collection",
-            "secondary_label": "The house"
+            "secondary_label": "Our story"
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "text", "buttons"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text",
+        "buttons"
+      ],
       "settings": {
         "focal_x": 50,
         "focal_y": 50,
@@ -32,48 +47,50 @@
         "cue_text": "Scroll"
       }
     },
-
     "manifesto": {
       "type": "brand-manifesto",
       "blocks": {
         "one": {
           "type": "pillar",
           "settings": {
-            "title": "Studied",
-            "text": "Every form begins with a real flower, observed before it is drawn."
+            "title": "Meaning",
+            "text": "Every form starts with a flower that already means something to someone."
           }
         },
         "two": {
           "type": "pillar",
           "settings": {
-            "title": "Made",
-            "text": "Built by hand in small numbers, in an atelier rather than a factory."
+            "title": "Line",
+            "text": "Reduced until only the gesture remains — the restraint of Italian design."
           }
         },
         "three": {
           "type": "pillar",
           "settings": {
-            "title": "Worn",
-            "text": "Weighted and finished to sit comfortably against the body, every day."
+            "title": "Hand",
+            "text": "Shaped, set and finished by hand, in numbers small enough to care about."
           }
         }
       },
-      "block_order": ["one", "two", "three"],
+      "block_order": [
+        "one",
+        "two",
+        "three"
+      ],
       "settings": {
-        "color_scheme": "parchment",
+        "color_scheme": "white",
         "eyebrow": "The house",
-        "statement": "A flower lasts a season. Held in metal, it lasts a life.",
-        "text": "<p>Florève begins where botany and metalwork meet. Each form is studied from a living flower, then rebuilt by hand — petal by petal — in materials chosen to hold that shape long after the season has passed.</p><p>The result is not a copy of nature. It is nature, given a second structure.</p>",
-        "link_label": "Read our story",
+        "statement": "In India, a flower is never only a flower. It is a greeting, a blessing, a thing you give when words are not enough.",
+        "text": "<p>Florève begins with that idea. In marigold at a doorway, jasmine in the hair, petals offered with both hands — the flower carries feeling, and it has done so for as long as anyone can remember.</p><p>We take that meaning and give it an Italian discipline of line: reduced, balanced, nothing ornamental for its own sake. What remains is shaped by hand, slowly, with the care the original gesture deserves.</p>",
+        "link_label": "Our story",
         "padding_top": 112,
         "padding_bottom": 96
       }
     },
-
     "signature": {
       "type": "featured-collection",
       "settings": {
-        "color_scheme": "parchment",
+        "color_scheme": "white",
         "eyebrow": "Signature",
         "heading": "The pieces we are known for",
         "alignment": "split",
@@ -86,29 +103,50 @@
         "padding_bottom": 112
       }
     },
-
     "botany": {
       "type": "editorial-story",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "Botany" } },
-        "heading": { "type": "heading", "settings": { "text": "Why a flower?" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "Symbolism"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "Why a flower?"
+          }
+        },
         "lede": {
           "type": "lede",
           "settings": {
-            "text": "Because nothing else is asked to be beautiful and brief at the same time."
+            "text": "Because it is how we welcome, bless, celebrate and remember — and it lasts a day."
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>A flower is the shape a living thing makes when it has something to say. It opens once, completely, and then it is gone — which is precisely why it has been carried, pressed, painted and worn for as long as people have made things at all.</p><p>Our work begins there: not with an ornament that resembles a flower, but with the particular gesture of one. The turn of a petal at its edge. The way a stem carries weight it was never built for.</p>"
+            "text": "<p>A flower is given at a birth, a wedding, a homecoming and a farewell. It is placed at a threshold, tucked into hair, laid at the feet of something loved. No other object carries so much feeling and asks so little.</p><p>Its only failing is that it fades. So we studied the part that matters — the turn of a petal at its edge, the way a bud holds itself before it opens — and gave it a form that stays.</p>"
           }
         },
-        "button": { "type": "button", "settings": { "label": "The philosophy", "style": "outline" } }
+        "button": {
+          "type": "button",
+          "settings": {
+            "label": "The philosophy",
+            "style": "outline"
+          }
+        }
       },
-      "block_order": ["eyebrow", "heading", "lede", "text", "button"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "lede",
+        "text",
+        "button"
+      ],
       "settings": {
-        "color_scheme": "white",
+        "color_scheme": "parchment",
         "image_ratio": "portrait",
         "media_position": "start",
         "wide_media": true,
@@ -116,17 +154,29 @@
         "padding_bottom": 112
       }
     },
-
     "collections": {
       "type": "collection-showcase",
       "blocks": {
-        "one": { "type": "tile", "settings": {} },
-        "two": { "type": "tile", "settings": {} },
-        "three": { "type": "tile", "settings": {} }
+        "one": {
+          "type": "tile",
+          "settings": {}
+        },
+        "two": {
+          "type": "tile",
+          "settings": {}
+        },
+        "three": {
+          "type": "tile",
+          "settings": {}
+        }
       },
-      "block_order": ["one", "two", "three"],
+      "block_order": [
+        "one",
+        "two",
+        "three"
+      ],
       "settings": {
-        "color_scheme": "parchment",
+        "color_scheme": "white",
         "eyebrow": "Collections",
         "heading": "Where would you like to begin?",
         "alignment": "split",
@@ -138,35 +188,52 @@
         "padding_bottom": 112
       }
     },
-
     "craft": {
       "type": "editorial-story",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "Craft" } },
-        "heading": { "type": "heading", "settings": { "text": "Two hands, two countries" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "Inspiration"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "An Indian heart, an Italian line"
+          }
+        },
         "lede": {
           "type": "lede",
-          "settings": { "text": "Drawn with Italian proportion. Finished with Indian patience." }
+          "settings": {
+            "text": "One tradition gives us the meaning. The other teaches us what to leave out."
+          }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>A Florève piece passes through more hands than a machine-made one ever could. The line comes first — the restraint of a European drawing table, where a petal is reduced until only its gesture remains.</p><p>Then the work moves to the bench, where setting, finishing and polishing are done slowly, in the way that ornament has been made on the subcontinent for centuries. Neither tradition is decoration for the other. The piece needs both.</p>"
+            "text": "<p>From India we take the reverence — the understanding that adornment is not vanity but expression, and that a flower given by hand carries intention.</p><p>From the Italian tradition we take the discipline of form: proportion held exactly, ornament earned rather than added, the confidence to stop. Neither is decoration for the other. A piece needs both to feel finished.</p>"
           }
         },
         "details": {
           "type": "details",
           "settings": {
-            "label_one": "Drawn in",
-            "value_one": "Italy",
-            "label_two": "Made in",
-            "value_two": "India"
+            "label_one": "Inspired by",
+            "value_one": "Indian symbolism",
+            "label_two": "Shaped by",
+            "value_two": "Italian restraint"
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "lede", "text", "details"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "lede",
+        "text",
+        "details"
+      ],
       "settings": {
-        "color_scheme": "alt",
+        "color_scheme": "parchment",
         "image_ratio": "portrait",
         "media_position": "end",
         "wide_media": true,
@@ -174,7 +241,6 @@
         "padding_bottom": 112
       }
     },
-
     "chapters": {
       "type": "craft-chapters",
       "blocks": {
@@ -182,29 +248,33 @@
           "type": "chapter",
           "settings": {
             "title": "The study",
-            "text": "A flower is photographed, measured and drawn before a single line is committed to metal."
+            "text": "We begin with a real flower — how it is held, given and worn — before a single line is drawn."
           }
         },
         "two": {
           "type": "chapter",
           "settings": {
-            "title": "The bench",
-            "text": "Forms are shaped, soldered and set by hand, one piece at a time."
+            "title": "The hand",
+            "text": "Each piece is shaped, soldered and set by hand. Nothing is stamped out, nothing is hurried."
           }
         },
         "three": {
           "type": "chapter",
           "settings": {
             "title": "The finish",
-            "text": "Surfaces are polished by hand until the light moves across them the way it moves across a petal."
+            "text": "Surfaces are polished by hand until light moves across them the way it moves across a petal."
           }
         }
       },
-      "block_order": ["one", "two", "three"],
+      "block_order": [
+        "one",
+        "two",
+        "three"
+      ],
       "settings": {
         "color_scheme": "white",
         "eyebrow": "The making",
-        "heading": "From a living thing to a lasting one",
+        "heading": "How a feeling becomes an object",
         "alignment": "center",
         "show_index": true,
         "image_ratio": "landscape",
@@ -212,30 +282,55 @@
         "padding_bottom": 112
       }
     },
-
     "running-line": {
       "type": "marquee",
       "blocks": {
-        "one": { "type": "phrase", "settings": { "text": "Made by hand" } },
-        "two": { "type": "phrase", "settings": { "text": "Drawn from botany" } },
-        "three": { "type": "phrase", "settings": { "text": "Finished in small numbers" } },
-        "four": { "type": "phrase", "settings": { "text": "Italy and India" } }
+        "one": {
+          "type": "phrase",
+          "settings": {
+            "text": "Made entirely by hand"
+          }
+        },
+        "two": {
+          "type": "phrase",
+          "settings": {
+            "text": "Drawn from botanical form"
+          }
+        },
+        "three": {
+          "type": "phrase",
+          "settings": {
+            "text": "Finished in small numbers"
+          }
+        },
+        "four": {
+          "type": "phrase",
+          "settings": {
+            "text": "An Indian heart, an Italian line"
+          }
+        }
       },
-      "block_order": ["one", "two", "three", "four"],
-      "settings": { "color_scheme": "parchment", "speed": 45 }
+      "block_order": [
+        "one",
+        "two",
+        "three",
+        "four"
+      ],
+      "settings": {
+        "color_scheme": "alt",
+        "speed": 45
+      }
     },
-
     "statement": {
       "type": "statement",
       "settings": {
         "color_scheme": "dark",
         "show_mark": true,
-        "quote": "Ornament is not decoration. It is the part of us we choose to make visible.",
+        "quote": "A flower is how we say the thing we cannot. We only made the sentence last longer.",
         "padding_top": 140,
         "padding_bottom": 140
       }
     },
-
     "invitation": {
       "type": "invitation",
       "settings": {
@@ -246,14 +341,13 @@
         "focal_y": 50,
         "show_mark": true,
         "eyebrow": "The collection",
-        "heading": "Find the one that is yours",
-        "text": "Every piece is made in small numbers. Take your time — and write to us if you would like to see one in person.",
+        "heading": "Find the one that speaks for you",
+        "text": "Each piece is made by hand in small numbers. Take your time — and write to us if you would like to see one in person.",
         "primary_label": "Explore the collection",
         "secondary_label": "Write to us"
       }
     }
   },
-
   "order": [
     "hero",
     "manifesto",

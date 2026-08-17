@@ -3,9 +3,10 @@
     "logo_width": 150,
     "logo_width_mobile": 110,
 
-    "color_background": "#FAF7F2",
+    "color_background": "#FFFFFF",
     "color_surface": "#FFFFFF",
-    "color_surface_alt": "#F0EAE0",
+    "color_tint": "#FAF7F3",
+    "color_surface_alt": "#F4EFE7",
     "color_dark": "#1A1814",
     "color_ink": "#1A1814",
     "color_body": "#625B4F",
