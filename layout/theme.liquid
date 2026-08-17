@@ -45,13 +45,13 @@
       assign heading_font_italic = heading_font | font_modify: 'style', 'italic'
     -%}
 
-    {{ heading_font | font_face: font_display: 'swap' }}
-    {{ heading_font_italic | font_face: font_display: 'swap' }}
-    {{ body_font | font_face: font_display: 'swap' }}
-    {{ body_font_bold | font_face: font_display: 'swap' }}
-    {{ body_font_italic | font_face: font_display: 'swap' }}
-
     <style>
+      {{ heading_font | font_face: font_display: 'swap' }}
+      {{ heading_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+
       :root {
         --color-bg: {{ settings.color_background }};
         --color-surface: {{ settings.color_surface }};
@@ -62,6 +62,7 @@
         --color-muted: {{ settings.color_muted }};
         --color-gold: {{ settings.color_gold }};
         --color-gold-pale: {{ settings.color_gold_pale }};
+        --color-gold-deep: {{ settings.color_gold_deep }};
         --color-sage: {{ settings.color_sage }};
         --color-blush: {{ settings.color_blush }};
         --color-error: {{ settings.color_error }};

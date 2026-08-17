@@ -129,14 +129,15 @@
         "type": "color",
         "id": "color_body",
         "label": "Body text",
-        "default": "#7A7468",
-        "info": "A warm grey rather than black. This softness is the palette's final luxury signal."
+        "default": "#625B4F",
+        "info": "A warm dark grey rather than black — soft, but still comfortably readable on parchment."
       },
       {
         "type": "color",
         "id": "color_muted",
-        "label": "Muted text and hairlines",
-        "default": "#C5BFB7"
+        "label": "Secondary text",
+        "default": "#6F6856",
+        "info": "Captions, counts and metadata. Keep it dark enough to read; it carries real information."
       },
       {
         "type": "header",
@@ -153,6 +154,13 @@
         "id": "color_gold_pale",
         "label": "Pale gold",
         "default": "#E8D5A3"
+      },
+      {
+        "type": "color",
+        "id": "color_gold_deep",
+        "label": "Deep gold — label text",
+        "default": "#846532",
+        "info": "Used wherever gold has to be read rather than admired: eyebrow labels, headings in the menu and footer. Champagne gold is too light for small text."
       },
       {
         "type": "color",

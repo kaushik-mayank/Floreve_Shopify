@@ -1112,6 +1112,64 @@
     if (facetRenderFrom) facetRenderFrom(window.location.href, false);
   });
 
+  /* --------------------------------------------------------- Link prefetch */
+
+  /*
+   * Warms the cache for a page the visitor is clearly about to open. Pointing
+   * at a link or starting a tap is a strong signal, and by the time the click
+   * lands the document is usually already in flight. Same-origin GET pages
+   * only — never the cart or account, which must not be fetched speculatively.
+   */
+  function initPrefetch() {
+    if (navigator.connection && navigator.connection.saveData) return;
+
+    try {
+      if (!document.createElement('link').relList.supports('prefetch')) return;
+    } catch (error) {
+      return;
+    }
+
+    var prefetched = {};
+    var skip = /\/(cart|checkout|account)(\/|$|\?)/;
+
+    function prefetch(url) {
+      if (!url || prefetched[url]) return;
+      prefetched[url] = true;
+      var link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = url;
+      document.head.appendChild(link);
+    }
+
+    function candidate(event) {
+      var anchor = event.target.closest('a[href]');
+      if (!anchor) return;
+      if (anchor.origin !== window.location.origin) return;
+      if (anchor.hasAttribute('download') || anchor.target === '_blank') return;
+      if (anchor.pathname === window.location.pathname) return;
+      if (skip.test(anchor.pathname)) return;
+      prefetch(anchor.href);
+    }
+
+    var timer;
+    document.addEventListener(
+      'mouseover',
+      function (event) {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          candidate(event);
+        }, 65);
+      },
+      { passive: true, capture: true }
+    );
+
+    document.addEventListener('mouseout', function () {
+      clearTimeout(timer);
+    });
+
+    document.addEventListener('touchstart', candidate, { passive: true, capture: true });
+  }
+
   /* ------------------------------------------------- Country and province */
 
   function initAddressFields(scope) {
@@ -1190,6 +1248,7 @@
   function init() {
     initHeader();
     initSearch();
+    initPrefetch();
     initSection(document);
   }
 

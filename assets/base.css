@@ -68,6 +68,9 @@ summary::-webkit-details-marker { display: none; }
   --color-muted: #C5BFB7;
   --color-gold: #B8975A;
   --color-gold-pale: #E8D5A3;
+  /* Champagne gold reads at only 2.6:1 on parchment, so label *text* uses a
+     deeper tone. The lighter gold stays for rules, the mark and ornament. */
+  --color-gold-deep: #846532;
   --color-sage: #4D5A49;
   --color-blush: #E8D0C4;
   --color-error: #9B4A3B;
@@ -126,8 +129,8 @@ summary::-webkit-details-marker { display: none; }
   --radius: 0px;
 
   /* Rules & shadows — hairlines only, never soft drop shadows */
-  --rule: rgba(var(--color-gold-rgb), 0.22);
-  --rule-strong: rgba(var(--color-gold-rgb), 0.42);
+  --rule: rgba(var(--color-gold-rgb), 0.34);
+  --rule-strong: rgba(var(--color-gold-rgb), 0.55);
   --rule-ink: rgba(var(--color-ink-rgb), 0.1);
 
   /* Motion */
@@ -149,6 +152,7 @@ summary::-webkit-details-marker { display: none; }
   --scheme-body: var(--color-body);
   --scheme-muted: var(--color-muted);
   --scheme-accent: var(--color-gold);
+  --scheme-accent-text: var(--color-gold-deep);
   --scheme-rule: var(--rule);
   --scheme-rule-strong: var(--rule-strong);
   --scheme-btn-bg: var(--color-ink);
@@ -169,6 +173,7 @@ summary::-webkit-details-marker { display: none; }
   --scheme-body: var(--color-body);
   --scheme-muted: var(--color-muted);
   --scheme-accent: var(--color-gold);
+  --scheme-accent-text: var(--color-gold-deep);
   --scheme-rule: var(--rule);
   --scheme-rule-strong: var(--rule-strong);
   --scheme-btn-bg: var(--color-ink);
@@ -182,6 +187,7 @@ summary::-webkit-details-marker { display: none; }
   --scheme-body: var(--color-body);
   --scheme-muted: var(--color-muted);
   --scheme-accent: var(--color-gold);
+  --scheme-accent-text: var(--color-gold-deep);
   --scheme-rule: var(--rule);
   --scheme-rule-strong: var(--rule-strong);
   --scheme-btn-bg: var(--color-ink);
@@ -195,6 +201,7 @@ summary::-webkit-details-marker { display: none; }
   --scheme-body: var(--color-body);
   --scheme-muted: var(--color-muted);
   --scheme-accent: var(--color-gold);
+  --scheme-accent-text: var(--color-gold-deep);
   --scheme-rule: var(--rule-strong);
   --scheme-rule-strong: var(--rule-strong);
   --scheme-btn-bg: var(--color-ink);
@@ -205,9 +212,10 @@ summary::-webkit-details-marker { display: none; }
   --scheme-bg: var(--color-dark);
   --scheme-surface: rgba(var(--color-bg-rgb), 0.05);
   --scheme-ink: var(--color-bg);
-  --scheme-body: rgba(var(--color-bg-rgb), 0.68);
-  --scheme-muted: rgba(var(--color-bg-rgb), 0.42);
+  --scheme-body: rgba(var(--color-bg-rgb), 0.78);
+  --scheme-muted: rgba(var(--color-bg-rgb), 0.58);
   --scheme-accent: var(--color-gold-pale);
+  --scheme-accent-text: var(--color-gold-pale);
   --scheme-rule: rgba(var(--color-gold-rgb), 0.3);
   --scheme-rule-strong: rgba(var(--color-gold-rgb), 0.55);
   --scheme-btn-bg: var(--color-bg);
@@ -218,9 +226,10 @@ summary::-webkit-details-marker { display: none; }
   --scheme-bg: var(--color-sage);
   --scheme-surface: rgba(var(--color-bg-rgb), 0.07);
   --scheme-ink: var(--color-bg);
-  --scheme-body: rgba(var(--color-bg-rgb), 0.72);
-  --scheme-muted: rgba(var(--color-bg-rgb), 0.45);
+  --scheme-body: rgba(var(--color-bg-rgb), 0.82);
+  --scheme-muted: rgba(var(--color-bg-rgb), 0.6);
   --scheme-accent: var(--color-gold-pale);
+  --scheme-accent-text: var(--color-gold-pale);
   --scheme-rule: rgba(var(--color-bg-rgb), 0.22);
   --scheme-rule-strong: rgba(var(--color-bg-rgb), 0.4);
   --scheme-btn-bg: var(--color-bg);
@@ -234,6 +243,7 @@ summary::-webkit-details-marker { display: none; }
   --scheme-body: rgba(var(--color-ink-rgb), 0.72);
   --scheme-muted: rgba(var(--color-ink-rgb), 0.42);
   --scheme-accent: var(--color-ink);
+  --scheme-accent-text: var(--color-ink);
   --scheme-rule: rgba(var(--color-ink-rgb), 0.16);
   --scheme-rule-strong: rgba(var(--color-ink-rgb), 0.3);
   --scheme-btn-bg: var(--color-ink);
@@ -304,7 +314,7 @@ h5, .h5 { font-size: var(--fs-h5); }
   font-weight: 400;
   letter-spacing: calc(var(--label-tracking) * 1.15);
   text-transform: uppercase;
-  color: var(--scheme-accent);
+  color: var(--scheme-accent-text);
   line-height: 1.4;
 }
 
@@ -337,7 +347,7 @@ h5, .h5 { font-size: var(--fs-h5); }
 
 .text-body { color: var(--scheme-body); }
 .text-ink { color: var(--scheme-ink); }
-.text-accent { color: var(--scheme-accent); }
+.text-accent { color: var(--scheme-accent-text); }
 .text-center { text-align: center; }
 
 .caption {
@@ -372,7 +382,7 @@ h5, .h5 { font-size: var(--fs-h5); }
 .rte a:hover { background-size: 0% 1px; }
 .rte ul, .rte ol { padding-left: 1.15rem; }
 .rte li + li { margin-top: 0.4em; }
-.rte li::marker { color: var(--scheme-accent); }
+.rte li::marker { color: var(--scheme-accent-text); }
 .rte img { margin: 2rem 0; }
 .rte blockquote {
   font-family: var(--font-heading);
@@ -670,7 +680,7 @@ h5, .h5 { font-size: var(--fs-h5); }
 .field textarea:not(:placeholder-shown) + .field__label,
 .field select + .field__label {
   transform: translateY(-1.35rem) scale(0.74);
-  color: var(--scheme-accent);
+  color: var(--scheme-accent-text);
   letter-spacing: var(--label-tracking);
   text-transform: uppercase;
 }
@@ -719,7 +729,7 @@ h5, .h5 { font-size: var(--fs-h5); }
   right: 0.35rem;
   width: 0.6rem;
   pointer-events: none;
-  color: var(--scheme-accent);
+  color: var(--scheme-accent-text);
 }
 
 .form-status {
@@ -791,7 +801,7 @@ h5, .h5 { font-size: var(--fs-h5); }
 
 /* Focus is visible and gold — never removed. */
 :focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 2px solid var(--color-gold-deep);
   outline-offset: 3px;
 }
 
@@ -832,7 +842,6 @@ h5, .h5 { font-size: var(--fs-h5); }
 /* Slow, restrained zoom. Never a pop. */
 .media--zoom > img {
   transition: transform 1.2s var(--ease-out);
-  will-change: transform;
 }
 
 a:hover .media--zoom > img,
@@ -896,7 +905,7 @@ a:hover .media--zoom > img,
   .reveal {
     opacity: 0;
     transform: translateY(1.5rem);
-    transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+    transition: opacity 460ms var(--ease-out), transform 460ms var(--ease-out);
     transition-delay: var(--reveal-delay, 0ms);
   }
 
@@ -967,7 +976,7 @@ a:hover .media--zoom > img,
   font-size: var(--fs-label-sm);
   letter-spacing: var(--label-tracking);
   text-transform: uppercase;
-  color: var(--scheme-accent);
+  color: var(--scheme-accent-text);
   line-height: 1.4;
 }
 
@@ -994,14 +1003,14 @@ a:hover .media--zoom > img,
   transition: color var(--dur) var(--ease);
 }
 
-.accordion__summary:hover { color: var(--scheme-accent); }
+.accordion__summary:hover { color: var(--scheme-accent-text); }
 
 .accordion__icon {
   position: relative;
   flex: none;
   width: 0.75rem;
   height: 0.75rem;
-  color: var(--scheme-accent);
+  color: var(--scheme-accent-text);
 }
 
 .accordion__icon::before,
@@ -1057,7 +1066,7 @@ details[open] > summary .accordion__icon::after { transform: rotate(0deg); }
   transition: color var(--dur) var(--ease);
 }
 
-.quantity__button:hover { color: var(--scheme-accent); }
+.quantity__button:hover { color: var(--scheme-accent-text); }
 .quantity__button[disabled] { opacity: 0.3; cursor: not-allowed; }
 .quantity__button svg { width: 0.7rem; }
 
@@ -1163,7 +1172,7 @@ details[open] > summary .accordion__icon::after { transform: rotate(0deg); }
   transition: color var(--dur) var(--ease);
 }
 
-.icon-button:hover { color: var(--scheme-accent); }
+.icon-button:hover { color: var(--scheme-accent-text); }
 .icon-button svg { width: 1.15rem; height: auto; }
 
 /* ------------------------------------------------------------ 18. Loading */
