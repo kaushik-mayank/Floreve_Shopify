@@ -1801,7 +1801,7 @@
   margin-inline: auto;
 }
 
-.media-banner__media { position: absolute; inset: 0; z-index: -2; }
+.media-banner__media { position: absolute; inset: 0; z-index: -2; background: var(--color-dark); }
 
 .media-banner__scrim {
   position: absolute;

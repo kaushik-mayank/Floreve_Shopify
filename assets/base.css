@@ -1315,8 +1315,17 @@ details[open] > summary .accordion__icon::after { transform: rotate(0deg); }
   object-fit: cover;
 }
 
+/*
+ * Overlay copy on these sections is always light, so the fallback ground is
+ * dark. A file that is missing, empty or still uploading then reads as an
+ * intentional charcoal panel with legible text, rather than white on white.
+ */
+.section-media__asset,
+.section-media__video {
+  background-color: var(--color-dark);
+}
+
 .section-media__asset {
   background-size: cover;
   background-repeat: no-repeat;
-  background-color: var(--color-tint);
 }

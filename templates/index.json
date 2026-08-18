@@ -3,8 +3,18 @@
     "hero": {
       "type": "hero",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "Maison de Joaillerie" } },
-        "heading": { "type": "heading", "settings": { "text": "Flowers, kept" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "Maison de Joaillerie"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "Flowers, kept"
+          }
+        },
         "text": {
           "type": "text",
           "settings": {
@@ -19,11 +29,16 @@
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "text", "buttons"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text",
+        "buttons"
+      ],
       "settings": {
         "video_asset": "hero-video.mp4",
-        "poster_asset": "hero-poster.jpg",
-        "image_asset": "hero-poster.jpg",
+        "poster_asset": "hero-poster.png",
+        "image_asset": "hero-poster.png",
         "image_alt": "A Florève piece worn close to the skin",
         "focal_x": 50,
         "focal_y": 50,
@@ -36,16 +51,32 @@
         "cue_text": "Scroll"
       }
     },
-
     "categories": {
       "type": "collection-showcase",
       "blocks": {
-        "one": { "type": "tile", "settings": {} },
-        "two": { "type": "tile", "settings": {} },
-        "three": { "type": "tile", "settings": {} },
-        "four": { "type": "tile", "settings": {} }
+        "one": {
+          "type": "tile",
+          "settings": {}
+        },
+        "two": {
+          "type": "tile",
+          "settings": {}
+        },
+        "three": {
+          "type": "tile",
+          "settings": {}
+        },
+        "four": {
+          "type": "tile",
+          "settings": {}
+        }
       },
-      "block_order": ["one", "two", "three", "four"],
+      "block_order": [
+        "one",
+        "two",
+        "three",
+        "four"
+      ],
       "settings": {
         "color_scheme": "white",
         "eyebrow": "Shop",
@@ -59,7 +90,6 @@
         "padding_bottom": 72
       }
     },
-
     "featured": {
       "type": "featured-collection",
       "settings": {
@@ -76,24 +106,44 @@
         "padding_bottom": 96
       }
     },
-
     "campaign": {
       "type": "media-banner",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "The collection" } },
-        "heading": { "type": "heading", "settings": { "text": "Made to be worn every day", "size": "h1" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "The collection"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "Made to be worn every day",
+            "size": "h1"
+          }
+        },
         "text": {
           "type": "text",
-          "settings": { "text": "Weighted, finished and set by hand, in numbers small enough to care about." }
+          "settings": {
+            "text": "Weighted, finished and set by hand, in numbers small enough to care about."
+          }
         },
         "button": {
           "type": "button",
-          "settings": { "label": "Shop the collection", "style": "light" }
+          "settings": {
+            "label": "Shop the collection",
+            "style": "light"
+          }
         }
       },
-      "block_order": ["eyebrow", "heading", "text", "button"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
-        "image_asset": "homepage-banner.jpg",
+        "image_asset": "homepage-banner.png",
         "image_alt": "A Florève piece photographed in natural light",
         "focal": "50% 45%",
         "loading": "lazy",
@@ -104,7 +154,6 @@
         "color_scheme": "neutral"
       }
     },
-
     "new-in": {
       "type": "featured-collection",
       "settings": {
@@ -121,15 +170,26 @@
         "padding_bottom": 96
       }
     },
-
     "editorial": {
       "type": "editorial-story",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "The house" } },
-        "heading": { "type": "heading", "settings": { "text": "An Indian heart, an Italian line" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "The house"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "An Indian heart, an Italian line"
+          }
+        },
         "lede": {
           "type": "lede",
-          "settings": { "text": "One tradition gives us the meaning. The other teaches us what to leave out." }
+          "settings": {
+            "text": "One tradition gives us the meaning. The other teaches us what to leave out."
+          }
         },
         "text": {
           "type": "text",
@@ -137,12 +197,24 @@
             "text": "<p>In India a flower is never only a flower — it is a greeting, a blessing, a thing given when words are not enough. We take that meaning and give it an Italian discipline of line: reduced, balanced, nothing ornamental for its own sake.</p>"
           }
         },
-        "button": { "type": "button", "settings": { "label": "Our story", "style": "outline" } }
+        "button": {
+          "type": "button",
+          "settings": {
+            "label": "Our story",
+            "style": "outline"
+          }
+        }
       },
-      "block_order": ["eyebrow", "heading", "lede", "text", "button"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "lede",
+        "text",
+        "button"
+      ],
       "settings": {
         "color_scheme": "white",
-        "image_asset": "homepage-editorial-01.jpg",
+        "image_asset": "homepage-editorial-01.png",
         "image_alt": "A piece being finished by hand at the bench",
         "image_ratio": "landscape",
         "media_position": "start",
@@ -151,11 +223,10 @@
         "padding_bottom": 96
       }
     },
-
     "closing": {
       "type": "invitation",
       "settings": {
-        "image_asset": "homepage-lifestyle-01.jpg",
+        "image_asset": "",
         "image_alt": "A Florève piece worn",
         "focal": "50% 40%",
         "color_scheme": "neutral",
@@ -172,6 +243,13 @@
       }
     }
   },
-
-  "order": ["hero", "categories", "featured", "campaign", "new-in", "editorial", "closing"]
+  "order": [
+    "hero",
+    "categories",
+    "featured",
+    "campaign",
+    "new-in",
+    "editorial",
+    "closing"
+  ]
 }

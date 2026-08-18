@@ -3,8 +3,18 @@
     "hero": {
       "type": "hero",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "The house" } },
-        "heading": { "type": "heading", "settings": { "text": "Florève" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "The house"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "Florève"
+          }
+        },
         "text": {
           "type": "text",
           "settings": {
@@ -12,9 +22,13 @@
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "text"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text"
+      ],
       "settings": {
-        "image_asset": "brand-story.jpg",
+        "image_asset": "",
         "image_alt": "Flowers gathered before being drawn",
         "focal_x": 50,
         "focal_y": 50,
@@ -26,7 +40,6 @@
         "show_cue": false
       }
     },
-
     "manifesto": {
       "type": "brand-manifesto",
       "blocks": {
@@ -52,7 +65,11 @@
           }
         }
       },
-      "block_order": ["one", "two", "three"],
+      "block_order": [
+        "one",
+        "two",
+        "three"
+      ],
       "settings": {
         "color_scheme": "white",
         "eyebrow": "The house",
@@ -63,12 +80,21 @@
         "padding_bottom": 88
       }
     },
-
     "botany": {
       "type": "editorial-story",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "Symbolism" } },
-        "heading": { "type": "heading", "settings": { "text": "Why a flower?" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "Symbolism"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "Why a flower?"
+          }
+        },
         "lede": {
           "type": "lede",
           "settings": {
@@ -82,10 +108,15 @@
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "lede", "text"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "lede",
+        "text"
+      ],
       "settings": {
         "color_scheme": "parchment",
-        "image_asset": "brand-philosophy.jpg",
+        "image_asset": "",
         "image_alt": "A single flower studied before it is drawn",
         "image_ratio": "portrait",
         "media_position": "start",
@@ -94,12 +125,21 @@
         "padding_bottom": 96
       }
     },
-
     "craft": {
       "type": "editorial-story",
       "blocks": {
-        "eyebrow": { "type": "eyebrow", "settings": { "text": "Inspiration" } },
-        "heading": { "type": "heading", "settings": { "text": "An Indian heart, an Italian line" } },
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "Inspiration"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "text": "An Indian heart, an Italian line"
+          }
+        },
         "text": {
           "type": "text",
           "settings": {
@@ -116,10 +156,15 @@
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "text", "details"],
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text",
+        "details"
+      ],
       "settings": {
         "color_scheme": "white",
-        "image_asset": "craftsmanship.jpg",
+        "image_asset": "",
         "image_alt": "Work in progress at the bench",
         "image_ratio": "portrait",
         "media_position": "end",
@@ -128,7 +173,6 @@
         "padding_bottom": 96
       }
     },
-
     "chapters": {
       "type": "craft-chapters",
       "blocks": {
@@ -154,7 +198,11 @@
           }
         }
       },
-      "block_order": ["one", "two", "three"],
+      "block_order": [
+        "one",
+        "two",
+        "three"
+      ],
       "settings": {
         "color_scheme": "neutral",
         "eyebrow": "The making",
@@ -166,7 +214,6 @@
         "padding_bottom": 96
       }
     },
-
     "statement": {
       "type": "statement",
       "settings": {
@@ -177,11 +224,10 @@
         "padding_bottom": 120
       }
     },
-
     "closing": {
       "type": "invitation",
       "settings": {
-        "image_asset": "homepage-lifestyle-02.jpg",
+        "image_asset": "",
         "image_alt": "A Florève piece worn",
         "focal": "50% 40%",
         "color_scheme": "neutral",
@@ -198,6 +244,13 @@
       }
     }
   },
-
-  "order": ["hero", "manifesto", "botany", "craft", "chapters", "statement", "closing"]
+  "order": [
+    "hero",
+    "manifesto",
+    "botany",
+    "craft",
+    "chapters",
+    "statement",
+    "closing"
+  ]
 }
