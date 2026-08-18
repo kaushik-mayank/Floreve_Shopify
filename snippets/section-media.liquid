@@ -1,0 +1,74 @@
+{%- comment -%}
+  Section media, from whichever source the merchant has.
+
+  Three routes, in priority order:
+
+  1. video_asset  — a file sitting in assets/, e.g. hero-video.mp4
+  2. image        — an image chosen in the theme editor (preferred: Shopify
+                    serves it responsively from its CDN, with real alt text)
+  3. image_asset  — a filename in assets/, e.g. homepage-lifestyle-01.jpg
+
+  Asset images are painted as a background rather than an <img>. A background
+  that has not been uploaded yet degrades to the surface colour, where a
+  missing <img> would leave a broken-image icon on the page. Use the image
+  picker whenever the art is final; use the asset route while you are still
+  dropping files into the theme.
+
+  Accepts:
+  - image, image_asset, video_asset, poster_asset
+  - alt      accessible description for the picked image
+  - sizes    responsive sizes attribute, defaults to full bleed
+  - loading  'eager' for above the fold, otherwise lazy
+  - focal    object-position, e.g. "50% 40%"
+{%- endcomment -%}
+
+{%- liquid
+  assign media_sizes = sizes | default: '100vw'
+  assign media_loading = loading | default: 'lazy'
+  assign media_focal = focal | default: '50% 50%'
+-%}
+
+{%- if video_asset != blank -%}
+  <video
+    class="section-media__video"
+    {% if poster_asset != blank %}poster="{{ poster_asset | asset_url }}"{% endif %}
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    aria-hidden="true"
+    tabindex="-1"
+    style="object-position: {{ media_focal }};"
+  >
+    <source src="{{ video_asset | asset_url }}" type="video/mp4">
+  </video>
+
+{%- elsif image != blank -%}
+  <img
+    class="section-media__image"
+    src="{{ image | image_url: width: 1600 }}"
+    srcset="
+      {{ image | image_url: width: 600 }} 600w,
+      {{ image | image_url: width: 900 }} 900w,
+      {{ image | image_url: width: 1400 }} 1400w,
+      {{ image | image_url: width: 1900 }} 1900w,
+      {{ image | image_url: width: 2400 }} 2400w
+    "
+    sizes="{{ media_sizes }}"
+    alt="{{ image.alt | default: alt | escape }}"
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+    loading="{{ media_loading }}"
+    {% if media_loading == 'eager' %}fetchpriority="high"{% endif %}
+    style="object-position: {{ media_focal }};"
+  >
+
+{%- elsif image_asset != blank -%}
+  <div
+    class="section-media__asset"
+    role="img"
+    {% if alt != blank %}aria-label="{{ alt | escape }}"{% else %}aria-hidden="true"{% endif %}
+    style="background-image: url({{ image_asset | asset_url }}); background-position: {{ media_focal }};"
+  ></div>
+{%- endif -%}

@@ -114,6 +114,13 @@
       },
       {
         "type": "color",
+        "id": "color_neutral",
+        "label": "Neutral band",
+        "default": "#F1F0EC",
+        "info": "A cool neutral for sections that should feel calm rather than warm. Alternate it with white so the store never sits on one tone."
+      },
+      {
+        "type": "color",
         "id": "color_surface_alt",
         "label": "Accent band",
         "default": "#F4EFE7",

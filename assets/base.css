@@ -62,6 +62,7 @@ summary::-webkit-details-marker { display: none; }
   --color-bg: #FFFFFF;
   --color-surface: #FFFFFF;
   --color-tint: #FAF7F3;
+  --color-neutral: #F1F0EC;
   --color-surface-alt: #F4EFE7;
   --color-dark: #1A1814;
   --color-ink: #1A1814;
@@ -196,6 +197,21 @@ summary::-webkit-details-marker { display: none; }
   --scheme-accent-text: var(--color-gold-deep);
   --scheme-rule: var(--rule);
   --scheme-rule-strong: var(--rule-strong);
+  --scheme-btn-bg: var(--color-ink);
+  --scheme-btn-ink: var(--color-bg);
+}
+
+.scheme--neutral {
+  --scheme-bg: var(--color-neutral);
+  --scheme-surface: var(--color-surface);
+  --scheme-tint: var(--color-surface);
+  --scheme-ink: var(--color-ink);
+  --scheme-body: var(--color-body);
+  --scheme-muted: var(--color-muted);
+  --scheme-accent: var(--color-gold);
+  --scheme-accent-text: var(--color-gold-deep);
+  --scheme-rule: rgba(var(--color-ink-rgb), 0.12);
+  --scheme-rule-strong: rgba(var(--color-ink-rgb), 0.22);
   --scheme-btn-bg: var(--color-ink);
   --scheme-btn-ink: var(--color-bg);
 }
@@ -339,7 +355,7 @@ h5, .h5 { font-size: var(--fs-h5); }
   font-weight: 400;
   letter-spacing: calc(var(--label-tracking) * 1.15);
   text-transform: uppercase;
-  color: var(--scheme-accent-text);
+  color: var(--scheme-muted);
   line-height: 1.4;
 }
 
@@ -595,6 +611,18 @@ h5, .h5 { font-size: var(--fs-h5); }
 .btn--outline:hover {
   color: var(--scheme-btn-ink);
   border-color: var(--scheme-btn-bg);
+}
+
+.btn--light {
+  --btn-bg: var(--color-bg);
+  --btn-ink: var(--color-ink);
+  --btn-border: var(--color-bg);
+  --btn-hover-bg: transparent;
+}
+
+.btn--light:hover {
+  color: var(--color-bg);
+  border-color: var(--color-bg);
 }
 
 .btn--small {
@@ -1267,3 +1295,28 @@ details[open] > summary .accordion__icon::after { transform: rotate(0deg); }
 
 .pagination__item svg { width: 1.25rem; }
 .pagination__item--disabled { opacity: 0.3; pointer-events: none; }
+
+
+/* ------------------------------------------------- 20. Section media */
+
+/*
+ * One media surface for every full-bleed section. The picked-image route gets
+ * a real <img> with srcset; the asset route paints a background so a file that
+ * has not been uploaded yet shows the surface colour instead of a broken icon.
+ */
+
+.section-media__image,
+.section-media__video,
+.section-media__asset {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.section-media__asset {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: var(--color-tint);
+}

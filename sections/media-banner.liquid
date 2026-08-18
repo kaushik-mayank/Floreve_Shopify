@@ -1,0 +1,231 @@
+{%- liquid
+  assign has_media = false
+  if section.settings.image != blank or section.settings.image_asset != blank or section.settings.video_asset != blank
+    assign has_media = true
+  endif
+-%}
+
+<section
+  class="media-banner media-banner--{{ section.settings.height }} media-banner--{{ section.settings.content_position }}{% unless has_media %} scheme scheme--{{ section.settings.color_scheme }}{% endunless %}{% if section.settings.full_width == false %} media-banner--inset{% endif %}"
+  style="--scrim: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+>
+  {%- if has_media -%}
+    <div class="media-banner__media">
+      {% render 'section-media',
+        image: section.settings.image,
+        image_asset: section.settings.image_asset,
+        video_asset: section.settings.video_asset,
+        poster_asset: section.settings.poster_asset,
+        alt: section.settings.image_alt,
+        focal: section.settings.focal,
+        loading: section.settings.loading
+      %}
+    </div>
+    <div class="media-banner__scrim" aria-hidden="true"></div>
+  {%- endif -%}
+
+  <div class="media-banner__inner page-width">
+    <div class="media-banner__content{% if has_media %} media-banner__content--over{% endif %} reveal">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'eyebrow' -%}
+            <span class="eyebrow" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+
+          {%- when 'heading' -%}
+            <h2 class="media-banner__title {{ block.settings.size }}" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </h2>
+
+          {%- when 'text' -%}
+            <p class="media-banner__text" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+
+          {%- when 'button' -%}
+            <div class="media-banner__actions" {{ block.shopify_attributes }}>
+              {%- if block.settings.label != blank -%}
+                <a
+                  href="{{ block.settings.url | default: routes.all_products_collection_url }}"
+                  class="btn btn--{{ block.settings.style }}"
+                >
+                  <span class="btn__label">{{ block.settings.label }}</span>
+                </a>
+              {%- endif -%}
+              {%- if block.settings.second_label != blank -%}
+                <a href="{{ block.settings.second_url }}" class="btn btn--outline">
+                  <span class="btn__label">{{ block.settings.second_label }}</span>
+                </a>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Campaign banner",
+  "tag": "div",
+  "class": "media-banner-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "A full-bleed image or video with a short line of copy over it. Use the image picker when the artwork is final; use the asset filename while you are still uploading files to the theme."
+    },
+    { "type": "header", "content": "Media" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "or an image filename in assets/",
+      "info": "For example homepage-banner.jpg. Ignored when an image is chosen above."
+    },
+    {
+      "type": "text",
+      "id": "video_asset",
+      "label": "or a video filename in assets/",
+      "info": "For example editorial-video.mp4. Plays silently on loop and takes priority over the image."
+    },
+    {
+      "type": "text",
+      "id": "poster_asset",
+      "label": "Video poster filename",
+      "info": "Shown while the video loads. For example hero-poster.jpg."
+    },
+    { "type": "text", "id": "image_alt", "label": "Describe the image", "info": "Read aloud by screen readers." },
+    {
+      "type": "text",
+      "id": "focal",
+      "label": "Focal point",
+      "default": "50% 50%",
+      "info": "Which part of the image to keep in frame when it is cropped. 50% 30% favours the upper area."
+    },
+    {
+      "type": "select",
+      "id": "loading",
+      "label": "Loading",
+      "options": [
+        { "value": "lazy", "label": "Lazy — anything below the fold" },
+        { "value": "eager", "label": "Eager — only if this is the first thing on the page" }
+      ],
+      "default": "lazy"
+    },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "sm", "label": "Compact" },
+        { "value": "md", "label": "Medium" },
+        { "value": "lg", "label": "Tall" }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Text position",
+      "options": [
+        { "value": "start", "label": "Lower left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "end", "label": "Lower right" }
+      ],
+      "default": "start"
+    },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": true },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "Shade behind the text",
+      "default": 35,
+      "info": "Only as much as the words need to stay legible."
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme when there is no media",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "parchment", "label": "Soft warm" },
+        { "value": "neutral", "label": "Neutral grey" },
+        { "value": "alt", "label": "Accent band" },
+        { "value": "dark", "label": "Charcoal" }
+      ],
+      "default": "neutral"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "eyebrow",
+      "name": "Eyebrow",
+      "limit": 1,
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "New this season" }]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Heading", "default": "The Camellia collection" },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            { "value": "h2", "label": "Medium" },
+            { "value": "h1", "label": "Large" },
+            { "value": "display", "label": "Display" }
+          ],
+          "default": "h1"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Hand-finished pieces drawn from a flower in full bloom."
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "First button", "default": "Shop the collection" },
+        { "type": "url", "id": "url", "label": "First link" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "First button style",
+          "options": [
+            { "value": "primary", "label": "Solid" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "light", "label": "Light — for use over photography" }
+          ],
+          "default": "light"
+        },
+        { "type": "text", "id": "second_label", "label": "Second button" },
+        { "type": "url", "id": "second_url", "label": "Second link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Campaign banner",
+      "blocks": [{ "type": "eyebrow" }, { "type": "heading" }, { "type": "text" }, { "type": "button" }]
+    }
+  ]
+}
+{% endschema %}

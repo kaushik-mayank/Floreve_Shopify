@@ -1,7 +1,11 @@
 {%- liquid
   assign image = section.settings.image
+  assign has_media = false
+  if image != blank or section.settings.image_asset != blank or section.settings.video_asset != blank
+    assign has_media = true
+  endif
   assign scheme = section.settings.color_scheme
-  if image != blank
+  if has_media
     assign scheme = 'dark'
   endif
 -%}
@@ -10,17 +14,16 @@
   class="hero hero--{{ section.settings.height }} hero--center scheme scheme--{{ scheme }}"
   style="--scrim: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --focal: {{ section.settings.focal_x }}% {{ section.settings.focal_y }}%;"
 >
-  {%- if image != blank -%}
+  {%- if has_media -%}
     <div class="hero__media">
-      <img
-        src="{{ image | image_url: width: 1800 }}"
-        srcset="{{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1400 }} 1400w, {{ image | image_url: width: 2000 }} 2000w"
-        sizes="100vw"
-        alt="{{ image.alt | escape }}"
-        width="{{ image.width }}"
-        height="{{ image.height }}"
-        loading="lazy"
-      >
+      {% render 'section-media',
+        image: image,
+        image_asset: section.settings.image_asset,
+        video_asset: section.settings.video_asset,
+        poster_asset: section.settings.poster_asset,
+        alt: section.settings.image_alt,
+        focal: section.settings.focal
+      %}
     </div>
     <div class="hero__scrim" aria-hidden="true"></div>
   {%- endif -%}
@@ -78,6 +81,30 @@
       "label": "Background image"
     },
     {
+      "type": "text",
+      "id": "image_asset",
+      "label": "or an image filename in assets/",
+      "info": "For example homepage-lifestyle-01.jpg. Ignored when an image is chosen above."
+    },
+    {
+      "type": "text",
+      "id": "video_asset",
+      "label": "or a video filename in assets/",
+      "info": "For example hero-video.mp4. Plays silently on loop and takes priority over the image."
+    },
+    {
+      "type": "text",
+      "id": "poster_asset",
+      "label": "Video poster filename",
+      "info": "Shown while the video loads. For example hero-poster.jpg."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Describe the image",
+      "info": "Read aloud by screen readers when the image comes from assets/."
+    },
+    {
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme when there is no image",
@@ -110,6 +137,13 @@
       "unit": "%",
       "label": "Shade behind the text",
       "default": 45
+    },
+    {
+      "type": "text",
+      "id": "focal",
+      "label": "Focal point",
+      "default": "50% 50%",
+      "info": "Which part of the image stays in frame when it is cropped."
     },
     {
       "type": "range",

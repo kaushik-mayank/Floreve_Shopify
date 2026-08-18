@@ -3,18 +3,8 @@
     "hero": {
       "type": "hero",
       "blocks": {
-        "eyebrow": {
-          "type": "eyebrow",
-          "settings": {
-            "text": "The house"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "text": "Florève"
-          }
-        },
+        "eyebrow": { "type": "eyebrow", "settings": { "text": "The house" } },
+        "heading": { "type": "heading", "settings": { "text": "Florève" } },
         "text": {
           "type": "text",
           "settings": {
@@ -22,75 +12,98 @@
           }
         }
       },
-      "block_order": [
-        "eyebrow",
-        "heading",
-        "text"
-      ],
+      "block_order": ["eyebrow", "heading", "text"],
       "settings": {
+        "image_asset": "brand-story.jpg",
+        "image_alt": "Flowers gathered before being drawn",
         "focal_x": 50,
         "focal_y": 50,
         "overlay_opacity": 40,
         "height": "md",
         "content_position": "center",
-        "color_scheme": "alt",
+        "color_scheme": "neutral",
         "use_h1": true,
         "show_cue": false
       }
     },
-    "story": {
-      "type": "rich-text",
+
+    "manifesto": {
+      "type": "brand-manifesto",
       "blocks": {
-        "mark": {
-          "type": "mark",
-          "settings": {}
-        },
-        "heading": {
-          "type": "heading",
+        "one": {
+          "type": "pillar",
           "settings": {
-            "text": "How we began",
-            "size": "h2"
+            "title": "Meaning",
+            "text": "Every form starts with a flower that already means something to someone."
           }
         },
-        "text": {
-          "type": "text",
+        "two": {
+          "type": "pillar",
           "settings": {
-            "text": "<p>Replace this with the true account of how Florève started — who began it, what they kept noticing about the way flowers are given, and what they wanted to make that did not exist yet.</p>"
+            "title": "Line",
+            "text": "Reduced until only the gesture remains — the restraint of Italian design."
+          }
+        },
+        "three": {
+          "type": "pillar",
+          "settings": {
+            "title": "Hand",
+            "text": "Shaped, set and finished by hand, in numbers small enough to care about."
           }
         }
       },
-      "block_order": [
-        "mark",
-        "heading",
-        "text"
-      ],
+      "block_order": ["one", "two", "three"],
       "settings": {
         "color_scheme": "white",
-        "width": "reading",
-        "alignment": "center",
+        "eyebrow": "The house",
+        "statement": "In India, a flower is never only a flower. It is a greeting, a blessing, a thing you give when words are not enough.",
+        "text": "<p>Florève begins with that idea. In marigold at a doorway, jasmine in the hair, petals offered with both hands — the flower carries feeling, and it has done so for as long as anyone can remember.</p><p>We take that meaning and give it an Italian discipline of line: reduced, balanced, nothing ornamental for its own sake. What remains is shaped by hand, slowly.</p>",
+        "link_label": "",
         "padding_top": 96,
-        "padding_bottom": 64
+        "padding_bottom": 88
       }
     },
-    "craft": {
+
+    "botany": {
       "type": "editorial-story",
       "blocks": {
-        "eyebrow": {
-          "type": "eyebrow",
+        "eyebrow": { "type": "eyebrow", "settings": { "text": "Symbolism" } },
+        "heading": { "type": "heading", "settings": { "text": "Why a flower?" } },
+        "lede": {
+          "type": "lede",
           "settings": {
-            "text": "Inspiration"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "text": "An Indian heart, an Italian line"
+            "text": "Because it is how we welcome, bless, celebrate and remember — and it lasts a day."
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Describe, in your own words, what you take from each tradition: the meaning a flower carries in Indian life, and the restraint of Italian design.</p>"
+            "text": "<p>A flower is given at a birth, a wedding, a homecoming and a farewell. It is placed at a threshold, tucked into hair, laid at the feet of something loved. No other object carries so much feeling and asks so little.</p><p>Its only failing is that it fades. So we studied the part that matters — the turn of a petal at its edge, the way a bud holds itself before it opens — and gave it a form that stays.</p>"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "heading", "lede", "text"],
+      "settings": {
+        "color_scheme": "parchment",
+        "image_asset": "brand-philosophy.jpg",
+        "image_alt": "A single flower studied before it is drawn",
+        "image_ratio": "portrait",
+        "media_position": "start",
+        "wide_media": true,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+
+    "craft": {
+      "type": "editorial-story",
+      "blocks": {
+        "eyebrow": { "type": "eyebrow", "settings": { "text": "Inspiration" } },
+        "heading": { "type": "heading", "settings": { "text": "An Indian heart, an Italian line" } },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>From India we take the reverence — that adornment is not vanity but expression, and that a flower given by hand carries intention.</p><p>From the Italian tradition we take the discipline of form: proportion held exactly, ornament earned rather than added, the confidence to stop. Neither is decoration for the other. A piece needs both to feel finished.</p>"
           }
         },
         "details": {
@@ -103,14 +116,11 @@
           }
         }
       },
-      "block_order": [
-        "eyebrow",
-        "heading",
-        "text",
-        "details"
-      ],
+      "block_order": ["eyebrow", "heading", "text", "details"],
       "settings": {
-        "color_scheme": "parchment",
+        "color_scheme": "white",
+        "image_asset": "craftsmanship.jpg",
+        "image_alt": "Work in progress at the bench",
         "image_ratio": "portrait",
         "media_position": "end",
         "wide_media": true,
@@ -118,38 +128,76 @@
         "padding_bottom": 96
       }
     },
+
+    "chapters": {
+      "type": "craft-chapters",
+      "blocks": {
+        "one": {
+          "type": "chapter",
+          "settings": {
+            "title": "The study",
+            "text": "We begin with a real flower — how it is held, given and worn — before a single line is drawn."
+          }
+        },
+        "two": {
+          "type": "chapter",
+          "settings": {
+            "title": "The hand",
+            "text": "Each piece is shaped, soldered and set by hand. Nothing is stamped out, nothing is hurried."
+          }
+        },
+        "three": {
+          "type": "chapter",
+          "settings": {
+            "title": "The finish",
+            "text": "Surfaces are polished by hand until light moves across them the way it moves across a petal."
+          }
+        }
+      },
+      "block_order": ["one", "two", "three"],
+      "settings": {
+        "color_scheme": "neutral",
+        "eyebrow": "The making",
+        "heading": "How a feeling becomes an object",
+        "alignment": "center",
+        "show_index": true,
+        "image_ratio": "landscape",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+
     "statement": {
       "type": "statement",
       "settings": {
-        "color_scheme": "sage",
+        "color_scheme": "dark",
         "show_mark": true,
-        "quote": "We are not preserving a flower. We are keeping the moment it was given.",
+        "quote": "A flower is how we say the thing we cannot. We only made the sentence last longer.",
         "padding_top": 120,
         "padding_bottom": 120
       }
     },
-    "invitation": {
+
+    "closing": {
       "type": "invitation",
       "settings": {
-        "color_scheme": "alt",
+        "image_asset": "homepage-lifestyle-02.jpg",
+        "image_alt": "A Florève piece worn",
+        "focal": "50% 40%",
+        "color_scheme": "neutral",
         "height": "sm",
-        "overlay_opacity": 45,
+        "overlay_opacity": 40,
         "focal_x": 50,
         "focal_y": 50,
         "show_mark": false,
         "eyebrow": "",
         "heading": "See the work",
         "text": "",
-        "primary_label": "Explore the collection",
+        "primary_label": "Shop the collection",
         "secondary_label": ""
       }
     }
   },
-  "order": [
-    "hero",
-    "story",
-    "craft",
-    "statement",
-    "invitation"
-  ]
+
+  "order": ["hero", "manifesto", "botany", "craft", "chapters", "statement", "closing"]
 }

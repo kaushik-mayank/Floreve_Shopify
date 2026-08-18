@@ -10,7 +10,15 @@
   <div class="page-width">
     <div class="editorial{% if section.settings.media_position == 'end' %} editorial--media-end{% endif %}{% if section.settings.wide_media %} editorial--wide-media{% endif %}">
       <div class="editorial__media reveal">
-        {%- if image != blank -%}
+        {%- if image == blank and section.settings.image_asset != blank -%}
+          <div class="media media--{{ section.settings.image_ratio }}">
+            {% render 'section-media',
+              image_asset: section.settings.image_asset,
+              alt: section.settings.image_alt,
+              sizes: '(min-width: 990px) 50vw, 100vw'
+            %}
+          </div>
+        {%- elsif image != blank -%}
           <div class="media media--{{ section.settings.image_ratio }}{% if settings.enable_image_zoom %} media--zoom{% endif %} media-zoom-parent">
             <img
               src="{{ image | image_url: width: 1200 }}"
@@ -107,6 +115,7 @@
       "options": [
         { "value": "parchment", "label": "Parchment" },
         { "value": "white", "label": "White" },
+        { "value": "neutral", "label": "Neutral grey" },
         { "value": "alt", "label": "Warm parchment" },
         { "value": "dark", "label": "Atelier black" },
         { "value": "sage", "label": "Botanical sage" },
@@ -122,6 +131,18 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "or an image filename in assets/",
+      "info": "For example homepage-editorial-01.jpg. Ignored when an image is chosen above."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Describe the image",
+      "info": "Read aloud by screen readers when the image comes from assets/."
     },
     {
       "type": "image_picker",
