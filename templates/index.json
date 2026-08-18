@@ -226,7 +226,7 @@
     "closing": {
       "type": "invitation",
       "settings": {
-        "image_asset": "",
+        "image_asset": "hero-poster.png",
         "image_alt": "A Florève piece worn",
         "focal": "50% 40%",
         "color_scheme": "neutral",

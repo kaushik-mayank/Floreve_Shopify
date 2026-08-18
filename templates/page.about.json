@@ -28,7 +28,7 @@
         "text"
       ],
       "settings": {
-        "image_asset": "",
+        "image_asset": "homepage-banner.png",
         "image_alt": "Flowers gathered before being drawn",
         "focal_x": 50,
         "focal_y": 50,
@@ -116,7 +116,7 @@
       ],
       "settings": {
         "color_scheme": "parchment",
-        "image_asset": "",
+        "image_asset": "homepage-editorial-01.png",
         "image_alt": "A single flower studied before it is drawn",
         "image_ratio": "portrait",
         "media_position": "start",
@@ -164,7 +164,7 @@
       ],
       "settings": {
         "color_scheme": "white",
-        "image_asset": "",
+        "image_asset": "hero-poster.png",
         "image_alt": "Work in progress at the bench",
         "image_ratio": "portrait",
         "media_position": "end",
@@ -227,7 +227,7 @@
     "closing": {
       "type": "invitation",
       "settings": {
-        "image_asset": "",
+        "image_asset": "homepage-banner.png",
         "image_alt": "A Florève piece worn",
         "focal": "50% 40%",
         "color_scheme": "neutral",

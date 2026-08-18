@@ -1226,6 +1226,56 @@
     if (!window.confirm(button.getAttribute('data-confirm'))) event.preventDefault();
   });
 
+  /* ---------------------------------------------------- Background video */
+
+  /*
+   * A looping hero video is the heaviest thing on the page, so it is never in
+   * the markup as autoplay. It loads only when the screen is big enough to
+   * warrant it, motion is welcome, and the visitor is not on Data Saver.
+   * Everyone else keeps the poster image and pays nothing.
+   */
+  function initLazyVideo(scope) {
+    var videos = $$('[data-lazy-video]', scope || document);
+    if (!videos.length) return;
+
+    var saveData = navigator.connection && navigator.connection.saveData;
+    var narrow = window.matchMedia('(max-width: 749px)').matches;
+
+    if (saveData || narrow || prefersReducedMotion()) return;
+
+    videos.forEach(function (video) {
+      if (video.dataset.started === 'true') return;
+
+      function start() {
+        video.dataset.started = 'true';
+        var src = video.getAttribute('data-src');
+        if (!src) return;
+        video.src = src;
+        video.load();
+        var attempt = video.play();
+        if (attempt && attempt.catch) attempt.catch(function () {});
+      }
+
+      if (!('IntersectionObserver' in window)) {
+        start();
+        return;
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            observer.disconnect();
+            start();
+          });
+        },
+        { rootMargin: '200px' }
+      );
+
+      observer.observe(video);
+    });
+  }
+
   /* ------------------------------------------------------- Section booting */
 
   function initSection(scope) {
@@ -1235,6 +1285,7 @@
     initFacets(scope);
     initRecommendations(scope);
     initAddressFields(scope);
+    initLazyVideo(scope);
 
     $$('[data-variant-picker]', scope).forEach(function (el) {
       if (!el.floreveVariantPicker) el.floreveVariantPicker = new VariantPicker(el);

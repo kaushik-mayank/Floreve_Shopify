@@ -3,22 +3,25 @@
 
   Three routes, in priority order:
 
-  1. video_asset  — a file sitting in assets/, e.g. hero-video.mp4
-  2. image        — an image chosen in the theme editor (preferred: Shopify
-                    serves it responsively from its CDN, with real alt text)
-  3. image_asset  — a filename in assets/, e.g. homepage-lifestyle-01.jpg
+  1. video_asset  — a file in assets/, e.g. hero-video.mp4
+  2. image        — an image chosen in the theme editor
+  3. image_asset  — a filename in assets/, e.g. homepage-banner.png
 
-  Asset images are painted as a background rather than an <img>. A background
-  that has not been uploaded yet degrades to the surface colour, where a
-  missing <img> would leave a broken-image icon on the page. Use the image
-  picker whenever the art is final; use the asset route while you are still
-  dropping files into the theme.
+  Both image routes go through Shopify's CDN, so a heavy source file is
+  resized and format-converted before it reaches the browser rather than being
+  served at full weight. Asset images use asset_img_url for exactly that
+  reason: a 5 MB PNG in the repository still arrives as an appropriately sized
+  image.
+
+  The video never autoplays from markup. It carries a poster and preload="none",
+  and theme.js starts it only on a large screen, with motion allowed and no
+  Data Saver — so phones get the still and never pay for the download.
 
   Accepts:
   - image, image_asset, video_asset, poster_asset
-  - alt      accessible description for the picked image
+  - alt      accessible description
   - sizes    responsive sizes attribute, defaults to full bleed
-  - loading  'eager' for above the fold, otherwise lazy
+  - loading  'eager' above the fold, otherwise lazy
   - focal    object-position, e.g. "50% 40%"
 {%- endcomment -%}
 
@@ -31,18 +34,17 @@
 {%- if video_asset != blank -%}
   <video
     class="section-media__video"
-    {% if poster_asset != blank %}poster="{{ poster_asset | asset_url }}"{% endif %}
-    autoplay
+    {% if poster_asset != blank %}poster="{{ poster_asset | asset_img_url: '1600x' }}"{% endif %}
     muted
     loop
     playsinline
-    preload="metadata"
+    preload="none"
     aria-hidden="true"
     tabindex="-1"
+    data-lazy-video
+    data-src="{{ video_asset | asset_url }}"
     style="object-position: {{ media_focal }};"
-  >
-    <source src="{{ video_asset | asset_url }}" type="video/mp4">
-  </video>
+  ></video>
 
 {%- elsif image != blank -%}
   <img
@@ -65,10 +67,20 @@
   >
 
 {%- elsif image_asset != blank -%}
-  <div
-    class="section-media__asset"
-    role="img"
-    {% if alt != blank %}aria-label="{{ alt | escape }}"{% else %}aria-hidden="true"{% endif %}
-    style="background-image: url({{ image_asset | asset_url }}); background-position: {{ media_focal }};"
-  ></div>
+  <img
+    class="section-media__image"
+    src="{{ image_asset | asset_img_url: '1600x' }}"
+    srcset="
+      {{ image_asset | asset_img_url: '600x' }} 600w,
+      {{ image_asset | asset_img_url: '900x' }} 900w,
+      {{ image_asset | asset_img_url: '1400x' }} 1400w,
+      {{ image_asset | asset_img_url: '1900x' }} 1900w,
+      {{ image_asset | asset_img_url: '2400x' }} 2400w
+    "
+    sizes="{{ media_sizes }}"
+    alt="{{ alt | escape }}"
+    loading="{{ media_loading }}"
+    {% if media_loading == 'eager' %}fetchpriority="high"{% endif %}
+    style="object-position: {{ media_focal }};"
+  >
 {%- endif -%}

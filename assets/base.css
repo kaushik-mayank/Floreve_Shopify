@@ -1300,14 +1300,13 @@ details[open] > summary .accordion__icon::after { transform: rotate(0deg); }
 /* ------------------------------------------------- 20. Section media */
 
 /*
- * One media surface for every full-bleed section. The picked-image route gets
- * a real <img> with srcset; the asset route paints a background so a file that
- * has not been uploaded yet shows the surface colour instead of a broken icon.
+ * One media surface for every full-bleed section. Both image routes render a
+ * real <img> with srcset — asset images go through Shopify's CDN via
+ * asset_img_url, so a heavy source file is resized before it is served.
  */
 
 .section-media__image,
-.section-media__video,
-.section-media__asset {
+.section-media__video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1320,12 +1319,6 @@ details[open] > summary .accordion__icon::after { transform: rotate(0deg); }
  * dark. A file that is missing, empty or still uploading then reads as an
  * intentional charcoal panel with legible text, rather than white on white.
  */
-.section-media__asset,
 .section-media__video {
   background-color: var(--color-dark);
-}
-
-.section-media__asset {
-  background-size: cover;
-  background-repeat: no-repeat;
 }
