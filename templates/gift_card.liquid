@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value | money, shop: shop.name }}</title>
+    <title>{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value | money: shop: shop.name }}</title>
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96 }}">
@@ -129,3 +129,15 @@
     </main>
   </body>
 </html>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value | money,
+    shop: shop.name }}"
+  to: "{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value | money: shop:
+    shop.name }}"
+  position: 180..272
+{% endcomment %}
